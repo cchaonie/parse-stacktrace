@@ -3,11 +3,13 @@ lockfileVersion: 5.3
 specifiers:
   '@rollup/plugin-commonjs': ^22.0.2
   '@rollup/plugin-html': ^0.2.4
+  '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^13.3.0
   '@teamwork/websocket-json-stream': ^2.0.0
   express: ^4.18.1
   jest: ^28.1.3
   reconnecting-websocket: ^4.4.0
+  rimraf: ^3.0.2
   rollup: ^2.78.1
   rollup-plugin-node-builtins: ^2.1.2
   sharedb: ^3.1.0
@@ -23,8 +25,10 @@ dependencies:
 devDependencies:
   '@rollup/plugin-commonjs': 22.0.2_rollup@2.78.1
   '@rollup/plugin-html': 0.2.4_rollup@2.78.1
+  '@rollup/plugin-json': 4.1.0_rollup@2.78.1
   '@rollup/plugin-node-resolve': 13.3.0_rollup@2.78.1
   jest: 28.1.3
+  rimraf: 3.0.2
   rollup: 2.78.1
   rollup-plugin-node-builtins: 2.1.2
 
@@ -647,6 +651,15 @@ packages:
     peerDependencies:
       rollup: ^1.20.0||^2.0.0
     dependencies:
+      rollup: 2.78.1
+    dev: true
+
+  /@rollup/plugin-json/4.1.0_rollup@2.78.1:
+    resolution: {integrity: sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==}
+    peerDependencies:
+      rollup: ^1.20.0 || ^2.0.0
+    dependencies:
+      '@rollup/pluginutils': 3.1.0_rollup@2.78.1
       rollup: 2.78.1
     dev: true
 

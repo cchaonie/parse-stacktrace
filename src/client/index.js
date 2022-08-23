@@ -1,10 +1,10 @@
-var ReconnectingWebSocket = require('reconnecting-websocket');
-var Connection = require('sharedb/lib/client').Connection;
+import ReconnectingWebSocket from 'reconnecting-websocket';
+import { Connection } from 'sharedb/lib/client';
 
-var socket = new ReconnectingWebSocket('ws://localhost:8080');
-var connection = new Connection(socket);
+const socket = new ReconnectingWebSocket('ws://localhost:8080');
+const connection = new Connection(socket);
 
-var doc = connection.get('doc-collection', 'doc-id');
+const doc = connection.get('doc-collection', 'doc-id');
 
 doc.subscribe(error => {
   if (error) return console.error(error);
