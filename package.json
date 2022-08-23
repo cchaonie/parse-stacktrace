@@ -1,0 +1,32 @@
+{
+  "name": "collaborative-editor",
+  "version": "0.0.1",
+  "description": "Learn collaborative softwares by creating a collaborative editor",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c && node src/index.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "collaborative",
+    "editor"
+  ],
+  "author": "nc_8093@163.com",
+  "license": "MIT",
+  "dependencies": {
+    "@teamwork/websocket-json-stream": "^2.0.0",
+    "express": "^4.18.1",
+    "reconnecting-websocket": "^4.4.0",
+    "sharedb": "^3.1.0",
+    "ws": "^8.8.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-html": "^0.2.4",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "jest": "^28.1.3",
+    "rollup": "^2.78.1",
+    "rollup-plugin-node-builtins": "^2.1.2"
+  }
+}
