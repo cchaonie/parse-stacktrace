@@ -1,20 +1,20 @@
-var express = require('express');
-var WebSocket = require('ws');
-var ShareDB = require('sharedb');
-var WebSocketJSONStream = require('@teamwork/websocket-json-stream');
-var http = require('http');
-var path = require('path');
+import express from 'express';
+import { WebSocketServer } from 'ws';
+import ShareDB from 'sharedb';
+import WebSocketJSONStream from '@teamwork/websocket-json-stream';
+import http from 'http';
+import path from 'path';
 
-var app = express();
+const app = express();
 
-app.use(express.static(path.resolve(process.cwd(), 'dist')));
+app.use(express.static(path.resolve(process.cwd(), 'dist/client')));
 
-var server = http.createServer(app);
-var webSocketServer = new WebSocket.Server({ server });
+const server = http.createServer(app);
+const webSocketServer = new WebSocketServer({ server });
 
-var backend = new ShareDB();
+const backend = new ShareDB();
 webSocketServer.on('connection', webSocket => {
-  var stream = new WebSocketJSONStream(webSocket);
+  const stream = new WebSocketJSONStream(webSocket);
   backend.listen(stream);
 });
 
