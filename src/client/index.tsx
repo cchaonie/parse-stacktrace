@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import App from './application';
+import App from './App';
 
 import './connectShareDB';
 

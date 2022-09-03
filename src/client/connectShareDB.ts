@@ -20,8 +20,3 @@ doc.subscribe(error => {
 doc.on('op', op => {
   console.log('count', doc.data.counter);
 });
-
-window.increment = () => {
-  // Increment the counter by 1
-  doc.submitOp([{ p: ['counter'], na: 1 }]);
-};
