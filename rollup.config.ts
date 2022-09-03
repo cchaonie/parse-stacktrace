@@ -5,6 +5,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import html from '@rollup/plugin-html';
 import builtins from 'rollup-plugin-node-builtins';
 import { babel } from '@rollup/plugin-babel';
+import typescript from '@rollup/plugin-typescript';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const isPrd = process.env.NODE_ENV === 'production';
@@ -23,7 +24,7 @@ const makeHtmlAttributes = attributes => {
 
 export default [
   {
-    input: 'src/index.js',
+    input: 'src/index',
     output: {
       dir: 'dist',
       format: 'es',
@@ -31,13 +32,15 @@ export default [
     plugins: [
       resolve({
         preferBuiltins: true,
+        extensions,
       }), // tells Rollup how to find libraries in node_modules
+      typescript(),
       commonjs(),
       json(),
     ],
   },
   {
-    input: 'src/client/index.jsx',
+    input: 'src/client/index',
     output: {
       dir: 'dist/client',
       format: 'es',
@@ -47,6 +50,12 @@ export default [
       resolve({
         extensions,
       }), // tells Rollup how to find libraries in node_modules
+      typescript(),
+      babel({
+        babelHelpers: 'bundled',
+        extensions,
+        exclude: './node_modules/**',
+      }),
       commonjs(), // converts commonjs modules to ES modules
       replace({
         'process.env.NODE_ENV': JSON.stringify(
@@ -54,14 +63,10 @@ export default [
         ),
         preventAssignment: true,
       }),
-      babel({
-        babelHelpers: 'bundled',
-        extensions,
-        exclude: './node_modules/**',
-      }),
       html({
         title: 'Collaborative Editor',
-        template: ({ attributes, meta, files, publicPath, title }) => {
+        template: options => {
+          const { attributes, meta, files, publicPath, title } = options!;
           const scripts = (files.js || [])
             .map(({ fileName }) => {
               const attrs = makeHtmlAttributes(attributes.script);
