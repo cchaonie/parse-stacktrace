@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "rimraf dist &&--config rollup.config.ts --configPlugin typescript",
-    "start": "npm run build && node dist/index.js",
+    "build": "rimraf dist && rollup --config rollup.config.ts --configPlugin typescript",
+    "start": " rollup --config rollup.config.ts --configPlugin typescript --watch && node dist/index.js",
     "test": "jest"
   },
   "keywords": [
