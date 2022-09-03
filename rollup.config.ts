@@ -27,7 +27,7 @@ export default [
     input: 'src/index',
     output: {
       dir: 'dist',
-      format: 'es',
+      format: 'cjs',
     },
     plugins: [
       resolve({
