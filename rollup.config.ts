@@ -5,7 +5,6 @@ import commonjs from '@rollup/plugin-commonjs';
 import html from '@rollup/plugin-html';
 import builtins from 'rollup-plugin-node-builtins';
 import { babel } from '@rollup/plugin-babel';
-import typescript from '@rollup/plugin-typescript';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const isPrd = process.env.NODE_ENV === 'production';
@@ -28,13 +27,18 @@ export default [
     output: {
       dir: 'dist',
       format: 'cjs',
+      sourcemap: !isPrd,
     },
     plugins: [
       resolve({
         preferBuiltins: true,
         extensions,
       }), // tells Rollup how to find libraries in node_modules
-      typescript(),
+      babel({
+        babelHelpers: 'bundled',
+        extensions,
+        exclude: './node_modules/**',
+      }),
       commonjs(),
       json(),
     ],
@@ -44,13 +48,13 @@ export default [
     output: {
       dir: 'dist/client',
       format: 'es',
+      sourcemap: !isPrd,
     },
     plugins: [
       builtins(),
       resolve({
         extensions,
       }), // tells Rollup how to find libraries in node_modules
-      typescript(),
       babel({
         babelHelpers: 'bundled',
         extensions,

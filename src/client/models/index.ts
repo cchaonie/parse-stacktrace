@@ -1,8 +1,4 @@
-const initialState = [
-  {
-    type: 'paragraph',
-    children: [{ text: 'A line of text in a paragraph.' }],
-  },
-];
-
-export default initialState;
+export { default as initialContent } from './initialContent';
+export { initialize } from './shareDBDocument';
+export { default as DocumentContext } from './documentContext';
+export { default as clientDocument } from './clientDocument';

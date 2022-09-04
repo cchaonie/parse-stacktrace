@@ -18,4 +18,4 @@ webSocketServer.on('connection', webSocket => {
   backend.listen(stream);
 });
 
-server.listen(8080, () => console.log(`[SERVER]: listening at port 8080 now`));
+server.listen(8080, () => console.log(`[SERVER] listening at port 8080 now`));

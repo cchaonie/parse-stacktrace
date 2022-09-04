@@ -7,14 +7,16 @@ const ROOT_DIR = process.cwd();
 
 const [serverOptions, clientOptions] = options;
 
-const runWatch = (option, callback) => {
+const [SERVER, CLIENT] = ['[SERVER]', '[CLIENT]'];
+
+const runWatch = (tag, option, callback) => {
   const watcher = watch(option);
   watcher.on('event', event => {
     if (event.code === 'START') {
-      console.log('Detecting changes');
+      console.log(`${tag} Changes detected`);
     }
     if (event.code === 'BUNDLE_START') {
-      console.log('Detecting changes');
+      console.log(`${tag} Start bundling`);
     }
     if (event.code === 'BUNDLE_END') {
       event.result.close();
@@ -28,14 +30,14 @@ const runWatch = (option, callback) => {
 
 let devServer = null;
 
-runWatch(serverOptions, () => {
+runWatch(SERVER, serverOptions, () => {
   if (devServer) {
     devServer.kill();
   }
 
   devServer = spawn('node', [path.resolve(ROOT_DIR, 'dist/index.js')]);
 
-  console.log(`[SERVER] building success`);
+  console.log(`${SERVER} building success`);
 
   devServer.stdout.on('data', data => console.log(data.toString().trim()));
 
@@ -48,4 +50,4 @@ runWatch(serverOptions, () => {
   });
 });
 
-runWatch(clientOptions, () => console.log(`[CLIENT] building success`));
+runWatch(CLIENT, clientOptions, () => console.log(`${CLIENT} building success`));

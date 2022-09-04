@@ -1,22 +1,14 @@
-import { useState } from 'react';
-import { createEditor } from 'slate';
-
-import { Slate, Editable, withReact } from 'slate-react';
-import initialState from './models';
+import { StrictMode, useState } from 'react';
+import { Editor, SyncDocument } from './components';
+import { LoadingStatus } from './models/types';
 
 export default () => {
-  const [editor] = useState(() => withReact(createEditor()));
-  const handleKeyDown = event => {
-    if (event.key === '&') {
-      // Prevent the ampersand character from being inserted.
-      event.preventDefault();
-      // Execute the `insertText` method when the event occurs.
-      editor.insertText('and');
-    }
-  };
+  const [status, setStatus] = useState<LoadingStatus>(LoadingStatus.Loading);
   return (
-    <Slate editor={editor} value={initialState}>
-      <Editable onKeyDown={handleKeyDown} />
-    </Slate>
+    <StrictMode>
+      <SyncDocument onStatusChange={status => setStatus(status)}>
+        <Editor status={status} />
+      </SyncDocument>
+    </StrictMode>
   );
 };
