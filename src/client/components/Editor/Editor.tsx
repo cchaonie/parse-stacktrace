@@ -11,14 +11,12 @@ export default ({ status }: EditorProps) => {
   const [editor] = useState(() => withReact(createEditor()));
   const clientDoc = useContext(DocumentContext);
 
-  const handleEditorChange = e => {
-    console.log(e);
-    console.log(editor);
-  };
-  const handleKeyDown = event => {
-    if (event.key === '&') {
-      event.preventDefault();
-      editor.insertText('and');
+  const handleSlateChange = () => {
+    const isAstChange = editor.operations.some(
+      op => 'set_selection' !== op.type
+    );
+    if (isAstChange) {
+      clientDoc.syncOperations(editor.operations)
     }
   };
 
@@ -27,11 +25,11 @@ export default ({ status }: EditorProps) => {
       <Message>Loading......</Message>
     ) : status === LoadingStatus.Loaded ? (
       <Slate
-        onChange={handleEditorChange}
         editor={editor}
-        value={clientDoc.sharedbDoc.data}
+        value={clientDoc.getDocumentData()}
+        onChange={handleSlateChange}
       >
-        <Editable onKeyDown={handleKeyDown} />
+        <Editable />
       </Slate>
     ) : (
       <Message>Loading failed -_-!, please refresh you page</Message>

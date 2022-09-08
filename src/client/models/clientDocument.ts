@@ -1,19 +1,24 @@
 import { Doc } from 'sharedb';
-import { Descendant } from 'slate';
+import { BaseOperation, Descendant } from 'slate';
 import initialContent from './initialContent';
-import { initialize as initializeSharedb } from './shareDBDocument';
+import { initialize as initializeSharedb } from './initializeShareDBDocument';
 import { LoadingStatus, StatusListener } from './types';
-
+import _ from 'lodash';
+import { OperationConverter } from './operationConverter';
 class ClientDocument {
   initialContent: Descendant[];
-  serverDocumentStatus: LoadingStatus;
+  serverDocumentStatus: LoadingStatus = LoadingStatus.Loading;
   sharedbDoc: Doc;
   statusListener: Array<StatusListener> = [];
+  operationConverter: OperationConverter = new OperationConverter();
 
   constructor(initialContent: Descendant[]) {
     this.initialContent = initialContent;
-    this.serverDocumentStatus = LoadingStatus.Loading;
     this.initialize();
+  }
+
+  getDocumentData() {
+    return _.cloneDeep(this.sharedbDoc.data);
   }
 
   initialize() {
@@ -40,6 +45,16 @@ class ClientDocument {
   removeStatusListener(listener: StatusListener) {
     const index = this.statusListener.indexOf(listener);
     this.statusListener.splice(index, 1);
+  }
+
+  syncOperations(ops: BaseOperation[]) {
+    _.each(ops, op => {
+      if (op.type === 'insert_text') {
+        this.sharedbDoc.submitOp(
+          this.operationConverter.setSlateOperation(op).convert()
+        );
+      }
+    });
   }
 }
 

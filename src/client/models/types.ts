@@ -12,5 +12,11 @@ export enum LoadingStatus {
   Failed = 'Failed',
 }
 
-
 export type StatusListener = (status: LoadingStatus) => void;
+
+export type JSON0Path = Array<string | number>;
+
+export interface JSON0StringInsertOperation {
+  p: JSON0Path;
+  si: string;
+}
