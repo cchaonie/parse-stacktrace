@@ -5,6 +5,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import html from '@rollup/plugin-html';
 import builtins from 'rollup-plugin-node-builtins';
 import { babel } from '@rollup/plugin-babel';
+import postcss from 'rollup-plugin-postcss';
+import autoprefixer from 'autoprefixer';
+import tailwindcss from 'tailwindcss';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const isPrd = process.env.NODE_ENV === 'production';
@@ -67,6 +70,10 @@ export default [
         ),
         preventAssignment: true,
       }),
+      postcss({
+        extract: true,
+        plugins: [autoprefixer, tailwindcss],
+      }),
       html({
         title: 'Collaborative Editor',
         template: options => {
@@ -82,7 +89,7 @@ export default [
             const links = (files.css || [])
               .map(({ fileName }) => {
                 const attrs = makeHtmlAttributes(attributes.link);
-                return `<link href="${publicPath}${fileName}" rel="stylesheet"${attrs}>`;
+                return `<link href="${publicPath}${fileName}" rel="stylesheet"${attrs}/>`;
               })
               .join('\n');
 
