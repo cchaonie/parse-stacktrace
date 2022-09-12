@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production rollup -c",
-    "build:css": "tailwindcss -i ./src/client/app.css -o ./dist/client/app.css --watch",
     "build-dev": "cross-env NODE_ENV=development rollup -c",
     "start": "node dist/index.js",
     "dev": "ts-node scripts/development",
