@@ -7,7 +7,6 @@ import builtins from 'rollup-plugin-node-builtins';
 import { babel } from '@rollup/plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
-import tailwindcss from 'tailwindcss';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const isPrd = process.env.NODE_ENV === 'production';
@@ -72,7 +71,7 @@ export default [
       }),
       postcss({
         extract: true,
-        plugins: [autoprefixer, tailwindcss],
+        plugins: [autoprefixer],
       }),
       html({
         title: 'Collaborative Editor',
