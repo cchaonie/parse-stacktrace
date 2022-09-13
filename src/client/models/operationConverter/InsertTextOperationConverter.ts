@@ -1,15 +1,9 @@
 import { BaseOperation, InsertTextOperation } from 'slate';
-import { JSON0Path, JSON0StringInsertOperation } from './types';
+import { JSON0Path, JSON0StringInsertOperation } from '../types';
 import _ from 'lodash';
+import BaseOperationConverter from './BaseOperationConverter';
 
-export class OperationConverter {
-  slateOperation: BaseOperation;
-
-  setSlateOperation(op: BaseOperation) {
-    this.slateOperation = op;
-    return this;
-  }
-
+export class InsertTextOperationConverter extends BaseOperationConverter {
   convert(): JSON0StringInsertOperation {
     const json0Path: JSON0Path = [];
     const { path, offset, text } = this.slateOperation as InsertTextOperation;

@@ -1,16 +1,16 @@
 import { Doc } from 'sharedb';
 import { BaseOperation, Descendant } from 'slate';
 import initialContent from './initialContent';
-import { initialize as initializeSharedb } from './initializeShareDBDocument';
+import { initializeShareDBDocument } from './initializeShareDBDocument';
 import { LoadingStatus, StatusListener } from './types';
 import _ from 'lodash';
-import { OperationConverter } from './operationConverter';
+import { createConverter } from './operationConverter';
+
 class ClientDocument {
   initialContent: Descendant[];
   serverDocumentStatus: LoadingStatus = LoadingStatus.Loading;
   sharedbDoc: Doc;
   statusListener: Array<StatusListener> = [];
-  operationConverter: OperationConverter = new OperationConverter();
 
   constructor(initialContent: Descendant[]) {
     this.initialContent = initialContent;
@@ -22,7 +22,7 @@ class ClientDocument {
   }
 
   initialize() {
-    initializeSharedb()
+    initializeShareDBDocument()
       .then(doc => {
         this.sharedbDoc = doc;
         this.serverDocumentStatus = LoadingStatus.Loaded;
@@ -49,10 +49,11 @@ class ClientDocument {
 
   syncOperations(ops: BaseOperation[]) {
     _.each(ops, op => {
-      if (op.type === 'insert_text') {
-        this.sharedbDoc.submitOp(
-          this.operationConverter.setSlateOperation(op).convert()
-        );
+      // TODO: implement the rest operations
+      try {
+        this.sharedbDoc.submitOp(createConverter(op).convert());
+      } catch (error) {
+        console.log(error);
       }
     });
   }

@@ -3,7 +3,7 @@ import { Doc } from 'sharedb';
 import { Connection } from 'sharedb/lib/client';
 import initialContent from './initialContent';
 
-export const initialize = () => {
+export const initializeShareDBDocument = () => {
   return new Promise<Doc>((resolve, reject) => {
     const socket = new ReconnectingWebSocket('ws://localhost:8080');
     const connection = new Connection(socket);
