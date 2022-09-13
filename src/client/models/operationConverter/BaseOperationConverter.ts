@@ -1,15 +1,15 @@
-import { BaseOperation, InsertTextOperation } from 'slate';
-import { JSON0Path, JSON0StringInsertOperation } from '../types';
+import { BaseOperation } from 'slate';
+import { JSON0Operation } from '../types';
 import _ from 'lodash';
 
-export default class BaseOperationConverter {
+export default class BaseOperationConverter<T extends JSON0Operation> {
   slateOperation: BaseOperation;
 
   constructor(op: BaseOperation) {
     this.slateOperation = op;
   }
 
-  convert(): JSON0StringInsertOperation {
+  convert(): T {
     throw new Error('Sub-Class should override this behavior');
   }
 }

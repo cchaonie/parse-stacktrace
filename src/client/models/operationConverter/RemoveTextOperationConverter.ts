@@ -1,9 +1,9 @@
 import { BaseOperation, InsertTextOperation } from 'slate';
-import { JSON0Path, JSON0StringInsertOperation } from '../types';
+import { JSON0Path, JSON0StringRemoveOperation } from '../types';
 import _ from 'lodash';
 import BaseOperationConverter from './BaseOperationConverter';
 
-export class InsertTextOperationConverter extends BaseOperationConverter<JSON0StringInsertOperation> {
+export class RemoveTextOperationConverter extends BaseOperationConverter<JSON0StringRemoveOperation> {
   convert() {
     const json0Path: JSON0Path = [];
     const { path, offset, text } = this.slateOperation as InsertTextOperation;
@@ -20,7 +20,7 @@ export class InsertTextOperationConverter extends BaseOperationConverter<JSON0St
 
     return {
       p: json0Path,
-      si: text,
+      sd: text,
     };
   }
 }
