@@ -8,6 +8,6 @@ body {
     min-height: 100vh;
 }
 
-.bg-black-100 {
-    background-color: rgb(34, 87, 167);
+.background {
+    background-color: rgb(193, 197, 202);
 }
