@@ -16,7 +16,7 @@ export default ({ status }: EditorProps) => {
       op => 'set_selection' !== op.type
     );
     if (isAstChange) {
-      clientDoc.syncOperations(editor.operations)
+      clientDoc.submitOperations(editor.operations)
     }
   };
 

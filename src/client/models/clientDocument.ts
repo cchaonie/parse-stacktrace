@@ -47,7 +47,7 @@ class ClientDocument {
     this.statusListener.splice(index, 1);
   }
 
-  syncOperations(ops: BaseOperation[]) {
+  submitOperations(ops: BaseOperation[]) {
     _.each(ops, op => {
       // TODO: implement the rest operations
       try {
