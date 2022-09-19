@@ -1,12 +1,12 @@
-import { InsertTextOperation } from 'slate';
-import { JSON0Path, JSON0StringInsertOperation } from '../types';
+import { InsertNodeOperation } from 'slate';
+import { JSON0ObjectInsertOperation, JSON0Path, JSON0StringInsertOperation } from '../types';
 import _ from 'lodash';
 import BaseOperationConverter from './BaseOperationConverter';
 
-export class InsertTextOperationConverter extends BaseOperationConverter<JSON0StringInsertOperation> {
+export class InsertTextOperationConverter extends BaseOperationConverter<JSON0ObjectInsertOperation> {
   convert() {
     const json0Path: JSON0Path = [];
-    const { path, offset, text } = this.slateOperation as InsertTextOperation;
+    const { path, node } = this.slateOperation as InsertNodeOperation;
     _.each(path, (value, index) => {
       json0Path.push(value);
       if (index < path.length - 1) {
@@ -15,12 +15,9 @@ export class InsertTextOperationConverter extends BaseOperationConverter<JSON0St
     });
     json0Path.push('text');
 
-    // offset
-    json0Path.push(offset);
-
     return {
       p: json0Path,
-      si: text,
+      li: node,
     };
   }
 }

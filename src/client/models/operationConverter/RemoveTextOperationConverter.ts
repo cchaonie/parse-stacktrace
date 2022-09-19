@@ -1,4 +1,4 @@
-import { BaseOperation, InsertTextOperation } from 'slate';
+import { InsertTextOperation } from 'slate';
 import { JSON0Path, JSON0StringRemoveOperation } from '../types';
 import _ from 'lodash';
 import BaseOperationConverter from './BaseOperationConverter';

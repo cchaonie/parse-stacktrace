@@ -17,7 +17,7 @@ class ClientDocument {
     this.initialize();
   }
 
-  getDocumentData() {
+  getDocumentData(): Descendant[] {
     return _.cloneDeep(this.sharedbDoc.data);
   }
 
@@ -51,7 +51,7 @@ class ClientDocument {
     _.each(ops, op => {
       // TODO: implement the rest operations
       try {
-        this.sharedbDoc.submitOp(createConverter(op).convert());
+        this.sharedbDoc.submitOp(createConverter(this.getDocumentData(), op).convert());
       } catch (error) {
         console.log(error);
       }

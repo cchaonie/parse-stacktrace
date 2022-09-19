@@ -4,6 +4,8 @@
 //   Failed: 3,
 // };
 
+import { Node } from 'slate';
+
 // export type LoadingStatus = typeof LoadingStatus[keyof typeof LoadingStatus];
 
 export enum LoadingStatus {
@@ -26,4 +28,8 @@ export interface JSON0StringInsertOperation extends JSON0Operation {
 
 export interface JSON0StringRemoveOperation extends JSON0Operation {
   sd: string;
+}
+
+export interface JSON0ObjectInsertOperation extends JSON0Operation {
+  li: Node;
 }
