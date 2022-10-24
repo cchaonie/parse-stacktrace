@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { DocumentContext, clientDocument } from '../../models';
 import { SyncDocumentProps } from './types';
 
-const SyncDocument = ({ children, onStatusChange }: SyncDocumentProps) => {
+export default ({ children, onStatusChange }: SyncDocumentProps) => {
   useEffect(() => {
     clientDocument.addStatusListener(onStatusChange);
     return () => clientDocument.removeStatusListener(onStatusChange);
@@ -14,5 +14,3 @@ const SyncDocument = ({ children, onStatusChange }: SyncDocumentProps) => {
     </DocumentContext.Provider>
   );
 };
-
-export default SyncDocument;
