@@ -48,6 +48,21 @@ runWatch(SERVER, serverOptions, () => {
   devServer.on('error', err => {
     console.error(err, 'Failed to start child process.');
   });
+
+  devServer.on('close', code => {
+    console.log(`devServer close all stdio with code ${code}`);
+  });
+
+  devServer.on('exit', code => {
+    console.log(`devServer exited with code ${code}`);
+  });
 });
 
 runWatch(CLIENT, clientOptions, () => console.log(`${CLIENT} building success`));
+
+process.on("uncaughtException", e => {
+  console.log(e);
+  if (devServer) {
+    devServer.kill(1);
+  }
+})
