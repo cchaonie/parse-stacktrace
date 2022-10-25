@@ -13,17 +13,6 @@ export default ({ status }: EditorProps) => {
 
   const clientDoc = useContext(DocumentContext);
 
-  // const handleSlateChange = () => {
-  //   const isAstChange = editor.operations.some(
-  //     op => 'set_selection' !== op.type
-  //   );
-  //   if (isAstChange) {
-  //     console.log('editor.children', editor.children);
-  //     console.log('editor.operations', editor.operations);
-  //     clientDoc.submitOperations(editor.operations);
-  //   }
-  // };
-
   const renderContent =
     status === LoadingStatus.Loading ? (
       <Message>Loading......</Message>
@@ -31,7 +20,6 @@ export default ({ status }: EditorProps) => {
       <Slate
         editor={editor}
         value={clientDoc.getDocumentData()}
-        // onChange={handleSlateChange}
       >
         <Editable />
       </Slate>
