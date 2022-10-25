@@ -4,21 +4,25 @@ import { createEditor } from 'slate';
 import { Slate, Editable, withReact } from 'slate-react';
 import { DocumentContext } from '../../models';
 import { LoadingStatus } from '../../models/types';
+import { withSync } from '../../plugins/withSync';
 import Message from '../Message';
 import { EditorProps } from './types';
 
 export default ({ status }: EditorProps) => {
-  const [editor] = useState(() => withReact(createEditor()));
+  const [editor] = useState(() => withSync(withReact(createEditor())));
+
   const clientDoc = useContext(DocumentContext);
 
-  const handleSlateChange = () => {
-    const isAstChange = editor.operations.some(
-      op => 'set_selection' !== op.type
-    );
-    if (isAstChange) {
-      clientDoc.submitOperations(editor.operations);
-    }
-  };
+  // const handleSlateChange = () => {
+  //   const isAstChange = editor.operations.some(
+  //     op => 'set_selection' !== op.type
+  //   );
+  //   if (isAstChange) {
+  //     console.log('editor.children', editor.children);
+  //     console.log('editor.operations', editor.operations);
+  //     clientDoc.submitOperations(editor.operations);
+  //   }
+  // };
 
   const renderContent =
     status === LoadingStatus.Loading ? (
@@ -27,7 +31,7 @@ export default ({ status }: EditorProps) => {
       <Slate
         editor={editor}
         value={clientDoc.getDocumentData()}
-        onChange={handleSlateChange}
+        // onChange={handleSlateChange}
       >
         <Editable />
       </Slate>
