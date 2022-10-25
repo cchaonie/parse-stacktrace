@@ -33,3 +33,8 @@ export interface JSON0StringRemoveOperation extends JSON0Operation {
 export interface JSON0ObjectInsertOperation extends JSON0Operation {
   li: Node;
 }
+
+export interface JSON0ObjectRemoveOperation extends JSON0Operation {
+  od: Node;
+}
+

@@ -16,7 +16,6 @@ export default ({ status }: EditorProps) => {
       op => 'set_selection' !== op.type
     );
     if (isAstChange) {
-      console.log(editor.children, editor.operations)
       clientDoc.submitOperations(editor.operations);
     }
   };

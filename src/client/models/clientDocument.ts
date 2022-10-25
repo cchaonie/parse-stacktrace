@@ -51,7 +51,8 @@ class ClientDocument {
     _.each(ops, op => {
       // TODO: implement the rest operations
       try {
-        this.sharedbDoc.submitOp(createConverter(this.getDocumentData(), op).convert());
+        const converter = createConverter(this.getDocumentData(), op);
+        this.sharedbDoc.submitOp(converter.convert());
       } catch (error) {
         console.log(error);
       }

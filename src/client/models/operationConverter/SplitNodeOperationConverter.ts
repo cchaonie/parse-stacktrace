@@ -1,9 +1,9 @@
 import { InsertNodeOperation } from 'slate';
-import { JSON0ObjectInsertOperation, JSON0Path, JSON0StringInsertOperation } from '../types';
+import { JSON0ObjectInsertOperation, JSON0Path } from '../types';
 import _ from 'lodash';
 import BaseOperationConverter from './BaseOperationConverter';
 
-export class InsertTextOperationConverter extends BaseOperationConverter<JSON0ObjectInsertOperation> {
+export class SplitNodeOperationConverter extends BaseOperationConverter<JSON0ObjectInsertOperation> {
   convert() {
     const json0Path: JSON0Path = [];
     const { path, node } = this.slateOperation as InsertNodeOperation;
