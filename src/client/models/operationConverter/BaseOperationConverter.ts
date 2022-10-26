@@ -2,7 +2,7 @@ import { BaseOperation, Descendant } from 'slate';
 import { JSON0Operation } from '../types';
 import _ from 'lodash';
 
-export default class BaseOperationConverter<T extends JSON0Operation> {
+export default class BaseOperationConverter {
   slateOperation: BaseOperation;
   docData: Descendant[];
 
@@ -11,7 +11,7 @@ export default class BaseOperationConverter<T extends JSON0Operation> {
     this.slateOperation = op;
   }
 
-  convert(): T {
+  convert(): JSON0Operation[] {
     throw new Error('Sub-Class should override this behavior');
   }
 }

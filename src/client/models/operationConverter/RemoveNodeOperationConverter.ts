@@ -3,7 +3,7 @@ import { JSON0ObjectRemoveOperation, JSON0Path } from '../types';
 import _ from 'lodash';
 import BaseOperationConverter from './BaseOperationConverter';
 
-export class RemoveNodeOperationConverter extends BaseOperationConverter<JSON0ObjectRemoveOperation> {
+export class RemoveNodeOperationConverter extends BaseOperationConverter {
   convert() {
     const json0Path: JSON0Path = [];
     const { path, node } = this.slateOperation as RemoveNodeOperation;
@@ -12,9 +12,11 @@ export class RemoveNodeOperationConverter extends BaseOperationConverter<JSON0Ob
       json0Path.push(value);
     });
 
-    return {
-      p: json0Path,
-      od: node,
-    };
+    return [
+      {
+        p: json0Path,
+        od: node,
+      },
+    ];
   }
 }

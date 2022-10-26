@@ -50,7 +50,10 @@ class ClientDocument {
   submitOperation(op: BaseOperation) {
     try {
       const converter = createConverter(this.getDocumentData(), op);
-      this.sharedbDoc.submitOp(converter.convert());
+      const sharedbOps = converter.convert();
+      _.forEach(sharedbOps, sharedbOp => {
+        this.sharedbDoc.submitOp(sharedbOp);
+      });
     } catch (error) {
       console.log(error);
     }

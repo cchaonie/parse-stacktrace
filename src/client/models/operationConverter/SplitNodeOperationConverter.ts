@@ -1,23 +1,67 @@
-import { InsertNodeOperation } from 'slate';
+import { SplitNodeOperation } from 'slate';
 import { JSON0ObjectInsertOperation, JSON0Path } from '../types';
 import _ from 'lodash';
 import BaseOperationConverter from './BaseOperationConverter';
+import { convertPath } from '../../../utils/convertPath';
 
-export class SplitNodeOperationConverter extends BaseOperationConverter<JSON0ObjectInsertOperation> {
+export class SplitNodeOperationConverter extends BaseOperationConverter {
   convert() {
-    const json0Path: JSON0Path = [];
-    const { path, node } = this.slateOperation as InsertNodeOperation;
-    _.each(path, (value, index) => {
-      json0Path.push(value);
-      if (index < path.length - 1) {
-        json0Path.push('children');
-      }
-    });
-    json0Path.push('text');
+    const { path, position, properties } = this
+      .slateOperation as SplitNodeOperation;
+    // TODO: type target
+    const json0Path: JSON0Path = convertPath(path);
 
-    return {
-      p: json0Path,
-      li: node,
-    };
+    if (Object.keys(properties).length) {
+      // We are splitting paragraph
+      const targetListPath = [...json0Path, 'children'];
+      const targetList = _.get(this.docData, targetListPath);
+      const splitObj = targetList[position];
+
+      const deleteOp = {
+        p: [...targetListPath, position],
+        ld: splitObj,
+      };
+
+      const upperLevel = [...path];
+      const insertTargetIndex = upperLevel.pop();
+
+      const upperLevelPath = convertPath(upperLevel);
+      const insertOp = {
+        p: upperLevelPath.length
+          ? [...upperLevelPath, 'children', insertTargetIndex + 1]
+          : [insertTargetIndex + 1],
+        li: {
+          ...properties,
+          children: [splitObj],
+        },
+      };
+      return [deleteOp, insertOp];
+    } else {
+      // We are splitting text node
+      const deletePosition = [...json0Path, 'text'];
+      const target = _.get(this.docData, deletePosition);
+
+      const splitText = target.substring(position);
+
+      const deleteOp = {
+        p: [...deletePosition, position],
+        sd: splitText,
+      };
+
+      const upperLevel = [...path];
+      const insertTargetIndex = upperLevel.pop();
+
+      const upperLevelPath = convertPath(upperLevel);
+
+      const insertOp = {
+        p: [...upperLevelPath, 'children', insertTargetIndex + 1],
+        li: {
+          text: splitText,
+        },
+      };
+      return [deleteOp, insertOp];
+    }
+
+    return [];
   }
 }
