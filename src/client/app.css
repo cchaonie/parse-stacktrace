@@ -6,8 +6,6 @@ body {
 
 #board {
     min-height: 100vh;
-}
-
-.background {
-    background-color: rgb(193, 197, 202);
+    display: flex;
+    flex-direction: column;
 }

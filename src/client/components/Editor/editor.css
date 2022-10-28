@@ -1,0 +1,13 @@
+.editor {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+}
+
+.background {
+    background-color: rgb(193, 197, 202);
+}

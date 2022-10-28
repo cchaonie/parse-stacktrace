@@ -6,7 +6,10 @@ import { DocumentContext } from '../../models';
 import { LoadingStatus } from '../../models/types';
 import { withSync } from '../../plugins/withSync';
 import Message from '../Message';
+import { Toolbar } from '../Toolbar';
 import { EditorProps } from './types';
+
+import './editor.css';
 
 export default ({ status }: EditorProps) => {
   const [editor] = useState(() => withSync(withReact(createEditor())));
@@ -17,12 +20,12 @@ export default ({ status }: EditorProps) => {
     status === LoadingStatus.Loading ? (
       <Message>Loading......</Message>
     ) : status === LoadingStatus.Loaded ? (
-      <Slate
-        editor={editor}
-        value={clientDoc.getDocumentData()}
-      >
-        <Editable />
-      </Slate>
+      <div className='editor background'>
+        <Toolbar />
+        <Slate editor={editor} value={clientDoc.getDocumentData()}>
+          <Editable style={{ flexGrow: 1 }} />
+        </Slate>
+      </div>
     ) : (
       <Message>Loading failed -_-!, please refresh you page</Message>
     );

@@ -8,7 +8,7 @@ export default () => {
   const [status, setStatus] = useState<LoadingStatus>(LoadingStatus.Loading);
   return (
     <SyncDocument onStatusChange={status => setStatus(status)}>
-      <div className='background' id='board'>
+      <div id='board'>
         <Editor status={status} />
       </div>
     </SyncDocument>
