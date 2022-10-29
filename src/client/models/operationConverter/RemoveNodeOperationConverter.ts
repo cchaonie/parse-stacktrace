@@ -1,5 +1,5 @@
 import { RemoveNodeOperation } from 'slate';
-import { JSON0ObjectRemoveOperation, JSON0Path } from '../types';
+import { JSON0Path } from '../types';
 import _ from 'lodash';
 import BaseOperationConverter from './BaseOperationConverter';
 

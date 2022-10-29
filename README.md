@@ -14,6 +14,7 @@ See [link](https://github.com/ottypes/json0#summary-of-operations)
 
 - [x] Handle split_node operation
 - [x] Handle remove_node operation
+- [ ] Handle merge_node operation
 - [ ] Add `user` management
 - [ ] Show the mouse position of the other users
 - [ ] Add user interface
@@ -44,3 +45,11 @@ The second one is to move the new text node up, and it will become a paragraph n
 To get the same effect, what needs to happen in sharedb side?
 1. get the split text node and the part that belongs to the new text node. This requires *delete string* and *insert object*
 2. change the text node to a paragraph. This requires *delete object* and *insert object*
+
+### How "merge_node" works in slate
+
+Contrast to the split_node, when delete all text in one line, merge_node will be triggered when the last text is deleted and 2 merge_node operations will be dispatched.
+
+The first merge_node is to merge 2 paragraphs. The result is the text node of the to be deleted paragraph will be appended to the previous sibling paragraph, which means the previous sibling paragraph will have 2 text nodes in its children.
+
+The second merge_node is to merge the 2 text nodes of the previous paragraph because it has a empty text node, which is the text node from the last merge_node operation.

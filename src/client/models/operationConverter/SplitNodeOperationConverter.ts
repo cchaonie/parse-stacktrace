@@ -8,7 +8,6 @@ export class SplitNodeOperationConverter extends BaseOperationConverter {
   convert() {
     const { path, position, properties } = this
       .slateOperation as SplitNodeOperation;
-    // TODO: type target
     const json0Path: JSON0Path = convertPath(path);
 
     if (Object.keys(properties).length) {
@@ -61,7 +60,5 @@ export class SplitNodeOperationConverter extends BaseOperationConverter {
       };
       return [deleteOp, insertOp];
     }
-
-    return [];
   }
 }
