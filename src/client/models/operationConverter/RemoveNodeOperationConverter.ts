@@ -8,14 +8,14 @@ export class RemoveNodeOperationConverter extends BaseOperationConverter {
     const json0Path: JSON0Path = [];
     const { path, node } = this.slateOperation as RemoveNodeOperation;
 
-    _.each(path, (value, index) => {
+    _.each(path, value => {
       json0Path.push(value);
     });
 
     return [
       {
         p: json0Path,
-        od: node,
+        ld: node,
       },
     ];
   }

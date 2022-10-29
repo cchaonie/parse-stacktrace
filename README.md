@@ -13,7 +13,7 @@ See [link](https://github.com/ottypes/json0#summary-of-operations)
 ## Features to be implement
 
 - [x] Handle split_node operation
-- [ ] Handle remove_node operation
+- [x] Handle remove_node operation
 - [ ] Add `user` management
 - [ ] Show the mouse position of the other users
 - [ ] Add user interface

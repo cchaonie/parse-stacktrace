@@ -23,7 +23,7 @@ export default ({ status }: EditorProps) => {
       <div className='editor background'>
         <Toolbar />
         <Slate editor={editor} value={clientDoc.getDocumentData()}>
-          <Editable style={{ flexGrow: 1 }} />
+          <Editable style={{ flexGrow: 1, paddingInline: '8px' }} />
         </Slate>
       </div>
     ) : (
