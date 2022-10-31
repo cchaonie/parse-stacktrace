@@ -17,6 +17,7 @@
   "author": "nc_8093@163.com",
   "license": "MIT",
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^3.3.6",
     "@teamwork/websocket-json-stream": "^2.0.0",
     "cross-env": "^7.0.3",
     "express": "^4.18.1",
