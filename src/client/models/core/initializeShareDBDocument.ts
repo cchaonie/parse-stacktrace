@@ -1,13 +1,14 @@
 import ReconnectingWebSocket from 'reconnecting-websocket';
 import { Doc } from 'sharedb';
 import { Connection } from 'sharedb/lib/client';
-import { getFingerprint } from './fingerprint/getFingerprint';
+import { getFingerprint } from '../fingerprint/getFingerprint';
 import initialContent from './initialContent';
 
 export const initializeShareDBDocument = () =>
   getFingerprint().then(
     ({ visitorId }) =>
       new Promise<Doc>((resolve, reject) => {
+        console.log(visitorId)
         const socket = new ReconnectingWebSocket('ws://localhost:8080');
         const connection = new Connection(socket);
 

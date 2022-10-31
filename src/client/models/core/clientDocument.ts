@@ -2,9 +2,9 @@ import { Doc } from 'sharedb';
 import { BaseOperation, Descendant } from 'slate';
 import initialContent from './initialContent';
 import { initializeShareDBDocument } from './initializeShareDBDocument';
-import { LoadingStatus, StatusListener } from './types';
+import { LoadingStatus, StatusListener } from '../types';
 import _ from 'lodash';
-import { createConverter } from './operationConverter';
+import { createConverter } from '../operationConverter';
 
 class ClientDocument {
   initialContent: Descendant[];
