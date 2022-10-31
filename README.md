@@ -14,8 +14,9 @@ See [link](https://github.com/ottypes/json0#summary-of-operations)
 
 - [x] Handle split_node operation
 - [x] Handle remove_node operation
-- [ ] Handle merge_node operation
+- [x] Handle merge_node operation
 - [ ] Add `user` management
+  - [ ] Add user fingerprint to tag users
 - [ ] Show the mouse position of the other users
 - [ ] Add user interface
 
