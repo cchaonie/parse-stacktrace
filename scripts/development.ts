@@ -35,7 +35,10 @@ runWatch(SERVER, serverOptions, () => {
     devServer.kill();
   }
 
-  devServer = spawn('node', [path.resolve(ROOT_DIR, 'dist/index.js')]);
+  devServer = spawn('node', [
+    '--inspect',
+    path.resolve(ROOT_DIR, 'dist/index.js'),
+  ]);
 
   console.log(`${SERVER} building success`);
 
@@ -60,9 +63,9 @@ runWatch(SERVER, serverOptions, () => {
 
 runWatch(CLIENT, clientOptions, () => console.log(`${CLIENT} building success`));
 
-process.on("uncaughtException", e => {
+process.on('uncaughtException', e => {
   console.log(e);
   if (devServer) {
     devServer.kill(1);
   }
-})
+});
