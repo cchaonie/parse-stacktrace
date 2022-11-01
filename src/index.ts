@@ -17,19 +17,19 @@ const backend = new ShareDB();
 const userMapWs = new Map();
 
 webSocketServer.on('connection', webSocket => {
-  webSocket.on('message', data => {
-    try {
-      const messageObj = JSON.parse(data.toString());
-      if (
-        messageObj.type === 'identity' &&
-        userMapWs.get(messageObj?.visitorId)
-      ) {
-        userMapWs.set(messageObj.visitorId, webSocket);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  });
+  // webSocket.on('message', data => {
+  //   try {
+  //     const messageObj = JSON.parse(data.toString());
+  //     if (
+  //       messageObj.type === 'identity' &&
+  //       userMapWs.get(messageObj?.visitorId)
+  //     ) {
+  //       userMapWs.set(messageObj.visitorId, webSocket);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // });
 
   const stream = new WebSocketJSONStream(webSocket);
   backend.listen(stream);
