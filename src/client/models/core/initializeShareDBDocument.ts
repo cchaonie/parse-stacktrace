@@ -9,14 +9,14 @@ export const initializeShareDBDocument = () =>
     ({ visitorId }) =>
       new Promise<Doc>((resolve, reject) => {
         const socket = new ReconnectingWebSocket('ws://localhost:8080');
-        socket.addEventListener('open', () => {
-          socket.send(
-            JSON.stringify({
-              type: 'identity',
-              visitorId,
-            })
-          );
-        });
+        // socket.addEventListener('open', () => {
+        //   socket.send(
+        //     JSON.stringify({
+        //       type: 'identity',
+        //       visitorId,
+        //     })
+        //   );
+        // });
 
         const connection = new Connection(socket);
 

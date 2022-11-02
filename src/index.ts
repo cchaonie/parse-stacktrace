@@ -1,9 +1,9 @@
 import express from 'express';
 import { WebSocketServer } from 'ws';
 import ShareDB from 'sharedb';
-import WebSocketJSONStream from '@teamwork/websocket-json-stream';
 import http from 'http';
 import path from 'path';
+import WebSocketJSONStream from './utils';
 
 const app = express();
 
@@ -14,7 +14,7 @@ const webSocketServer = new WebSocketServer({ server });
 
 const backend = new ShareDB();
 
-const userMapWs = new Map();
+// const userMapWs = new Map();
 
 webSocketServer.on('connection', webSocket => {
   // webSocket.on('message', data => {
