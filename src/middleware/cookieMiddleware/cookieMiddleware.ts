@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { v4, validate } from 'uuid';
+import { nanoid } from 'nanoid';
 
 export const cookieMiddleware = (
   req: Request,
@@ -8,8 +8,8 @@ export const cookieMiddleware = (
 ) => {
   const { uid } = req.cookies;
   console.log(uid);
-  if (!uid || validate(uid)) {
-    res.cookie('uid', v4());
+  if (!uid) {
+    res.cookie('uid', nanoid());
   }
   return next();
 };

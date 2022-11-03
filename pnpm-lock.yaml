@@ -21,7 +21,6 @@ specifiers:
   '@types/react': ^18.0.18
   '@types/react-dom': ^18.0.6
   '@types/sharedb': ^3.0.0
-  '@types/uuid': ^8.3.4
   '@types/ws': ^8.5.3
   autoprefixer: ^10.4.8
   cookie-parser: ^1.4.6
@@ -29,6 +28,7 @@ specifiers:
   express: ^4.18.1
   jest: ^28.1.3
   lodash: ^4.17.21
+  nanoid: ^4.0.0
   postcss: ^8.4.16
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -43,7 +43,6 @@ specifiers:
   ts-node: ^10.9.1
   tslib: ^2.4.0
   typescript: ^4.8.2
-  uuid: ^9.0.0
   ws: ^8.8.1
 
 dependencies:
@@ -52,13 +51,13 @@ dependencies:
   cross-env: 7.0.3
   express: 4.18.1
   lodash: 4.17.21
+  nanoid: 4.0.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   reconnecting-websocket: 4.4.0
   sharedb: 3.1.0
   slate: 0.82.1
   slate-react: 0.82.1_lryiyh7uo2ykhysveiorwwrgwa
-  uuid: 9.0.0
   ws: 8.8.1
 
 devDependencies:
@@ -81,7 +80,6 @@ devDependencies:
   '@types/react': 18.0.18
   '@types/react-dom': 18.0.6
   '@types/sharedb': 3.0.0
-  '@types/uuid': 8.3.4
   '@types/ws': 8.5.3
   autoprefixer: 10.4.8_postcss@8.4.16
   jest: 28.1.3_gsb7asu77en4txj3es3i65pxci
@@ -2008,10 +2006,6 @@ packages:
 
   /@types/stack-utils/2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
-    dev: true
-
-  /@types/uuid/8.3.4:
-    resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
     dev: true
 
   /@types/ws/8.5.3:
@@ -4339,6 +4333,12 @@ packages:
     hasBin: true
     dev: true
 
+  /nanoid/4.0.0:
+    resolution: {integrity: sha512-IgBP8piMxe/gf73RTQx7hmnhwz0aaEXYakvqZyE302IXW3HyVNhdNGC+O2MwMAVhLEnvXlvKtGbtJf6wvHihCg==}
+    engines: {node: ^14 || ^16 || >=18}
+    hasBin: true
+    dev: false
+
   /natural-compare/1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
@@ -5766,11 +5766,6 @@ packages:
   /utils-merge/1.0.1:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
-    dev: false
-
-  /uuid/9.0.0:
-    resolution: {integrity: sha512-MXcSTerfPa4uqyzStbRoTgt5XIe3x5+42+q1sDuy3R5MDk66URdLMOZe5aPX/SQd+kuYAh0FdP/pO28IkQyTeg==}
-    hasBin: true
     dev: false
 
   /v8-compile-cache-lib/3.0.1:
