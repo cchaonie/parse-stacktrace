@@ -55,7 +55,7 @@ class ClientDocument {
         this.sharedbDoc.submitOp(sharedbOp);
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 

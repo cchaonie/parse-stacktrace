@@ -7,7 +7,6 @@ export const cookieMiddleware = (
   next: NextFunction
 ) => {
   const { uid } = req.cookies;
-  console.log(uid);
   if (!uid) {
     res.cookie('uid', nanoid());
   }

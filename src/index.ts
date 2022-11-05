@@ -4,8 +4,8 @@ import ShareDB from 'sharedb';
 import http from 'http';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import WebSocketJSONStream from './utils';
 import { cookieMiddleware } from './middleware';
+import { connectionHandler } from './handlers';
 
 const app = express();
 
@@ -24,9 +24,6 @@ const webSocketServer = new WebSocketServer({ server });
 
 const backend = new ShareDB();
 
-webSocketServer.on('connection', webSocket => {
-  const stream = new WebSocketJSONStream(webSocket);
-  backend.listen(stream);
-});
+webSocketServer.on('connection', connectionHandler(backend));
 
 server.listen(8080, () => console.log(`[SERVER] listening at port 8080 now`));
