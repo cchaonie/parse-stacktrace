@@ -20,4 +20,15 @@
     font-size: 24px;
     font-weight: 500;
     border-bottom: 1px solid grey;
+    display: flex;
+}
+
+.sideMenu-operationIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sideMenu-operationText {
+    margin-left: 16px;
 }

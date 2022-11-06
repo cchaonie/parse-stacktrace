@@ -1,0 +1,28 @@
+.arrow {
+    border-top: 1px solid grey;
+    border-right: 1px solid grey;
+    transition: transform 300ms ease-in;
+}
+
+.arrow-down {
+    transform: rotate(135deg);
+}
+
+.arrow-right {
+    transform: rotate(45deg);
+}
+
+.arrow-small {
+    width: 8px;
+    height: 8px;
+}
+
+.arrow-medium {
+    width: 12px;
+    height: 12px;
+}
+
+.arrow-large {
+    width: 20px;
+    height: 20px;
+}

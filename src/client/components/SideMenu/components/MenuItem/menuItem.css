@@ -1,0 +1,18 @@
+.menuItem {
+    font-size: 24px;
+    font-weight: 500;
+    border-bottom: 1px solid grey;
+    display: flex;
+}
+
+.menuItem-operationIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.menuItem-operationText {
+    margin-left: 16px;
+    cursor: pointer;
+}

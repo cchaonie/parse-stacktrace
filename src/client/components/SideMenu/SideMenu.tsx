@@ -1,3 +1,5 @@
+import MenuItem from './components/MenuItem';
+
 import './sideMenu.css';
 
 export default () => {
@@ -5,7 +7,7 @@ export default () => {
     <div className='sideMenu sideMenu-background'>
       <h1 className='sideMenu-title'>Collaborative Editor</h1>
       <div className='sideMenu-operationSection'>
-        <div className='sideMenu-operation'>files</div>
+        <MenuItem name='files' />
       </div>
     </div>
   );
