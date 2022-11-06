@@ -20,7 +20,7 @@ export default ({ status }: EditorProps) => {
     status === LoadingStatus.Loading ? (
       <Message>Loading......</Message>
     ) : status === LoadingStatus.Loaded ? (
-      <div className='editor background'>
+      <div className='editor'>
         <Toolbar />
         <Slate editor={editor} value={clientDoc.getDocumentData()}>
           <Editable style={{ flexGrow: 1, paddingInline: '8px' }} />
