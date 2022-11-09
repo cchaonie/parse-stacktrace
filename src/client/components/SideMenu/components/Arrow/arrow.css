@@ -1,15 +1,13 @@
 .arrow {
-    border-top: 1px solid grey;
-    border-right: 1px solid grey;
     transition: transform 300ms ease-in;
+    transform-origin: center;
+    display: flex;
+    align-items: center;
+    justify-self: center;
 }
 
 .arrow-down {
-    transform: rotate(135deg);
-}
-
-.arrow-right {
-    transform: rotate(45deg);
+    transform: rotate(90deg);
 }
 
 .arrow-small {

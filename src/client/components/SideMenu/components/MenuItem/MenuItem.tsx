@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Iconfont from '../../../Iconfont';
 import Arrow from '../Arrow';
 
 import './menuItem.css';
@@ -10,12 +11,15 @@ export default ({ name }: MenuItemProps) => {
     direction === 'right' ? setDirection('down') : setDirection('right');
 
   return (
-    <div className='menuItem'>
-      <div className='menuItem-operationIcon' onClick={handleArrowClick}>
+    <div className='menuItem' onClick={handleArrowClick}>
+      <div className='menuItem-operationIcon'>
         <Arrow direction={direction} />
       </div>
-      <div className='menuItem-operationText' onClick={handleArrowClick}>
-        {name}
+      <div className='menuItem-mainOperation'>
+        <div className='menuItem-operationText'>{name}</div>
+        <div className='menuItem-moreOperation'>
+          <Iconfont name='add-select' fontSize='20px' />
+        </div>
       </div>
     </div>
   );

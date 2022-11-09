@@ -3,6 +3,7 @@
     font-weight: 500;
     border-bottom: 1px solid grey;
     display: flex;
+    width: 100%;
 }
 
 .menuItem-operationIcon {
@@ -12,7 +13,20 @@
     cursor: pointer;
 }
 
-.menuItem-operationText {
+.menuItem-mainOperation {
     margin-left: 16px;
     cursor: pointer;
+    display: flex;
+    width: 100%;
+}
+
+.menuItem-operationText {
+    flex-grow: 1;
+}
+
+.menuItem-moreOperation {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    flex: 0 0 auto;
 }
