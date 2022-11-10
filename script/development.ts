@@ -58,6 +58,7 @@ runWatch(SERVER, serverOptions, () => {
 
   devServer.on('exit', code => {
     console.log(`devServer exited with code ${code}`);
+    process.exit(code);
   });
 });
 
