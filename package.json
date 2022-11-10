@@ -7,7 +7,7 @@
     "build": "cross-env NODE_ENV=production rollup -c",
     "build-dev": "cross-env NODE_ENV=development rollup -c",
     "start": "node dist/index.js",
-    "dev": "ts-node scripts/development",
+    "dev": "ts-node script/development",
     "test": "jest"
   },
   "keywords": [

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { LoadingStatus } from '../../models/types';
+import { LoadingStatus } from '../../model/types';
 
 export interface SyncDocumentProps {
   onStatusChange: (status: LoadingStatus) => void;

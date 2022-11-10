@@ -1,7 +1,7 @@
 import { Operation } from 'slate';
 import { ReactEditor } from 'slate-react';
-import { clientDocument } from '../models';
-import { isDocumentUpdated } from '../../utils/isDocumentUpdated';
+import { clientDocument } from '../model';
+import { isDocumentUpdated } from '../../util/isDocumentUpdated';
 
 export const withSync = (editor: ReactEditor): ReactEditor => {
   const { apply } = editor;

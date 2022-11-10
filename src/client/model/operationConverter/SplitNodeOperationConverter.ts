@@ -2,7 +2,7 @@ import { SplitNodeOperation } from 'slate';
 import { JSON0ObjectInsertOperation, JSON0Path } from '../types';
 import _ from 'lodash';
 import BaseOperationConverter from './BaseOperationConverter';
-import { convertPath } from '../../../utils/convertPath';
+import { convertPath } from '../../../util/convertPath';
 
 export class SplitNodeOperationConverter extends BaseOperationConverter {
   convert() {

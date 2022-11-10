@@ -1,6 +1,6 @@
-import WebSocketJSONStream from '../../utils/index';
+import WebSocketJSONStream from '../../util/index';
 import type ShareDB from 'sharedb';
-import { parseCookie } from '../../utils/parseCookie/parseCookie';
+import { parseCookie } from '../../util/parseCookie/parseCookie';
 import { IncomingMessage } from 'http';
 import { WebSocket } from 'ws';
 

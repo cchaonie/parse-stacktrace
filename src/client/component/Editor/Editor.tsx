@@ -2,9 +2,9 @@ import { useContext, useState } from 'react';
 import { createEditor } from 'slate';
 
 import { Slate, Editable, withReact } from 'slate-react';
-import { DocumentContext } from '../../models';
-import { LoadingStatus } from '../../models/types';
-import { withSync } from '../../plugins/withSync';
+import { DocumentContext } from '../../model';
+import { LoadingStatus } from '../../model/types';
+import { withSync } from '../../plugin/withSync';
 import Message from '../Message';
 import { Toolbar } from '../Toolbar';
 import { EditorProps } from './types';

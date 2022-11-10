@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Editor, SideMenu, SyncDocument } from './components';
-import { LoadingStatus } from './models/types';
+import { Editor, SideMenu, SyncDocument } from './component';
+import { LoadingStatus } from './model/types';
 
 import './app.css';
 

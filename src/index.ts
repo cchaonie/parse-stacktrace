@@ -5,7 +5,7 @@ import http from 'http';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import { cookieMiddleware } from './middleware';
-import { connectionHandler } from './handlers';
+import { connectionHandler } from './handler';
 
 const app = express();
 
