@@ -6,11 +6,16 @@ import './app.css';
 
 export default () => {
   const [status, setStatus] = useState<LoadingStatus>(LoadingStatus.Loading);
+  const [hasDocOpen, setHasDocOpen] = useState(false);
   return (
     <SyncDocument onStatusChange={status => setStatus(status)}>
       <div id='board'>
         <SideMenu />
-        <Editor status={status} />
+        {hasDocOpen ? (
+          <Editor status={status} />
+        ) : (
+          <div className='welcome'>Create a new document from the side menu</div>
+        )}
       </div>
     </SyncDocument>
   );
