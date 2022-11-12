@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { DocumentContext, clientDocument } from '../../model';
-import { SyncDocumentProps } from './types';
+import { SyncDocumentProps } from './type';
 
 export default ({ children, onStatusChange }: SyncDocumentProps) => {
   useEffect(() => {

@@ -3,13 +3,13 @@ import { createEditor } from 'slate';
 
 import { Slate, Editable, withReact } from 'slate-react';
 import { DocumentContext } from '../../model';
-import { LoadingStatus } from '../../model/types';
 import { withSync } from '../../plugin/withSync';
 import Message from '../Message';
 import { Toolbar } from '../Toolbar';
-import { EditorProps } from './types';
+import { EditorProps } from './type';
 
 import './editor.css';
+import { LoadingStatus } from '../../model/core/type';
 
 export default ({ status }: EditorProps) => {
   const [editor] = useState(() => withSync(withReact(createEditor())));

@@ -1,4 +1,4 @@
-import { IconFontProps } from './types';
+import { IconFontProps } from './type';
 
 import './iconfont.css';
 

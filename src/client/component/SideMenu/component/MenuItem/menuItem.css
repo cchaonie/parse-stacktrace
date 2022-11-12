@@ -1,9 +1,16 @@
 .menuItem {
+    width: 100%;
+}
+
+.menuItem-itemTitle {
     font-size: 24px;
     font-weight: 500;
     border-bottom: 1px solid grey;
     display: flex;
-    width: 100%;
+}
+
+.menuItem-itemContent {
+    padding-inline: 20px;
 }
 
 .menuItem-operationIcon {
@@ -14,7 +21,6 @@
 }
 
 .menuItem-mainOperation {
-    margin-left: 16px;
     cursor: pointer;
     display: flex;
     width: 100%;

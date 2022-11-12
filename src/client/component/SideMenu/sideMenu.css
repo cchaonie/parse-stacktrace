@@ -9,9 +9,6 @@
     background-color: rgb(193, 197, 202);
 }
 
-.sideMenu-title {
-}
-
 .sideMenu-operationSection {
     flex: 1 0 auto;
 }
@@ -19,7 +16,6 @@
 .sideMenu-operation {
     font-size: 24px;
     font-weight: 500;
-    border-bottom: 1px solid grey;
     display: flex;
 }
 

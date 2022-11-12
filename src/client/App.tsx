@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Editor, SideMenu, SyncDocument } from './component';
-import { LoadingStatus } from './model/types';
 
 import './app.css';
+import { LoadingStatus } from './model/core/type';
 
 export default () => {
   const [status, setStatus] = useState<LoadingStatus>(LoadingStatus.Loading);

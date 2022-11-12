@@ -1,5 +1,5 @@
 import { BaseOperation, Descendant } from 'slate';
-import { JSON0Operation } from '../types';
+import { JSON0Operation } from './type';
 import _ from 'lodash';
 
 export default class BaseOperationConverter {
