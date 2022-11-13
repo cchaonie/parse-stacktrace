@@ -32,7 +32,9 @@ const MenuItem = ({ name, children }: MenuItemProps) => {
           </div>
         </div>
       </div>
-      <div className='menuItem-itemContent'>{children}</div>
+      {direction === 'down' && (
+        <div className='menuItem-itemContent'>{children}</div>
+      )}
     </div>
   );
 };
