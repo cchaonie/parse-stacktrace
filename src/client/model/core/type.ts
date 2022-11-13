@@ -12,4 +12,9 @@ export enum LoadingStatus {
   Failed = 'Failed',
 }
 
+export enum UserStatus {
+  NotLoggedIn = 'Not Logged in',
+  LoggedIn = 'Logged in',
+}
+
 export type StatusListener = (status: LoadingStatus) => void;
