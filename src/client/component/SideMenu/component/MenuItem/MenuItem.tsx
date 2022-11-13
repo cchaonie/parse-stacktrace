@@ -1,4 +1,6 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useContext, useState } from 'react';
+import FilesContext from '../../../../context/FilesContext';
+import FileDescription from '../../../../model/state/FileDescription';
 import Iconfont from '../../../Iconfont';
 import Arrow from '../Arrow';
 
@@ -7,12 +9,14 @@ import { MenuItemProps } from './type';
 
 const MenuItem = ({ name, children }: MenuItemProps) => {
   const [direction, setDirection] = useState('right');
+  const { files, setFiles } = useContext(FilesContext);
 
   const handleArrowClick = () =>
     direction === 'right' ? setDirection('down') : setDirection('right');
 
   const handleMoreOperations = (e: SyntheticEvent) => {
     e.stopPropagation();
+    setFiles([...files, new FileDescription('New File.txt', '', new Date())]);
   };
 
   return (
