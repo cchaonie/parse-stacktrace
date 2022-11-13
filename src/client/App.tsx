@@ -8,14 +8,14 @@ import FileDescription from './model/state/FileDescription';
 
 export default () => {
   const [status, setStatus] = useState<LoadingStatus>(LoadingStatus.Loading);
-  const [hasDocOpen, setHasDocOpen] = useState(false);
-
   const [files, setFiles] = useState<FileDescription[]>([]);
 
   const initialFilesContext: FilesContextValue = {
     files,
     setFiles,
   };
+
+  const hasDocOpen = files.some(f => f.active);
 
   return (
     <FilesContext.Provider value={initialFilesContext}>
