@@ -3,20 +3,33 @@ import FilesContext from '../../../../context/FilesContext';
 import FileDescription from '../../../../model/state/FileDescription';
 import Iconfont from '../../../Iconfont';
 import Arrow from '../Arrow';
+import { defaultFileExtension, defaultFileName } from './constant';
 
 import './menuItem.css';
 import { MenuItemProps } from './type';
 
 const MenuItem = ({ name, children }: MenuItemProps) => {
   const [direction, setDirection] = useState('right');
-  const { files, setFiles } = useContext(FilesContext);
+  const { files, setFiles, userId } = useContext(FilesContext);
 
   const handleArrowClick = () =>
     direction === 'right' ? setDirection('down') : setDirection('right');
 
   const handleMoreOperations = (e: SyntheticEvent) => {
     e.stopPropagation();
-    setFiles([...files, new FileDescription('New File.txt', '', new Date())]);
+    const fileCountWithDefaultName = files.filter(f =>
+      f.name.includes(defaultFileName)
+    ).length;
+    setFiles([
+      ...files,
+      new FileDescription(
+        `${defaultFileName}${
+          fileCountWithDefaultName > 0 ? fileCountWithDefaultName : ''
+        }.${defaultFileExtension}`,
+        userId,
+        new Date()
+      ),
+    ]);
   };
 
   return (
