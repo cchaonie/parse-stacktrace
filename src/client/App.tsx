@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
-import { Editor, SideMenu, SyncDocument } from './component';
-import { ShareDBDocStatus, UserStatus } from './model/core/type';
+import { Editor, SideMenu } from './component';
+import { UserStatus } from './model/core/type';
 import FilesContext, { FilesContextValue } from './context/FilesContext';
 import FileDescription from './model/state/FileDescription';
 import { getFingerprint } from './model/fingerprint/getFingerprint';
