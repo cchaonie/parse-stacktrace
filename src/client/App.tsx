@@ -1,26 +1,29 @@
 import { useEffect, useState } from 'react';
-import { Editor, SideMenu, SyncDocument } from './component';
 
-import './app.css';
-import { LoadingStatus, UserStatus } from './model/core/type';
+import { Editor, SideMenu, SyncDocument } from './component';
+import { ShareDBDocStatus, UserStatus } from './model/core/type';
 import FilesContext, { FilesContextValue } from './context/FilesContext';
 import FileDescription from './model/state/FileDescription';
 import { getFingerprint } from './model/fingerprint/getFingerprint';
+import { getShareDBConnection } from './model/core/getShareDBConnection';
+
+import './app.css';
 
 export default () => {
-  const [status, setStatus] = useState<LoadingStatus>(LoadingStatus.Loading);
   const [files, setFiles] = useState<FileDescription[]>([]);
-  const [userId, setUserId] = useState(undefined);
+  const [userId, setUserId] = useState('');
   const [userStatus, setUserStatus] = useState(UserStatus.NotLoggedIn);
+  const [connection, setConnection] = useState(null);
 
   const initialFilesContext: FilesContextValue = {
     userId,
     userStatus,
     files,
+    connection,
     setFiles,
   };
 
-  const hasDocOpen = files.some(f => f.active);
+  const openedFile = files.filter(f => f.active)?.[0];
 
   useEffect(() => {
     getFingerprint().then(({ visitorId }) => {
@@ -38,14 +41,16 @@ export default () => {
     });
   }, []);
 
+  useEffect(() => {
+    setConnection(getShareDBConnection());
+  }, []);
+
   return (
     <FilesContext.Provider value={initialFilesContext}>
       <div id='board'>
         <SideMenu />
-        {hasDocOpen ? (
-          <SyncDocument onStatusChange={status => setStatus(status)}>
-            <Editor status={status} />
-          </SyncDocument>
+        {!!openedFile ? (
+          <Editor file={openedFile} />
         ) : (
           <div className='welcome'>Create a new document from the side menu</div>
         )}

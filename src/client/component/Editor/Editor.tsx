@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { createEditor } from 'slate';
 
 import { Slate, Editable, withReact } from 'slate-react';
@@ -9,17 +9,41 @@ import { Toolbar } from '../Toolbar';
 import { EditorProps } from './type';
 
 import './editor.css';
-import { LoadingStatus } from '../../model/core/type';
+import { ShareDBDocStatus } from '../../model/core/type';
+import FilesContext from '../../context/FilesContext';
 
-export default ({ status }: EditorProps) => {
+export default ({ file: { name, content } }: EditorProps) => {
   const [editor] = useState(() => withSync(withReact(createEditor())));
-
+  const [status, setStatus] = useState<ShareDBDocStatus>(
+    ShareDBDocStatus.Loading
+  );
   const clientDoc = useContext(DocumentContext);
+  const { userId, connection } = useContext(FilesContext);
+
+  useEffect(() => {
+    const shareDBDoc = connection.get(userId, name);
+    shareDBDoc.subscribe(error => {
+      if (error) {
+        setStatus(ShareDBDocStatus.LoadFailed);
+      }
+
+      if (!shareDBDoc.type) {
+        shareDBDoc.create(content, error => {
+          if (error) {
+            setStatus(ShareDBDocStatus.LoadFailed);
+          }
+          setStatus(ShareDBDocStatus.Loaded);
+        });
+      } else {
+        setStatus(ShareDBDocStatus.Loaded);
+      }
+    });
+  }, []);
 
   const renderContent =
-    status === LoadingStatus.Loading ? (
+    status === ShareDBDocStatus.Loading ? (
       <Message>Loading......</Message>
-    ) : status === LoadingStatus.Loaded ? (
+    ) : status === ShareDBDocStatus.Loaded ? (
       <div className='editor'>
         <Toolbar />
         <Slate editor={editor} value={clientDoc.getDocumentData()}>
@@ -27,7 +51,9 @@ export default ({ status }: EditorProps) => {
         </Slate>
       </div>
     ) : (
-      <Message>Loading failed -_-!, please refresh you page</Message>
+      <Message>
+        Load shareDB document failed -_-!, please refresh you page
+      </Message>
     );
 
   return renderContent;

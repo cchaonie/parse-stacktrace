@@ -2,13 +2,13 @@ import { Doc } from 'sharedb';
 import { BaseOperation, Descendant } from 'slate';
 import initialContent from './initialContent';
 import { initializeShareDBDocument } from './initializeShareDBDocument';
-import { LoadingStatus, StatusListener } from './type';
+import { ShareDBDocStatus, StatusListener } from './type';
 import _ from 'lodash';
 import { createConverter } from '../operationConverter';
 
 class ClientDocument {
   initialContent: Descendant[];
-  serverDocumentStatus: LoadingStatus = LoadingStatus.Loading;
+  serverDocumentStatus: ShareDBDocStatus = ShareDBDocStatus.Loading;
   sharedbDoc: Doc;
   statusListener: Array<StatusListener> = [];
 
@@ -25,11 +25,11 @@ class ClientDocument {
     initializeShareDBDocument()
       .then(doc => {
         this.sharedbDoc = doc;
-        this.serverDocumentStatus = LoadingStatus.Loaded;
+        this.serverDocumentStatus = ShareDBDocStatus.Loaded;
       })
       .catch(e => {
         console.error(e);
-        this.serverDocumentStatus = LoadingStatus.Failed;
+        this.serverDocumentStatus = ShareDBDocStatus.LoadFailed;
       })
       .finally(() => this.invokeStatusListeners());
   }

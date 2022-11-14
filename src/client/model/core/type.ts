@@ -6,10 +6,10 @@
 
 // export type LoadingStatus = typeof LoadingStatus[keyof typeof LoadingStatus];
 
-export enum LoadingStatus {
+export enum ShareDBDocStatus {
   Loading = 'Loading',
   Loaded = 'Loaded',
-  Failed = 'Failed',
+  LoadFailed = 'LoadFailed',
 }
 
 export enum UserStatus {
@@ -17,4 +17,4 @@ export enum UserStatus {
   LoggedIn = 'Logged in',
 }
 
-export type StatusListener = (status: LoadingStatus) => void;
+export type StatusListener = (status: ShareDBDocStatus) => void;
