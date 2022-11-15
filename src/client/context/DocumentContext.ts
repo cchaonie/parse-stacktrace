@@ -1,4 +1,4 @@
 import React from 'react';
-import clientDocument from '../model/core/clientDocument';
+// import clientDocument from '../model/core/clientDocument';
 
-export default React.createContext(clientDocument);
+// export default React.createContext(clientDocument);

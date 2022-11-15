@@ -1,19 +1,26 @@
 import { Operation } from 'slate';
 import { ReactEditor } from 'slate-react';
-import { clientDocument } from '../model';
 import { isDocumentUpdated } from '../../util/isDocumentUpdated';
+import { ClientDocument } from '../model/core/clientDocument';
 
-export const withSync = (editor: ReactEditor): ReactEditor => {
-  const { apply } = editor;
+export const withSync =
+  (clientDocument: ClientDocument) =>
+  (editor: ReactEditor): ReactEditor => {
+    const { apply } = editor;
 
-  editor.apply = (op: Operation) => {
-    if (isDocumentUpdated(op)) {
-      // send to server
-      clientDocument.submitOperation(op);
-    }
+    editor.apply = (op: Operation) => {
+      if (isDocumentUpdated(op)) {
+        // send to server
+        if (!clientDocument.shareDBDoc) {
+          throw new Error(
+            'The related shareDBDoc has not been initialized yet.'
+          );
+        }
+        clientDocument.submitOperation(op);
+      }
 
-    apply(op);
+      apply(op);
+    };
+
+    return editor;
   };
-
-  return editor;
-};

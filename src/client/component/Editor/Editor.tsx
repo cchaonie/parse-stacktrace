@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { createEditor } from 'slate';
 
 import { Slate, Editable, withReact } from 'slate-react';
-import { DocumentContext } from '../../model';
+// import { DocumentContext } from '../../model';
 import { withSync } from '../../plugin/withSync';
 import Message from '../Message';
 import { Toolbar } from '../Toolbar';
@@ -11,13 +11,18 @@ import { EditorProps } from './type';
 import './editor.css';
 import { ShareDBDocStatus } from '../../model/core/type';
 import FilesContext from '../../context/FilesContext';
+import { ClientDocument } from '../../model/core/clientDocument';
 
 export default ({ file: { name, content } }: EditorProps) => {
-  const [editor] = useState(() => withSync(withReact(createEditor())));
+  const clientDocRef = useRef(new ClientDocument());
+  const [editor] = useState(() =>
+    withSync(clientDocRef.current)(withReact(createEditor()))
+  );
+
   const [status, setStatus] = useState<ShareDBDocStatus>(
     ShareDBDocStatus.Loading
   );
-  const clientDoc = useContext(DocumentContext);
+
   const { userId, connection } = useContext(FilesContext);
 
   useEffect(() => {
@@ -33,9 +38,11 @@ export default ({ file: { name, content } }: EditorProps) => {
             setStatus(ShareDBDocStatus.LoadFailed);
           }
           setStatus(ShareDBDocStatus.Loaded);
+          clientDocRef.current.shareDBDoc = shareDBDoc;
         });
       } else {
         setStatus(ShareDBDocStatus.Loaded);
+        clientDocRef.current.shareDBDoc = shareDBDoc;
       }
     });
   }, []);
@@ -46,7 +53,7 @@ export default ({ file: { name, content } }: EditorProps) => {
     ) : status === ShareDBDocStatus.Loaded ? (
       <div className='editor'>
         <Toolbar />
-        <Slate editor={editor} value={clientDoc.getDocumentData()}>
+        <Slate editor={editor} value={clientDocRef.current.getDocumentData()}>
           <Editable style={{ flexGrow: 1, paddingInline: '8px' }} />
         </Slate>
       </div>

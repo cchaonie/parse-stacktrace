@@ -1,38 +1,41 @@
 import { Doc } from 'sharedb';
 import { BaseOperation, Descendant } from 'slate';
-import initialContent from './initialContent';
+// import initialContent from './initialContent';
 import { initializeShareDBDocument } from './initializeShareDBDocument';
 import { ShareDBDocStatus, StatusListener } from './type';
 import _ from 'lodash';
 import { createConverter } from '../operationConverter';
 
-class ClientDocument {
+export class ClientDocument {
   initialContent: Descendant[];
   serverDocumentStatus: ShareDBDocStatus = ShareDBDocStatus.Loading;
-  sharedbDoc: Doc;
+  shareDBDoc: Doc;
   statusListener: Array<StatusListener> = [];
 
-  constructor(initialContent: Descendant[]) {
-    this.initialContent = initialContent;
-    this.initialize();
-  }
+  // constructor(initialContent: Descendant[]) {
+  //   this.initialContent = initialContent;
+  //   this.initialize();
+  // }
 
   getDocumentData(): Descendant[] {
-    return _.cloneDeep(this.sharedbDoc.data);
+    if (!this.shareDBDoc) {
+      throw new Error('The related shareDBDoc has not been initialized yet.');
+    }
+    return _.cloneDeep(this.shareDBDoc.data);
   }
 
-  initialize() {
-    initializeShareDBDocument()
-      .then(doc => {
-        this.sharedbDoc = doc;
-        this.serverDocumentStatus = ShareDBDocStatus.Loaded;
-      })
-      .catch(e => {
-        console.error(e);
-        this.serverDocumentStatus = ShareDBDocStatus.LoadFailed;
-      })
-      .finally(() => this.invokeStatusListeners());
-  }
+  // initialize() {
+  //   initializeShareDBDocument()
+  //     .then(doc => {
+  //       this.shareDBDoc = doc;
+  //       this.serverDocumentStatus = ShareDBDocStatus.Loaded;
+  //     })
+  //     .catch(e => {
+  //       console.error(e);
+  //       this.serverDocumentStatus = ShareDBDocStatus.LoadFailed;
+  //     })
+  //     .finally(() => this.invokeStatusListeners());
+  // }
 
   invokeStatusListeners() {
     this.statusListener.forEach(listener => listener(this.serverDocumentStatus));
@@ -52,7 +55,7 @@ class ClientDocument {
       const converter = createConverter(this.getDocumentData(), op);
       const sharedbOps = converter.convert();
       _.forEach(sharedbOps, sharedbOp => {
-        this.sharedbDoc.submitOp(sharedbOp);
+        this.shareDBDoc.submitOp(sharedbOp);
       });
     } catch (error) {
       console.error(error);
@@ -66,6 +69,6 @@ class ClientDocument {
   }
 }
 
-const clientDocument = new ClientDocument(initialContent);
+// const clientDocument = new ClientDocument(initialContent);
 
-export default clientDocument;
+// export default clientDocument;
