@@ -5,6 +5,21 @@
     "strict": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "~client/*": [
+        "src/client/*"
+      ],
+      "~handler/*": [
+        "src/handler/*"
+      ],
+      "~middleware/*": [
+        "src/middleware/*"
+      ],
+      "~util/*": [
+        "src/util/*"
+      ]
+    }
   },
 }

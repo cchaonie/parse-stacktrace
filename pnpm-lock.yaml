@@ -7,6 +7,7 @@ specifiers:
   '@babel/preset-react': ^7.18.6
   '@babel/preset-typescript': ^7.18.6
   '@fingerprintjs/fingerprintjs': ^3.3.6
+  '@rollup/plugin-alias': ^4.0.2
   '@rollup/plugin-babel': ^5.3.1
   '@rollup/plugin-commonjs': ^22.0.2
   '@rollup/plugin-html': ^0.2.4
@@ -37,6 +38,7 @@ specifiers:
   rollup: ^2.78.1
   rollup-plugin-node-builtins: ^2.1.2
   rollup-plugin-postcss: ^4.0.2
+  rollup-plugin-tsconfig-paths: ^1.4.0
   sharedb: ^3.1.0
   slate: ^0.82.1
   slate-react: ^0.82.1
@@ -66,6 +68,7 @@ devDependencies:
   '@babel/preset-env': 7.18.10_@babel+core@7.18.13
   '@babel/preset-react': 7.18.6_@babel+core@7.18.13
   '@babel/preset-typescript': 7.18.6_@babel+core@7.18.13
+  '@rollup/plugin-alias': 4.0.2_rollup@2.78.1
   '@rollup/plugin-babel': 5.3.1_2uin6pbxavst3oir53roxbd5qi
   '@rollup/plugin-commonjs': 22.0.2_rollup@2.78.1
   '@rollup/plugin-html': 0.2.4_rollup@2.78.1
@@ -88,6 +91,7 @@ devDependencies:
   rollup: 2.78.1
   rollup-plugin-node-builtins: 2.1.2
   rollup-plugin-postcss: 4.0.2_57znarxsqwmnneadci5z5fd5gu
+  rollup-plugin-tsconfig-paths: 1.4.0_rusrl3yqfuqle4tcyjzane2tmq
   ts-node: 10.9.1_tphhiizkxv2hzwkunblc3hbmra
   tslib: 2.4.0
   typescript: 4.8.2
@@ -1710,6 +1714,19 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
+
+  /@rollup/plugin-alias/4.0.2_rollup@2.78.1:
+    resolution: {integrity: sha512-1hv7dBOZZwo3SEupxn4UA2N0EDThqSSS+wI1St1TNTBtOZvUchyIClyHcnDcjjrReTPZ47Faedrhblv4n+T5UQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      rollup: 2.78.1
+      slash: 4.0.0
+    dev: true
 
   /@rollup/plugin-babel/5.3.1_2uin6pbxavst3oir53roxbd5qi:
     resolution: {integrity: sha512-WFfdLWU/xVWKeRQnKmIAQULUI7Il0gZnBIH/ZFO069wYIfPu+8zrfp/KMW0atmELoRDq8FbiP3VCss9MhCut7Q==}
@@ -5253,6 +5270,17 @@ packages:
       - ts-node
     dev: true
 
+  /rollup-plugin-tsconfig-paths/1.4.0_rusrl3yqfuqle4tcyjzane2tmq:
+    resolution: {integrity: sha512-mZm3up1di2s6aveD05WViY3IYnY6aAerKAq3XVUyxfE+So8dUUHSZ++7LOLUe5De4zsR46mxV/A3lMg81CRuPw==}
+    peerDependencies:
+      rollup: ^2 || ^3
+    dependencies:
+      rollup: 2.78.1
+      typescript-paths: 1.4.0_typescript@4.8.2
+    transitivePeerDependencies:
+      - typescript
+    dev: true
+
   /rollup-pluginutils/2.8.2:
     resolution: {integrity: sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==}
     dependencies:
@@ -5410,6 +5438,11 @@ packages:
   /slash/3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+    dev: true
+
+  /slash/4.0.0:
+    resolution: {integrity: sha512-3dOsAHXXUkQTpOYcoAxLIorMTp4gIQr5IW3iVb7A7lFIp0VHhnynm9izx6TssdrIcVIESAlVjtnO2K8bg+Coew==}
+    engines: {node: '>=12'}
     dev: true
 
   /slate-react/0.82.1_lryiyh7uo2ykhysveiorwwrgwa:
@@ -5712,6 +5745,14 @@ packages:
 
   /typedarray/0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
+    dev: true
+
+  /typescript-paths/1.4.0_typescript@4.8.2:
+    resolution: {integrity: sha512-olt3yKj5d4ON5MpQgxvqpiN24ApsrdlRnIQFwqlbzuTjRZFQNoTOzzTJ13vyDRt7VW0cuO+g8HA+eoYfBLWWMA==}
+    peerDependencies:
+      typescript: ^4.7.2
+    dependencies:
+      typescript: 4.8.2
     dev: true
 
   /typescript/4.8.2:
