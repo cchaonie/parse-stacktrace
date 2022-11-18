@@ -8,6 +8,7 @@ import { getFingerprint } from './model/fingerprint/getFingerprint';
 import { getShareDBConnection } from './model/core/getShareDBConnection';
 
 import './app.css';
+import { useRequest } from './hooks/useRequest/useRequest';
 
 export default () => {
   const [files, setFiles] = useState<FileDescription[]>([]);
@@ -26,20 +27,29 @@ export default () => {
   const openedFile = files.filter(f => f.active)?.[0];
 
   useEffect(() => {
-    getFingerprint().then(({ visitorId }) => {
-      setUserId(visitorId);
-      fetch('/login', {
-        method: 'POST',
+    getFingerprint()
+      .then(({ visitorId }) => {
+        setUserId(visitorId);
+        console.log(`Visitor: ${visitorId}`);
       })
-        .then(res => {
-          if (res.ok) {
-            setUserStatus(UserStatus.LoggedIn);
-            console.log(`Visitor: ${visitorId} log in successfully`);
-          }
-        })
-        .catch(e => console.error(e));
-    });
+      .catch(e => console.error(`Getting fingerprint failed`, e));
   }, []);
+
+  useRequest(
+    {
+      url: '/login',
+      initOptions: {
+        method: 'POST',
+      },
+    },
+    res => {
+      if (res.ok) {
+        setUserStatus(UserStatus.LoggedIn);
+        console.log(`User login successfully`);
+      }
+    },
+    e => console.error(`User login failed`, e)
+  );
 
   useEffect(() => {
     setConnection(getShareDBConnection());
