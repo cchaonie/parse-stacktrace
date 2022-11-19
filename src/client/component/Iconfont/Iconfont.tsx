@@ -1,6 +1,6 @@
 import { IconFontProps } from './type';
 
-import './iconfont.css';
+import styles from './iconfont.css';
 
 export default ({
   name,
@@ -21,7 +21,9 @@ export default ({
 
   return (
     <i
-      className={`iconfont icon-${name} ${animated ? 'iconfont-animated' : ''}`}
+      className={`${styles.iconfont} ${styles[`icon-${name}`]} ${
+        animated ? styles['iconfont-animated'] : ''
+      }`}
       style={defaultStyle}
     ></i>
   );

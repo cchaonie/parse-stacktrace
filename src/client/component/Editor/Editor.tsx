@@ -8,7 +8,7 @@ import Message from '../Message';
 import { Toolbar } from '../Toolbar';
 import { EditorProps } from './type';
 
-import './editor.css';
+import styles from './editor.css';
 import { ShareDBDocStatus } from '../../model/core/type';
 import FilesContext from '../../context/FilesContext';
 import { ClientDocument } from '../../model/core/clientDocument';
@@ -51,7 +51,7 @@ export default ({ file: { name, content } }: EditorProps) => {
     status === ShareDBDocStatus.Loading ? (
       <Message>Loading......</Message>
     ) : status === ShareDBDocStatus.Loaded ? (
-      <div className='editor'>
+      <div className={styles.editor}>
         <Toolbar />
         <Slate editor={editor} value={clientDocRef.current.getDocumentData()}>
           <Editable style={{ flexGrow: 1, paddingInline: '8px' }} />

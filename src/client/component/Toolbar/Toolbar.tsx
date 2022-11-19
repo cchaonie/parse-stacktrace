@@ -1,10 +1,10 @@
-import './toolbar.css';
+import styles from './toolbar.css';
 
 export default () => {
   return (
-    <div className='toolbar'>
-      <div className='toolbarItem bold'>B</div>
-      <div className='toolbarItem italic'>I</div>
+    <div className={styles['toolbar']}>
+      <div className={`${styles['toolbarItem']} ${styles['bold']}`}>B</div>
+      <div className={`${styles['toolbarItem']} ${styles['italic']}`}>I</div>
     </div>
   );
 };

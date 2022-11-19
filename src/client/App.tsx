@@ -7,7 +7,7 @@ import FileDescription from './model/state/FileDescription';
 import { getFingerprint } from './model/fingerprint/getFingerprint';
 import { getShareDBConnection } from './model/core/getShareDBConnection';
 
-import './app.css';
+import styles from './app.css';
 import { useRequest } from './hooks/useRequest/useRequest';
 
 export default () => {
@@ -57,12 +57,14 @@ export default () => {
 
   return (
     <FilesContext.Provider value={initialFilesContext}>
-      <div id='board'>
+      <div id='board' className={styles.board}>
         <SideMenu />
         {!!openedFile ? (
           <Editor file={openedFile} />
         ) : (
-          <div className='welcome'>Create a new document from the side menu</div>
+          <div className={styles.welcome}>
+            Create a new document from the side menu
+          </div>
         )}
       </div>
     </FilesContext.Provider>

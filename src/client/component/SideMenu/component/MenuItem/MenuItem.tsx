@@ -5,7 +5,7 @@ import Iconfont from '../../../Iconfont';
 import Arrow from '../Arrow';
 import { defaultFileExtension, defaultFileName } from './constant';
 
-import './menuItem.css';
+import styles from './menuItem.css';
 import { MenuItemProps } from './type';
 
 const MenuItem = ({ name, children }: MenuItemProps) => {
@@ -33,20 +33,23 @@ const MenuItem = ({ name, children }: MenuItemProps) => {
   };
 
   return (
-    <div className='menuItem'>
-      <div className='menuItem-itemTitle' onClick={handleArrowClick}>
-        <div className='menuItem-operationIcon'>
+    <div className={styles.menuItem}>
+      <div className={styles['menuItem-itemTitle']} onClick={handleArrowClick}>
+        <div className={styles['menuItem-operationIcon']}>
           <Arrow direction={direction} />
         </div>
-        <div className='menuItem-mainOperation'>
-          <div className='menuItem-operationText'>{name}</div>
-          <div className='menuItem-moreOperation' onClick={handleMoreOperations}>
+        <div className={styles['menuItem-mainOperation']}>
+          <div className={styles['menuItem-operationText']}>{name}</div>
+          <div
+            className={styles['menuItem-moreOperation']}
+            onClick={handleMoreOperations}
+          >
             <Iconfont name='add-select' fontSize='20px' />
           </div>
         </div>
       </div>
       {direction === 'down' && (
-        <div className='menuItem-itemContent'>{children}</div>
+        <div className={styles['menuItem-itemContent']}>{children}</div>
       )}
     </div>
   );

@@ -1,7 +1,5 @@
 import Iconfont from '../../../Iconfont';
 
-import './arrow.css';
-
 export default ({ direction = 'right' }) => (
   <Iconfont
     name='arrow-right'

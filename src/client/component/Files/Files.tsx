@@ -1,6 +1,6 @@
 import { FilesProps } from './type';
 
-import './files.css';
+import styles from './files.css';
 import { useContext } from 'react';
 import FilesContext from '../../context/FilesContext';
 
@@ -19,10 +19,10 @@ export default ({ fileNames }: FilesProps) => {
   };
 
   return (
-    <div className='files'>
+    <div className={styles.files}>
       {fileNames.map((fileName, i) => (
         <div
-          className='files-item'
+          className={styles['files-item']}
           key={fileName}
           onClick={() => handleFileClick(i)}
         >

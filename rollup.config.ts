@@ -79,6 +79,7 @@ export default [
       postcss({
         extract: true,
         plugins: [autoprefixer],
+        modules: true
       }),
       html({
         title: 'Collaborative Editor',
