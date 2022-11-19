@@ -9,6 +9,7 @@ import { getShareDBConnection } from './model/core/getShareDBConnection';
 
 import styles from './app.css';
 import { useRequest } from './hooks/useRequest/useRequest';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 export default () => {
   const [files, setFiles] = useState<FileDescription[]>([]);
@@ -56,17 +57,23 @@ export default () => {
   }, []);
 
   return (
-    <FilesContext.Provider value={initialFilesContext}>
-      <div id='board' className={styles.board}>
-        <SideMenu />
-        {!!openedFile ? (
-          <Editor file={openedFile} />
-        ) : (
-          <div className={styles.welcome}>
-            Create a new document from the side menu
-          </div>
-        )}
-      </div>
-    </FilesContext.Provider>
+    <BrowserRouter>
+      <FilesContext.Provider value={initialFilesContext}>
+        <div id='board' className={styles.board}>
+          <SideMenu />
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <div className={styles.welcome}>
+                  Create a new document from the side menu
+                </div>
+              }
+            />
+            <Route path='/document' element={<Editor file={openedFile} />} />
+          </Routes>
+        </div>
+      </FilesContext.Provider>
+    </BrowserRouter>
   );
 };

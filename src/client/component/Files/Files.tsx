@@ -3,9 +3,11 @@ import { FilesProps } from './type';
 import styles from './files.css';
 import { useContext } from 'react';
 import FilesContext from '../../context/FilesContext';
+import { useNavigate } from 'react-router-dom';
 
 export default ({ fileNames }: FilesProps) => {
   const { files, setFiles } = useContext(FilesContext);
+  const navigate = useNavigate();
 
   const handleFileClick = (index: number) => {
     setFiles(
@@ -16,6 +18,7 @@ export default ({ fileNames }: FilesProps) => {
         return f;
       })
     );
+    navigate('/document');
   };
 
   return (
