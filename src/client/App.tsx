@@ -70,7 +70,7 @@ export default () => {
                 </div>
               }
             />
-            <Route path='/document' element={<Editor file={openedFile} />} />
+            <Route path='/document/:collectionId/:name' element={<Editor file={openedFile} />} />
           </Routes>
         </div>
       </FilesContext.Provider>

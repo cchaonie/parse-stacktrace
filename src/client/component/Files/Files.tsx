@@ -10,6 +10,7 @@ export default ({ fileNames }: FilesProps) => {
   const navigate = useNavigate();
 
   const handleFileClick = (index: number) => {
+    const targetFile = files.find((_, i) => i === index);
     setFiles(
       files.map((f, i) => {
         if (i === index) {
@@ -18,7 +19,7 @@ export default ({ fileNames }: FilesProps) => {
         return f;
       })
     );
-    navigate('/document');
+    navigate(`/document/${targetFile.creator}/${targetFile.name}`);
   };
 
   return (
