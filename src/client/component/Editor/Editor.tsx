@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import { createEditor } from 'slate';
 
 import { Slate, Editable, withReact } from 'slate-react';
-// import { DocumentContext } from '../../model';
 import { withSync } from '../../plugin/withSync';
 import Message from '../Message';
 import { Toolbar } from '../Toolbar';
@@ -13,7 +12,7 @@ import { ShareDBDocStatus } from '../../model/core/type';
 import FilesContext from '../../context/FilesContext';
 import { ClientDocument } from '../../model/core/clientDocument';
 
-export default ({ file: { name, content } }: EditorProps) => {
+export default ({ file: { name, content, creator } }: EditorProps) => {
   const clientDocRef = useRef(new ClientDocument());
   const [editor] = useState(() =>
     withSync(clientDocRef.current)(withReact(createEditor()))
@@ -23,29 +22,34 @@ export default ({ file: { name, content } }: EditorProps) => {
     ShareDBDocStatus.Loading
   );
 
-  const { userId, connection } = useContext(FilesContext);
+  const { connection } = useContext(FilesContext);
 
   useEffect(() => {
-    const shareDBDoc = connection.get(userId, name);
-    shareDBDoc.subscribe(error => {
-      if (error) {
-        setStatus(ShareDBDocStatus.LoadFailed);
-      }
+    if (!connection) return;
+    const shareDBDoc = connection.get(creator, name);
+    clientDocRef.current.shareDBDoc = shareDBDoc;
 
+    shareDBDoc.addListener('load', () => {
+      console.log(shareDBDoc);
       if (!shareDBDoc.type) {
         shareDBDoc.create(content, error => {
           if (error) {
             setStatus(ShareDBDocStatus.LoadFailed);
+          } else {
+            setStatus(ShareDBDocStatus.Loaded);
           }
-          setStatus(ShareDBDocStatus.Loaded);
-          clientDocRef.current.shareDBDoc = shareDBDoc;
         });
       } else {
         setStatus(ShareDBDocStatus.Loaded);
-        clientDocRef.current.shareDBDoc = shareDBDoc;
       }
     });
-  }, []);
+
+    shareDBDoc.subscribe(error => {
+      if (error) {
+        setStatus(ShareDBDocStatus.LoadFailed);
+      }
+    });
+  }, [creator, name, connection]);
 
   const renderContent =
     status === ShareDBDocStatus.Loading ? (

@@ -15,6 +15,8 @@ export default ({ fileNames }: FilesProps) => {
       files.map((f, i) => {
         if (i === index) {
           f.active = true;
+        } else {
+          f.active = false;
         }
         return f;
       })

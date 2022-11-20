@@ -1,16 +1,13 @@
 import { Doc } from 'sharedb';
-import { BaseOperation, Descendant } from 'slate';
-// import initialContent from './initialContent';
-import { initializeShareDBDocument } from './initializeShareDBDocument';
-import { ShareDBDocStatus, StatusListener } from './type';
 import _ from 'lodash';
+import { BaseOperation, Descendant } from 'slate';
+
 import { createConverter } from '../operationConverter';
 
 export class ClientDocument {
-  initialContent: Descendant[];
-  serverDocumentStatus: ShareDBDocStatus = ShareDBDocStatus.Loading;
+  // initialContent: Descendant[];
   shareDBDoc: Doc;
-  statusListener: Array<StatusListener> = [];
+  // statusListener: Array<StatusListener> = [];
 
   // constructor(initialContent: Descendant[]) {
   //   this.initialContent = initialContent;
@@ -37,18 +34,18 @@ export class ClientDocument {
   //     .finally(() => this.invokeStatusListeners());
   // }
 
-  invokeStatusListeners() {
-    this.statusListener.forEach(listener => listener(this.serverDocumentStatus));
-  }
+  // invokeStatusListeners() {
+  //   this.statusListener.forEach(listener => listener(this.serverDocumentStatus));
+  // }
 
-  addStatusListener(listener: StatusListener) {
-    this.statusListener.push(listener);
-  }
+  // addStatusListener(listener: StatusListener) {
+  //   this.statusListener.push(listener);
+  // }
 
-  removeStatusListener(listener: StatusListener) {
-    const index = this.statusListener.indexOf(listener);
-    this.statusListener.splice(index, 1);
-  }
+  // removeStatusListener(listener: StatusListener) {
+  //   const index = this.statusListener.indexOf(listener);
+  //   this.statusListener.splice(index, 1);
+  // }
 
   submitOperation(op: BaseOperation) {
     try {

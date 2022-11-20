@@ -9,10 +9,20 @@ import { getShareDBConnection } from './model/core/getShareDBConnection';
 
 import styles from './app.css';
 import { useRequest } from './hooks/useRequest/useRequest';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { parseUrl } from '~util/parseUrl';
 
 export default () => {
-  const [files, setFiles] = useState<FileDescription[]>([]);
+  const location = useLocation();
+  const [_, collectionId, documentName] = parseUrl(location.pathname);
+  const [files, setFiles] = useState<FileDescription[]>(() => {
+    if (collectionId && documentName) {
+      const file = new FileDescription(documentName, collectionId, new Date());
+      file.active = true;
+      return [file];
+    }
+    return [];
+  });
   const [userId, setUserId] = useState('');
   const [userStatus, setUserStatus] = useState(UserStatus.NotLoggedIn);
   const [connection, setConnection] = useState(null);
@@ -57,23 +67,24 @@ export default () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <FilesContext.Provider value={initialFilesContext}>
-        <div id='board' className={styles.board}>
-          <SideMenu />
-          <Routes>
-            <Route
-              path='/'
-              element={
-                <div className={styles.welcome}>
-                  Create a new document from the side menu
-                </div>
-              }
-            />
-            <Route path='/document/:collectionId/:name' element={<Editor file={openedFile} />} />
-          </Routes>
-        </div>
-      </FilesContext.Provider>
-    </BrowserRouter>
+    <FilesContext.Provider value={initialFilesContext}>
+      <div id='board' className={styles.board}>
+        <SideMenu />
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <div className={styles.welcome}>
+                Create a new document from the side menu
+              </div>
+            }
+          />
+          <Route
+            path='/document/:collectionId/:documentName'
+            element={<Editor file={openedFile} />}
+          />
+        </Routes>
+      </div>
+    </FilesContext.Provider>
   );
 };
