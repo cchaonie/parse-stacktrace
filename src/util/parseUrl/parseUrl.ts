@@ -6,5 +6,5 @@ export const parseUrl = (url: string) => {
   if (url.endsWith('/')) {
     segments.pop();
   }
-  return segments;
+  return segments.map(seg => decodeURI(seg));
 };
