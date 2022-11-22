@@ -8,6 +8,7 @@ import { babel } from '@rollup/plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import tsConfigPaths from 'rollup-plugin-tsconfig-paths';
+import copy from 'rollup-plugin-copy';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const isPrd = process.env.NODE_ENV === 'production';
@@ -79,7 +80,10 @@ export default [
       postcss({
         extract: true,
         plugins: [autoprefixer],
-        modules: true
+        modules: true,
+      }),
+      copy({
+        targets: [{ src: 'src/assets', dest: 'dist/client' }],
       }),
       html({
         title: 'Collaborative Editor',
@@ -110,6 +114,7 @@ export default [
                   <!doctype html>
                   <html${makeHtmlAttributes(attributes.html)}>
                     <head>
+                      <link rel="icon" type="image/svg+xml" href="/assets/favicon.ico" />
                       ${metas}
                       <title>${title}</title>
                       ${links}

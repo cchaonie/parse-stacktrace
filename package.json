@@ -4,8 +4,8 @@
   "description": "Learn collaborative softwares by creating a collaborative editor",
   "main": "index.js",
   "scripts": {
-    "build": "cross-env NODE_ENV=production rollup -c",
-    "build-dev": "cross-env NODE_ENV=development rollup -c",
+    "build": "rimraf ./dist && cross-env NODE_ENV=production rollup -c",
+    "build-dev": "rimraf ./dist && cross-env NODE_ENV=development rollup -c",
     "start": "node dist/index.js",
     "dev": "ts-node script/development",
     "test": "jest"
@@ -59,6 +59,7 @@
     "postcss": "^8.4.16",
     "rimraf": "^3.0.2",
     "rollup": "^2.78.1",
+    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-tsconfig-paths": "^1.4.0",
