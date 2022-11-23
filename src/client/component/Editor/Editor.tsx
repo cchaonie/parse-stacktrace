@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { createEditor } from 'slate';
 
 import { Slate, Editable, withReact } from 'slate-react';
@@ -11,6 +11,7 @@ import styles from './editor.css';
 import { ShareDBDocStatus } from '../../model/core/type';
 import FilesContext from '../../context/FilesContext';
 import { ClientDocument } from '../../model/core/clientDocument';
+import { BoldElement, DefaultElement } from '../RenderElement';
 
 export default ({ file: { name, content, creator } }: EditorProps) => {
   const clientDocRef = useRef(new ClientDocument());
@@ -24,13 +25,22 @@ export default ({ file: { name, content, creator } }: EditorProps) => {
 
   const { connection } = useContext(FilesContext);
 
+  const renderElement = useCallback(props => {
+    console.log(props);
+    switch (props.element.type) {
+      case 'bold':
+        return <BoldElement {...props} />;
+      default:
+        return <DefaultElement {...props} />;
+    }
+  }, []);
+
   useEffect(() => {
     if (!connection) return;
     const shareDBDoc = connection.get(creator, name);
     clientDocRef.current.shareDBDoc = shareDBDoc;
 
     shareDBDoc.addListener('load', () => {
-      console.log(shareDBDoc);
       if (!shareDBDoc.type) {
         shareDBDoc.create(content, error => {
           if (error) {
@@ -56,9 +66,12 @@ export default ({ file: { name, content, creator } }: EditorProps) => {
       <Message>Loading......</Message>
     ) : status === ShareDBDocStatus.Loaded ? (
       <div className={styles.editor}>
-        <Toolbar />
         <Slate editor={editor} value={clientDocRef.current.getDocumentData()}>
-          <Editable style={{ flexGrow: 1, paddingInline: '8px' }} />
+          <Toolbar />
+          <Editable
+            renderLeaf={renderElement}
+            style={{ flexGrow: 1, paddingInline: '8px' }}
+          />
         </Slate>
       </div>
     ) : (

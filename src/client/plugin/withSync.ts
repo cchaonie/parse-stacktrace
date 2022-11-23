@@ -12,11 +12,13 @@ export const withSync =
       if (isDocumentUpdated(op)) {
         // send to server
         if (!clientDocument.shareDBDoc) {
-          throw new Error(
-            'The related shareDBDoc has not been initialized yet.'
-          );
+          console.error('The related shareDBDoc has not been initialized yet.');
         }
-        clientDocument.submitOperation(op);
+        try {
+          clientDocument.submitOperation(op);
+        } catch (error) {
+          console.error(error);
+        }
       }
 
       apply(op);

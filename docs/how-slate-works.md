@@ -37,3 +37,6 @@ Contrast to the split_node, when delete all text in one line, merge_node will be
 The first merge_node is to merge 2 paragraphs. The result is the text node of the to be deleted paragraph will be appended to the previous sibling paragraph, which means the previous sibling paragraph will have 2 text nodes in its children.
 
 The second merge_node is to merge the 2 text nodes of the previous paragraph because it has a empty text node, which is the text node from the last merge_node operation.
+
+
+## How to change the style of the text?
