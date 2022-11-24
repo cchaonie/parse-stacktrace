@@ -1,21 +1,15 @@
 import { useCallback } from 'react';
-import { Transforms, Text } from 'slate';
+import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
 import styles from './toolbar.css';
 
 export default () => {
   const editor = useSlate();
+
   const handleBold = useCallback(() => {
-    Transforms.setNodes(
-      editor,
-      { type: 'bold' },
-      {
-        at: editor.selection,
-        match: node => Text.isText(node),
-        split: true,
-      }
-    );
+    Editor.addMark(editor, 'bold', true);
   }, [editor]);
+
   return (
     <div className={styles['toolbar']}>
       <div

@@ -11,7 +11,8 @@ import styles from './editor.css';
 import { ShareDBDocStatus } from '../../model/core/type';
 import FilesContext from '../../context/FilesContext';
 import { ClientDocument } from '../../model/core/clientDocument';
-import { BoldElement, DefaultElement } from '../RenderElement';
+import { BoldElement, DefaultElement, RenderElement } from '../RenderElement';
+import { RenderLeaf } from '../RenderLeaf';
 
 export default ({ file: { name, content, creator } }: EditorProps) => {
   const clientDocRef = useRef(new ClientDocument());
@@ -25,15 +26,8 @@ export default ({ file: { name, content, creator } }: EditorProps) => {
 
   const { connection } = useContext(FilesContext);
 
-  const renderElement = useCallback(props => {
-    console.log(props);
-    switch (props.element.type) {
-      case 'bold':
-        return <BoldElement {...props} />;
-      default:
-        return <DefaultElement {...props} />;
-    }
-  }, []);
+  const renderElement = useCallback(props => <RenderElement {...props} />, []);
+  const renderLeaf = useCallback(props => <RenderLeaf {...props} />, []);
 
   useEffect(() => {
     if (!connection) return;
@@ -69,7 +63,8 @@ export default ({ file: { name, content, creator } }: EditorProps) => {
         <Slate editor={editor} value={clientDocRef.current.getDocumentData()}>
           <Toolbar />
           <Editable
-            renderLeaf={renderElement}
+            renderElement={renderElement}
+            renderLeaf={renderLeaf}
             style={{ flexGrow: 1, paddingInline: '8px' }}
           />
         </Slate>
