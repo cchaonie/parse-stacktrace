@@ -2,7 +2,7 @@ import type ShareDB from 'sharedb';
 import { IncomingMessage } from 'http';
 import { WebSocket } from 'ws';
 
-import { parseCookie } from '../../utils/parseCookie/parseCookie';
+import { parseCookie } from '../../common';
 import { WebSocketJSONStream } from './WebSocketJSONStream';
 
 const userMap = new Map();

@@ -6,20 +6,5 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react-jsx",
-    "baseUrl": ".",
-    "paths": {
-      "~client/*": [
-        "src/client/*"
-      ],
-      "~handler/*": [
-        "src/handlers/*"
-      ],
-      "~middleware/*": [
-        "src/middlewares/*"
-      ],
-      "~utils/*": [
-        "src/utils/*"
-      ]
-    }
   },
 }

@@ -7,7 +7,6 @@ import builtins from 'rollup-plugin-node-builtins';
 import { babel } from '@rollup/plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
-import tsConfigPaths from 'rollup-plugin-tsconfig-paths';
 import copy from 'rollup-plugin-copy';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
@@ -34,9 +33,6 @@ export default [
       sourcemap: !isPrd,
     },
     plugins: [
-      tsConfigPaths({
-        tsConfigPath: ['./tsconfig.json', './src/client/tsconfig.json'],
-      }),
       resolve({
         preferBuiltins: true,
         extensions,
@@ -58,9 +54,6 @@ export default [
       sourcemap: !isPrd,
     },
     plugins: [
-      tsConfigPaths({
-        tsConfigPath: ['./tsconfig.json', './src/client/tsconfig.json'],
-      }),
       builtins(),
       resolve({
         extensions,

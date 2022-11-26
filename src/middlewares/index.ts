@@ -1,2 +1,2 @@
-export { cookieMiddleware } from './cookieMiddleware/index';
-export { baseFileMiddleware } from './baseFileMiddleware/index';
+export { cookieMiddleware } from './cookieMiddleware';
+export { baseFileMiddleware } from './baseFileMiddleware';

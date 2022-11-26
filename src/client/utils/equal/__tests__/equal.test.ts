@@ -1,4 +1,4 @@
-import { equal } from '../../index';
+import { equal } from '..';
 
 describe('equal', () => {
   it('should return true', () => {

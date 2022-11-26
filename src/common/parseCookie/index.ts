@@ -1,0 +1,1 @@
+export { parseCookie } from './parseCookie';
