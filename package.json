@@ -7,7 +7,7 @@
     "build": "rimraf ./dist && cross-env NODE_ENV=production rollup -c",
     "build-dev": "rimraf ./dist && cross-env NODE_ENV=development rollup -c",
     "start": "node dist/index.js",
-    "dev": "ts-node script/development",
+    "dev": "ts-node scripts/development",
     "test": "jest"
   },
   "keywords": [

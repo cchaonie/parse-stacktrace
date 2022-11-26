@@ -4,8 +4,8 @@ import ShareDB from 'sharedb';
 import http from 'http';
 import path from 'path';
 import cookieParser from 'cookie-parser';
-import { connectionHandler } from './handler';
-import { baseFileMiddleware, cookieMiddleware } from '~middleware/index';
+import { connectionHandler } from './handlers';
+import { baseFileMiddleware, cookieMiddleware } from './middlewares';
 
 const app = express();
 
@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 app.use(cookieMiddleware);
 
-app.get("*", baseFileMiddleware);
+app.get('*', baseFileMiddleware);
 
 const server = http.createServer(app);
 const webSocketServer = new WebSocketServer({ server });

@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
-import { Editor, SideMenu } from './component';
-import { UserStatus } from './model/core/type';
-import FilesContext, { FilesContextValue } from './context/FilesContext';
-import FileDescription from './model/state/FileDescription';
-import { getFingerprint } from './model/fingerprint/getFingerprint';
-import { getShareDBConnection } from './model/core/getShareDBConnection';
+import { Editor, SideMenu } from './components';
+import FilesContext, { FilesContextValue } from './contexts/FilesContext';
+import { UserStatus } from './models/core/type';
+import FileDescription from './models/state/FileDescription';
+import { getFingerprint } from './models/fingerprint/getFingerprint';
+import { getShareDBConnection } from './models/core/getShareDBConnection';
+import { useRequest } from './hooks/useRequest/useRequest';
+import { parseUrl } from '../utils/parseUrl';
 
 import styles from './app.css';
-import { useRequest } from './hooks/useRequest/useRequest';
-import { Route, Routes, useLocation } from 'react-router-dom';
-import { parseUrl } from '~util/parseUrl';
 
 export default () => {
   const location = useLocation();

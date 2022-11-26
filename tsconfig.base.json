@@ -12,13 +12,13 @@
         "src/client/*"
       ],
       "~handler/*": [
-        "src/handler/*"
+        "src/handlers/*"
       ],
       "~middleware/*": [
-        "src/middleware/*"
+        "src/middlewares/*"
       ],
-      "~util/*": [
-        "src/util/*"
+      "~utils/*": [
+        "src/utils/*"
       ]
     }
   },

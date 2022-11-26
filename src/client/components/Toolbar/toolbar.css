@@ -1,0 +1,22 @@
+.toolbar {
+    display: flex;
+    height: 64px;
+    width: 100%;
+    align-items: center;
+    border-bottom: 1px solid grey;
+}
+
+.toolbarItem {
+    width: 36px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
