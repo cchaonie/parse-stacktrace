@@ -6,6 +6,6 @@
         "module": "CommonJS"
     },
     "include": [
-        "./**/*",
+        "./**/*", "../common/parseCookie",
     ],
 }

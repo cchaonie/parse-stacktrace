@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import { JSON0Path } from './type';
 import BaseOperationConverter from './BaseOperationConverter';
-import { convertPath } from '../../../utils';
+import { convertPath } from '../../utils';
 
 export class SplitNodeOperationConverter extends BaseOperationConverter {
   convert() {

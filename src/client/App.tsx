@@ -8,7 +8,7 @@ import FileDescription from './models/state/FileDescription';
 import { getFingerprint } from './models/fingerprint/getFingerprint';
 import { getShareDBConnection } from './models/core/getShareDBConnection';
 import { useRequest } from './hooks/useRequest/useRequest';
-import { parseUrl } from '../utils/parseUrl';
+import { parseUrl } from './utils/parseUrl';
 
 import styles from './app.css';
 
