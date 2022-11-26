@@ -1,7 +1,13 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { createEditor } from 'slate';
 
-import { Slate, Editable, withReact } from 'slate-react';
+import {
+  Slate,
+  Editable,
+  withReact,
+  RenderElementProps,
+  RenderLeafProps,
+} from 'slate-react';
 import { withSync } from '../../plugin/withSync';
 import Message from '../Message';
 import { Toolbar } from '../Toolbar';
@@ -11,7 +17,7 @@ import styles from './editor.css';
 import { ShareDBDocStatus } from '../../model/core/type';
 import FilesContext from '../../context/FilesContext';
 import { ClientDocument } from '../../model/core/clientDocument';
-import { BoldElement, DefaultElement, RenderElement } from '../RenderElement';
+import { RenderElement } from '../RenderElement';
 import { RenderLeaf } from '../RenderLeaf';
 
 export default ({ file: { name, content, creator } }: EditorProps) => {
@@ -26,8 +32,14 @@ export default ({ file: { name, content, creator } }: EditorProps) => {
 
   const { connection } = useContext(FilesContext);
 
-  const renderElement = useCallback(props => <RenderElement {...props} />, []);
-  const renderLeaf = useCallback(props => <RenderLeaf {...props} />, []);
+  const renderElement = useCallback(
+    (props: RenderElementProps) => <RenderElement {...props} />,
+    []
+  );
+  const renderLeaf = useCallback(
+    (props: RenderLeafProps) => <RenderLeaf {...props} />,
+    []
+  );
 
   useEffect(() => {
     if (!connection) return;

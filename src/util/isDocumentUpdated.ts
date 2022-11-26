@@ -1,7 +1,7 @@
 import { Operation } from 'slate';
 
 export const isDocumentUpdated = (op: Operation) => {
-  if (op.type === 'set_selection' || op.type === 'set_node') {
+  if (op.type === 'set_selection') {
     return false;
   }
   return true;

@@ -40,3 +40,4 @@ The second merge_node is to merge the 2 text nodes of the previous paragraph bec
 
 
 ## How to change the style of the text?
+Text nodes are the leaves of the whole nodes tree. So by adding extra properties to the text node, we can render different component depending on the custom properties.
