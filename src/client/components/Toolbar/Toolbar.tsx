@@ -1,6 +1,7 @@
 import { useCallback } from 'react';
 import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
+import Iconfont from '../Iconfont';
 import styles from './toolbar.css';
 
 export default () => {
@@ -19,13 +20,13 @@ export default () => {
         onClick={() => handleStyle('bold')}
         className={`${styles['toolbarItem']} ${styles['bold']}`}
       >
-        B
+        <Iconfont name='bold' fontSize='20px' />
       </div>
       <div
         onClick={() => handleStyle('italic')}
         className={`${styles['toolbarItem']} ${styles['italic']}`}
       >
-        I
+        <Iconfont name='italics' fontSize='20px' />
       </div>
     </div>
   );
