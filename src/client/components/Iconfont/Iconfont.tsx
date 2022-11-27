@@ -19,11 +19,16 @@ export default ({
     };
   }
 
+  if (animated) {
+    defaultStyle = {
+      ...defaultStyle,
+      transition: 'ease-in transform 300ms',
+    };
+  }
+
   return (
     <i
-      className={`${styles.iconfont} ${styles[`icon-${name}`]} ${
-        animated ? styles['iconfont-animated'] : ''
-      }`}
+      className={`${styles.iconfont} ${styles[`icon-${name}`]}`}
       style={defaultStyle}
     ></i>
   );

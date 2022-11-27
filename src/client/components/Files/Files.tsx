@@ -1,9 +1,10 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { FilesProps } from './type';
+import { FilesContext } from '../../contexts';
 
 import styles from './files.css';
-import { useContext } from 'react';
-import FilesContext from '../../contexts/FilesContext';
-import { useNavigate } from 'react-router-dom';
 
 export default ({ fileNames }: FilesProps) => {
   const { files, setFiles } = useContext(FilesContext);

@@ -1,5 +1,5 @@
 import { SyntheticEvent, useContext, useState } from 'react';
-import FilesContext from '../../../../contexts/FilesContext';
+import { AuthContext, FilesContext } from '../../../../contexts';
 import FileDescription from '../../../../models/state/FileDescription';
 import Iconfont from '../../../Iconfont';
 import Arrow from '../Arrow';
@@ -10,7 +10,8 @@ import { MenuItemProps } from './type';
 
 const MenuItem = ({ name, children }: MenuItemProps) => {
   const [direction, setDirection] = useState('right');
-  const { files, setFiles, userId } = useContext(FilesContext);
+  const { files, setFiles } = useContext(FilesContext);
+  const { userId } = useContext(AuthContext);
 
   const handleArrowClick = () =>
     direction === 'right' ? setDirection('down') : setDirection('right');

@@ -1,12 +1,13 @@
 import { useContext } from 'react';
-import FilesContext from '../../contexts/FilesContext';
+import { AuthContext, FilesContext } from '../../contexts';
 import Files from '../Files';
 import MenuItem from './component/MenuItem';
 
 import styles from './sideMenu.css';
 
 export default () => {
-  const { files, userId } = useContext(FilesContext);
+  const { files } = useContext(FilesContext);
+  const { userId } = useContext(AuthContext);
 
   return (
     <div className={`${styles.sideMenu} ${styles['sideMenu-background']}`}>

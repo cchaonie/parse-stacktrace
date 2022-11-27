@@ -18,5 +18,5 @@ export const useRequest = (
           console.error(e);
         }
       });
-  });
+  }, []);
 };

@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { createEditor } from 'slate';
-
 import {
   Slate,
   Editable,
@@ -8,20 +7,25 @@ import {
   RenderElementProps,
   RenderLeafProps,
 } from 'slate-react';
+
 import { withSync } from '../../plugins/withSync';
 import Message from '../Message';
 import { Toolbar } from '../Toolbar';
-import { EditorProps } from './type';
-
-import styles from './editor.css';
 import { ShareDBDocStatus } from '../../models/core/type';
-import FilesContext from '../../contexts/FilesContext';
 import { ClientDocument } from '../../models/core/clientDocument';
 import { RenderElement } from '../RenderElement';
 import { RenderLeaf } from '../RenderLeaf';
+import { ConnectionContext, FilesContext } from '../../contexts';
 
-export default ({ file: { name, content, creator } }: EditorProps) => {
+import styles from './editor.css';
+
+export default () => {
+  const { files } = useContext(FilesContext);
+  const { connection } = useContext(ConnectionContext);
+  const { name, content, creator } = files.filter(f => f.active)?.[0];
+
   const clientDocRef = useRef(new ClientDocument());
+
   const [editor] = useState(() =>
     withSync(clientDocRef.current)(withReact(createEditor()))
   );
@@ -29,8 +33,6 @@ export default ({ file: { name, content, creator } }: EditorProps) => {
   const [status, setStatus] = useState<ShareDBDocStatus>(
     ShareDBDocStatus.Loading
   );
-
-  const { connection } = useContext(FilesContext);
 
   const renderElement = useCallback(
     (props: RenderElementProps) => <RenderElement {...props} />,
