@@ -14,9 +14,7 @@ export default () => {
       <h1 className={styles['sideMenu-title']}>Collaborative Editor</h1>
       <div className={styles['sideMenu-operationSection']}>
         <MenuItem name='FILES'>
-          <Files
-            fileNames={files.filter(f => f.creator === userId).map(f => f.name)}
-          />
+          <Files />
         </MenuItem>
       </div>
     </div>

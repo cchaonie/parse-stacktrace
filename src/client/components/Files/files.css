@@ -5,3 +5,8 @@
     cursor: pointer;
     padding-block: 8px;
 }
+
+.files-item_active, .files-item:hover {
+    background: rgb(220, 220, 230);
+    font-weight: bold;
+}

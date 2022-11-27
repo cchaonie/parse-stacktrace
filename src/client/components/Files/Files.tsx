@@ -1,12 +1,11 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { FilesProps } from './type';
 import { FilesContext } from '../../contexts';
 
 import styles from './files.css';
 
-export default ({ fileNames }: FilesProps) => {
+export default () => {
   const { files, setFiles } = useContext(FilesContext);
   const navigate = useNavigate();
 
@@ -27,13 +26,15 @@ export default ({ fileNames }: FilesProps) => {
 
   return (
     <div className={styles.files}>
-      {fileNames.map((fileName, i) => (
+      {files.map(({ name, active }, i) => (
         <div
-          className={styles['files-item']}
-          key={fileName}
+          className={`${styles['files-item']} ${
+            active && styles['files-item_active']
+          }`}
+          key={name}
           onClick={() => handleFileClick(i)}
         >
-          {fileName}
+          {name}
         </div>
       ))}
     </div>
