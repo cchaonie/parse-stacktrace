@@ -1,12 +1,21 @@
-import { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { createEditor } from 'slate';
+import {
+  useCallback,
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
+import { createEditor, Descendant } from 'slate';
 import {
   Slate,
   Editable,
   withReact,
   RenderElementProps,
   RenderLeafProps,
+  ReactEditor,
 } from 'slate-react';
+import JSONFormatter from 'json-formatter-js';
 
 import { withSync } from '../../plugins/withSync';
 import Message from '../Message';
@@ -26,8 +35,23 @@ export default () => {
 
   const clientDocRef = useRef(new ClientDocument());
 
+  const codeBlockRef = useRef(null);
+
+  const operationListener = useCallback(
+    (currentData: Descendant[]) => {
+      if (codeBlockRef.current && clientDocRef.current) {
+        const parent = codeBlockRef.current;
+        while (parent.firstChild) {
+          parent.removeChild(parent.firstChild);
+        }
+        parent.appendChild(new JSONFormatter(currentData, Infinity).render());
+      }
+    },
+    [codeBlockRef.current, clientDocRef.current]
+  );
+
   const [editor] = useState(() =>
-    withSync(clientDocRef.current)(withReact(createEditor()))
+    withSync(clientDocRef.current)(withReact(createEditor()), operationListener)
   );
 
   const [status, setStatus] = useState<ShareDBDocStatus>(
@@ -82,6 +106,7 @@ export default () => {
             style={{ flexGrow: 1, paddingInline: '8px' }}
           />
         </Slate>
+        <div className={styles.sourceCode} ref={codeBlockRef}></div>
       </div>
     ) : (
       <Message>

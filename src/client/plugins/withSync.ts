@@ -1,11 +1,14 @@
-import { Operation } from 'slate';
+import { Descendant, Operation } from 'slate';
 import { ReactEditor } from 'slate-react';
 import { ClientDocument } from '../models/core/clientDocument';
 import { isDocumentUpdated } from '../utils/isDocumentUpdated';
 
 export const withSync =
   (clientDocument: ClientDocument) =>
-  (editor: ReactEditor): ReactEditor => {
+  (
+    editor: ReactEditor,
+    operationListener: (editor: Descendant[]) => void
+  ): ReactEditor => {
     const { apply } = editor;
 
     editor.apply = (op: Operation) => {
@@ -24,6 +27,7 @@ export const withSync =
       }
 
       apply(op);
+      operationListener(editor.children);
     };
 
     return editor;
