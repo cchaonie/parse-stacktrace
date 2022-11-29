@@ -33,23 +33,12 @@ export default () => {
   const { files } = useContext(FilesContext);
   const { connection } = useContext(ConnectionContext);
   const { name, content, creator } = files.filter(f => f.active)?.[0];
+  const [source, setSource] = useState(content);
 
   const clientDocRef = useRef(new ClientDocument());
 
-  const codeBlockRef = useRef(null);
-
-  const operationListener = useCallback(
-    (currentData: Descendant[]) => {
-      if (codeBlockRef.current && clientDocRef.current) {
-        const parent = codeBlockRef.current;
-        // while (parent.firstChild) {
-        //   parent.removeChild(parent.firstChild);
-        // }
-        // parent.appendChild(new JSONFormatter(currentData, Infinity).render());
-      }
-    },
-    [codeBlockRef.current, clientDocRef.current]
-  );
+  const operationListener = (currentData: Descendant[]) =>
+    setSource(currentData);
 
   const [editor] = useState(() =>
     withSync(clientDocRef.current)(withReact(createEditor()), operationListener)
@@ -80,10 +69,12 @@ export default () => {
             setStatus(ShareDBDocStatus.LoadFailed);
           } else {
             setStatus(ShareDBDocStatus.Loaded);
+            setSource(shareDBDoc.data);
           }
         });
       } else {
         setStatus(ShareDBDocStatus.Loaded);
+        setSource(shareDBDoc.data);
       }
     });
 
@@ -106,7 +97,7 @@ export default () => {
             renderLeaf={renderLeaf}
             style={{ flexGrow: 1, paddingInline: '8px' }}
           />
-          <SourceView />
+          <SourceView data={source} />
         </Slate>
       </div>
     ) : (
