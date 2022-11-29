@@ -27,6 +27,7 @@ import { RenderLeaf } from '../RenderLeaf';
 import { ConnectionContext, FilesContext } from '../../contexts';
 
 import styles from './editor.css';
+import { SourceView } from '../SourceView';
 
 export default () => {
   const { files } = useContext(FilesContext);
@@ -41,10 +42,10 @@ export default () => {
     (currentData: Descendant[]) => {
       if (codeBlockRef.current && clientDocRef.current) {
         const parent = codeBlockRef.current;
-        while (parent.firstChild) {
-          parent.removeChild(parent.firstChild);
-        }
-        parent.appendChild(new JSONFormatter(currentData, Infinity).render());
+        // while (parent.firstChild) {
+        //   parent.removeChild(parent.firstChild);
+        // }
+        // parent.appendChild(new JSONFormatter(currentData, Infinity).render());
       }
     },
     [codeBlockRef.current, clientDocRef.current]
@@ -105,8 +106,8 @@ export default () => {
             renderLeaf={renderLeaf}
             style={{ flexGrow: 1, paddingInline: '8px' }}
           />
+          <SourceView />
         </Slate>
-        <div className={styles.sourceCode} ref={codeBlockRef}></div>
       </div>
     ) : (
       <Message>
