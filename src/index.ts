@@ -5,7 +5,11 @@ import http from 'http';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import { connectionHandler } from './handlers';
-import { baseFileMiddleware, cookieMiddleware } from './middlewares';
+import {
+  baseFileMiddleware,
+  applyMiddleware,
+  cookieMiddleware,
+} from './middlewares';
 
 const app = express();
 
@@ -27,5 +31,7 @@ const webSocketServer = new WebSocketServer({ server });
 const backend = new ShareDB();
 
 webSocketServer.on('connection', connectionHandler(backend));
+
+backend.use('apply', applyMiddleware);
 
 server.listen(8080, () => console.log(`[SERVER] listening at port 8080 now`));

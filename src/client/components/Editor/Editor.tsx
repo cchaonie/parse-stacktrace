@@ -1,11 +1,4 @@
-import {
-  useCallback,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { createEditor, Descendant } from 'slate';
 import {
   Slate,
@@ -13,9 +6,7 @@ import {
   withReact,
   RenderElementProps,
   RenderLeafProps,
-  ReactEditor,
 } from 'slate-react';
-import JSONFormatter from 'json-formatter-js';
 
 import { withSync } from '../../plugins/withSync';
 import Message from '../Message';
