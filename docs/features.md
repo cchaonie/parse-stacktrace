@@ -6,5 +6,6 @@
 - [x] Add `user` management
   - [x] Add user fingerprint to tag users
 - [ ] Show the mouse position of the other users
-- [ ] Add user interface
-- [ ] Add bold/italic style
+- [x] Add user interface
+- [x] Add bold/italic style
+- [ ] Broadcast the changes to all client
