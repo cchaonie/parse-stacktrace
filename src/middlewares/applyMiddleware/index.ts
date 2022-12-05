@@ -4,6 +4,6 @@ export const applyMiddleware = (
   context: middleware.ApplyContext,
   next: (err?: any) => void
 ) => {
-  console.log(Object.keys(context));
+  // implementation to be added
   next();
 };

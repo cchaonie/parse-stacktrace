@@ -9,3 +9,4 @@
 - [x] Add user interface
 - [x] Add bold/italic style
 - [ ] Broadcast the changes to all client
+- [ ] Use json1 as the sharedb type
