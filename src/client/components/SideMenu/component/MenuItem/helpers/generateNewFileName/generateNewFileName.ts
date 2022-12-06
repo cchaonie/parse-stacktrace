@@ -1,6 +1,7 @@
 import { defaultFileExtension, defaultFileName } from '../../constant';
 
 export const generateNewFileName = (fileNames: string[]) => {
+  console.log(fileNames);
   let index = 1;
   while (
     isFileNameExist(

@@ -26,13 +26,18 @@ const FilesContainer = ({ children }) => {
       .then(res => res.json())
       .then(({ message, data }: any) => {
         if (message === 'OK') {
-          const userFiles = data as string[];
+          const userFiles = data as Array<any>;
+
+          const filesNotExist = userFiles.filter(userFile =>
+            !files.some(
+              f => f.creator === userFile.creator && f.name === userFile.fileName
+            )
+          );
 
           setFiles([
             ...files,
-            ...userFiles.map(
-              (f: any) =>
-                new FileDescription(f.fileName, f.creator, f.createTime)
+            ...filesNotExist.map(
+              f => new FileDescription(f.fileName, f.creator, f.createTime)
             ),
           ]);
         }

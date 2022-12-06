@@ -19,7 +19,10 @@ const MenuItem = ({ name, children }: MenuItemProps) => {
   const handleAddNewFile = (e: SyntheticEvent) => {
     e.stopPropagation();
 
-    const newFileName = generateNewFileName(files.map(f => f.name));
+    const newFileName = generateNewFileName(
+      files.filter(f => f.creator === userId).map(f => f.name)
+    );
+    console.log(newFileName);
     const createTime = +new Date();
 
     fetch('/files', {
@@ -36,10 +39,12 @@ const MenuItem = ({ name, children }: MenuItemProps) => {
       .then(res => res.json())
       .then(json => {
         if (json.message === 'OK') {
-          setFiles([
-            ...files,
-            new FileDescription(newFileName, userId, createTime),
-          ]);
+          setFiles(
+            [
+              ...files,
+              new FileDescription(newFileName, userId, createTime),
+            ].sort((a, b) => a.createTime - b.createTime)
+          );
         }
       });
   };
