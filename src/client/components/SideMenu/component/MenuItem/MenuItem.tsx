@@ -4,6 +4,7 @@ import FileDescription from '../../../../models/state/FileDescription';
 import Iconfont from '../../../Iconfont';
 import Arrow from '../Arrow';
 import { defaultFileExtension, defaultFileName } from './constant';
+import { generateNewFileName } from './helpers';
 
 import styles from './menuItem.css';
 import { MenuItemProps } from './type';
@@ -16,17 +17,12 @@ const MenuItem = ({ name, children }: MenuItemProps) => {
   const handleArrowClick = () =>
     direction === 'right' ? setDirection('down') : setDirection('right');
 
-  const handleMoreOperations = (e: SyntheticEvent) => {
+  const handleAddNewFile = (e: SyntheticEvent) => {
     e.stopPropagation();
-    const fileCountWithDefaultName = files.filter(f =>
-      f.name.includes(defaultFileName)
-    ).length;
     setFiles([
       ...files,
       new FileDescription(
-        `${defaultFileName}${
-          fileCountWithDefaultName > 0 ? fileCountWithDefaultName : ''
-        }.${defaultFileExtension}`,
+        `${generateNewFileName(files.map(f => f.name))}`,
         userId,
         new Date()
       ),
@@ -43,7 +39,7 @@ const MenuItem = ({ name, children }: MenuItemProps) => {
           <div className={styles['menuItem-operationText']}>{name}</div>
           <div
             className={styles['menuItem-moreOperation']}
-            onClick={handleMoreOperations}
+            onClick={handleAddNewFile}
           >
             <Iconfont name='add-select' fontSize='20px' />
           </div>

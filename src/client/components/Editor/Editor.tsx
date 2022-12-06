@@ -74,6 +74,11 @@ export default () => {
         setStatus(ShareDBDocStatus.LoadFailed);
       }
     });
+
+    shareDBDoc.addListener('op', () => {
+      console.log('new operation received');
+      console.log(shareDBDoc.data);
+    });
   }, [creator, name, connection]);
 
   const renderContent =

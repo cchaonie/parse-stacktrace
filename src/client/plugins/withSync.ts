@@ -12,8 +12,8 @@ export const withSync =
     const { apply } = editor;
 
     editor.apply = (op: Operation) => {
-      console.log('[Operation]', op);
-      console.log('[editor.children]', editor.children);
+      // console.log('[Operation]', op);
+      // console.log('[editor.children]', editor.children);
       if (isDocumentUpdated(op)) {
         // send to server
         if (!clientDocument.shareDBDoc) {

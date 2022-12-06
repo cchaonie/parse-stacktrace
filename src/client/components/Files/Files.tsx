@@ -1,13 +1,16 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { FilesContext } from '../../contexts';
+import { AuthContext, FilesContext } from '../../contexts';
 
 import styles from './files.css';
 
 export default () => {
   const { files, setFiles } = useContext(FilesContext);
+  const { userId } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const filesOwnedByCurrentUser = files.filter(f => f.creator === userId);
 
   const handleFileClick = (index: number) => {
     const targetFile = files.find((_, i) => i === index);
@@ -26,17 +29,20 @@ export default () => {
 
   return (
     <div className={styles.files}>
-      {files.map(({ name, active }, i) => (
-        <div
-          className={`${styles['files-item']} ${
-            active && styles['files-item_active']
-          }`}
-          key={name}
-          onClick={() => handleFileClick(i)}
-        >
-          {name}
-        </div>
-      ))}
+      {files.map(
+        ({ name, active, creator }, i) =>
+          creator === userId && (
+            <div
+              className={`${styles['files-item']} ${
+                active && styles['files-item_active']
+              }`}
+              key={name}
+              onClick={() => handleFileClick(i)}
+            >
+              {name}
+            </div>
+          )
+      )}
     </div>
   );
 };
