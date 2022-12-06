@@ -3,7 +3,6 @@ import { AuthContext, FilesContext } from '../../../../contexts';
 import FileDescription from '../../../../models/state/FileDescription';
 import Iconfont from '../../../Iconfont';
 import Arrow from '../Arrow';
-import { defaultFileExtension, defaultFileName } from './constant';
 import { generateNewFileName } from './helpers';
 
 import styles from './menuItem.css';
@@ -19,14 +18,30 @@ const MenuItem = ({ name, children }: MenuItemProps) => {
 
   const handleAddNewFile = (e: SyntheticEvent) => {
     e.stopPropagation();
-    setFiles([
-      ...files,
-      new FileDescription(
-        `${generateNewFileName(files.map(f => f.name))}`,
+
+    const newFileName = generateNewFileName(files.map(f => f.name));
+    const createTime = +new Date();
+
+    fetch('/files', {
+      method: 'PUT',
+      body: JSON.stringify({
+        fileName: newFileName,
+        createTime,
         userId,
-        new Date()
-      ),
-    ]);
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.message === 'OK') {
+          setFiles([
+            ...files,
+            new FileDescription(newFileName, userId, createTime),
+          ]);
+        }
+      });
   };
 
   return (

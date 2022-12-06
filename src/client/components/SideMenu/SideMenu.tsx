@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { AuthContext, FilesContext } from '../../contexts';
 import Files from '../Files';
 import MenuItem from './component/MenuItem';
 

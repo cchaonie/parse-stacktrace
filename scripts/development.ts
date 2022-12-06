@@ -35,10 +35,7 @@ runWatch(SERVER, serverOptions, () => {
     devServer.kill();
   }
 
-  devServer = spawn('node', [
-    '--inspect',
-    path.resolve(ROOT_DIR, 'dist/index.js'),
-  ]);
+  devServer = spawn('node', [path.resolve(ROOT_DIR, 'dist/index.js')]);
 
   console.log(`${SERVER} building success`);
 

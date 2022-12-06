@@ -22,9 +22,11 @@ import { SourceView } from '../SourceView';
 
 export default () => {
   const { files } = useContext(FilesContext);
+  const activeFile = files.filter(f => f.active)?.[0];
+
   const { connection } = useContext(ConnectionContext);
-  const { name, content, creator } = files.filter(f => f.active)?.[0];
-  const [source, setSource] = useState(content);
+
+  const [source, setSource] = useState(activeFile.content);
 
   const clientDocRef = useRef(new ClientDocument());
 
@@ -50,6 +52,8 @@ export default () => {
 
   useEffect(() => {
     if (!connection) return;
+    const { name, content, creator } = activeFile;
+
     const shareDBDoc = connection.get(creator, name);
     clientDocRef.current.shareDBDoc = shareDBDoc;
 
@@ -79,7 +83,7 @@ export default () => {
       console.log('new operation received');
       console.log(shareDBDoc.data);
     });
-  }, [creator, name, connection]);
+  }, [activeFile, connection]);
 
   const renderContent =
     status === ShareDBDocStatus.Loading ? (

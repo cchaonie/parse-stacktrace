@@ -10,8 +10,6 @@ export default () => {
   const { userId } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const filesOwnedByCurrentUser = files.filter(f => f.creator === userId);
-
   const handleFileClick = (index: number) => {
     const targetFile = files.find((_, i) => i === index);
     setFiles(

@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { json } from 'express';
 import { WebSocketServer } from 'ws';
 import ShareDB from 'sharedb';
 import http from 'http';
@@ -10,18 +10,21 @@ import {
   applyMiddleware,
   cookieMiddleware,
 } from './middlewares';
+import { userFilesRoute, loginRoute } from './routers';
 
 const app = express();
 
-app.use(express.static(path.resolve(process.cwd(), 'dist/client')));
-
-app.post('/login', (_, res) => {
-  res.end('OK');
-});
-
 app.use(cookieParser());
 
+app.use(json());
+
 app.use(cookieMiddleware);
+
+app.use(express.static(path.resolve(process.cwd(), 'dist/client')));
+
+app.use(loginRoute);
+
+app.use(userFilesRoute);
 
 app.get('*', baseFileMiddleware);
 
