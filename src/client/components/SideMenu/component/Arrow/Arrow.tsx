@@ -1,4 +1,4 @@
-import Iconfont from '../../../Iconfont';
+import { Iconfont } from '../../../Iconfont';
 
 export default ({ direction = 'right' }) => (
   <Iconfont

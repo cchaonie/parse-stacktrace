@@ -1,7 +1,7 @@
 import { SyntheticEvent, useContext, useState } from 'react';
 import { AuthContext, FilesContext } from '../../../../contexts';
-import FileDescription from '../../../../models/state/FileDescription';
-import Iconfont from '../../../Iconfont';
+import { FileDescription } from '../../../../models';
+import { Iconfont } from '../../../Iconfont';
 import Arrow from '../Arrow';
 import { generateNewFileName } from './helpers';
 

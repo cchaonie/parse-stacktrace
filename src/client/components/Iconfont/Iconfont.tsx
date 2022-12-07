@@ -2,7 +2,7 @@ import { IconFontProps } from './type';
 
 import styles from './iconfont.css';
 
-export default ({
+export const Iconfont = ({
   name,
   rotate,
   animated = false,

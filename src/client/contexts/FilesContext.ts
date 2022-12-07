@@ -1,5 +1,5 @@
 import React from 'react';
-import FileDescription from '../models/state/FileDescription';
+import { FileDescription } from '../models';
 
 export interface FilesValue {
   files: FileDescription[];

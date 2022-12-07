@@ -1,3 +1,4 @@
-export { default as Editor } from './Editor';
-export { default as Message } from './Message';
-export { default as SideMenu } from './SideMenu';
+export { Iconfont } from './Iconfont';
+export { Message } from './Message';
+export { SourceEditor } from './SourceEditor';
+export { SideMenu } from './SideMenu';

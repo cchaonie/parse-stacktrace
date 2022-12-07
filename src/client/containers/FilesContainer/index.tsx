@@ -1,7 +1,7 @@
 import { memo, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { AuthContext, FilesContext } from '../../contexts';
-import FileDescription from '../../models/state/FileDescription';
+import { FileDescription } from '../../models';
 import { parseUrl } from '../../utils';
 import { mergeFiles } from './helpers';
 

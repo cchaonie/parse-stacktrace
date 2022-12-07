@@ -1,3 +1,3 @@
 import { MessageProps } from './type';
 
-export default ({ children }: MessageProps) => <div>{children}</div>;
+export const Message = ({ children }: MessageProps) => <div>{children}</div>;

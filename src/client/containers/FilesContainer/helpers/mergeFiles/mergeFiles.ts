@@ -1,4 +1,4 @@
-import FileDescription from '../../../../models/state/FileDescription';
+import { FileDescription } from '../../../../models';
 
 export const mergeFiles = (
   existingFiles: FileDescription[],

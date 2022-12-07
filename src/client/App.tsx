@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import { AuthContainer, FilesContainer } from './containers';
-import { Editor, SideMenu } from './components';
+import {
+  AuthContainer,
+  ConnectionContainer,
+  FilesContainer,
+} from './containers';
+import { SourceEditor, SideMenu } from './components';
 
 import styles from './app.css';
-import ConnectionContainer from './containers/ConnectionContainer';
 
 export default () => {
   return (
@@ -25,7 +27,7 @@ export default () => {
               />
               <Route
                 path='/document/:collectionId/:documentName'
-                element={<Editor />}
+                element={<SourceEditor />}
               />
             </Routes>
           </div>

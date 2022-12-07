@@ -1,4 +1,4 @@
-import FileDescription from './FileDescription';
+import { FileDescription } from './FileDescription';
 
 const files: FileDescription[] = [];
 

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AuthContext, FilesContext } from '../../contexts';
+import { AuthContext, FilesContext } from '../../../../contexts';
 
 import styles from './files.css';
 

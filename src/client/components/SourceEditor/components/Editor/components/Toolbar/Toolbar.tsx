@@ -1,10 +1,12 @@
 import { useCallback } from 'react';
 import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
-import Iconfont from '../Iconfont';
+
+import { Iconfont } from '../../../../../Iconfont';
+
 import styles from './toolbar.css';
 
-export default () => {
+export const Toolbar = () => {
   const editor = useSlate();
 
   const handleStyle = useCallback(

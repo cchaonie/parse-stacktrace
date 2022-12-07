@@ -1,9 +1,9 @@
 import { Descendant } from 'slate';
 import _ from 'lodash';
 
-import { initialContent } from '../core/initialContent';
+import { initialContent } from '../core';
 
-export default class FileDescription {
+export class FileDescription {
   name: string;
   creator: string;
   createTime: number;
