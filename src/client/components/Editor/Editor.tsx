@@ -7,18 +7,20 @@ import {
   RenderElementProps,
   RenderLeafProps,
 } from 'slate-react';
+import _ from 'lodash';
 
 import { withSync } from '../../plugins/withSync';
-import Message from '../Message';
+import { Message } from '../Message';
 import { Toolbar } from '../Toolbar';
-import { ShareDBDocStatus } from '../../models/core/type';
-import { ClientDocument } from '../../models/core/clientDocument';
+import { SourceView } from '../SourceView';
 import { RenderElement } from '../RenderElement';
 import { RenderLeaf } from '../RenderLeaf';
 import { ConnectionContext, FilesContext } from '../../contexts';
 
+import { ClientDocument, ClientDocumentEvents } from '../../models';
+import { ShareDBDocStatus } from '../../models/core/type';
+
 import styles from './editor.css';
-import { SourceView } from '../SourceView';
 
 export default () => {
   const { files } = useContext(FilesContext);
@@ -57,6 +59,13 @@ export default () => {
     const shareDBDoc = connection.get(creator, name);
     clientDocRef.current.shareDBDoc = shareDBDoc;
 
+    // clientDocRef.current.addListener(
+    //   ClientDocumentEvents.documentContentUpdate,
+    //   doc => {
+    //     setSource(_.cloneDeep(doc.data));
+    //   }
+    // );
+
     shareDBDoc.addListener('load', () => {
       if (!shareDBDoc.type) {
         shareDBDoc.create(content, error => {
@@ -81,7 +90,7 @@ export default () => {
 
     shareDBDoc.addListener('op', () => {
       console.log('new operation received');
-      console.log(shareDBDoc.data);
+      clientDocRef.current.dispatch(ClientDocumentEvents.documentContentUpdate);
     });
   }, [activeFile, connection]);
 

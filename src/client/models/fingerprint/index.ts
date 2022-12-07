@@ -1,0 +1,1 @@
+export { getFingerprint } from './getFingerprint';

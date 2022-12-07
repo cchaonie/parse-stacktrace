@@ -1,3 +1,6 @@
+import { Doc } from 'sharedb';
+import { ClientDocumentEvents } from './constants';
+
 // export const LoadingStatus = {
 //   Loading: 1,
 //   Loaded: 2,
@@ -17,4 +20,8 @@ export enum UserStatus {
   LoggedIn = 'Logged in',
 }
 
-export type StatusListener = (status: ShareDBDocStatus) => void;
+export type ClientDocumentEventHandler = (doc: Doc) => void;
+
+export type ClientDocumentListeners = {
+  [key in ClientDocumentEvents]?: ClientDocumentEventHandler[];
+};

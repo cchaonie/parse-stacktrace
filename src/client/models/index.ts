@@ -1,2 +1,7 @@
-export { initialContent } from './core/initialContent';
-export { initializeShareDBDocument } from './core/initializeShareDBDocument';
+export {
+  initialContent,
+  getShareDBConnection,
+  ClientDocument,
+  ClientDocumentEvents,
+} from './core';
+export { getFingerprint } from './fingerprint';
