@@ -15,7 +15,7 @@ userFilesRoute.get('/files', function (req, res) {
 });
 
 userFilesRoute.put('/files', (req: Request, res: Response) => {
-  const fileName = req.body['fileName'];
+  const fileName = req.body['name'];
   const createTime = req.body['createTime'];
   const userId = req.body['userId'];
 
@@ -28,7 +28,7 @@ userFilesRoute.put('/files', (req: Request, res: Response) => {
   }
 
   files.push({
-    fileName,
+    name: fileName,
     creator: userId,
     createTime,
   });
@@ -39,7 +39,7 @@ userFilesRoute.put('/files', (req: Request, res: Response) => {
 });
 
 function getByUserIdAndFileName(userId: string, fileName: string) {
-  return files.filter(f => f.fileName === fileName && f.creator === userId);
+  return files.filter(f => f.name === fileName && f.creator === userId);
 }
 
 function getByUserId(userId: string) {

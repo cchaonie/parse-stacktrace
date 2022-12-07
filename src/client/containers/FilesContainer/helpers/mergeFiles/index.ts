@@ -1,0 +1,1 @@
+export { mergeFiles } from './mergeFiles';

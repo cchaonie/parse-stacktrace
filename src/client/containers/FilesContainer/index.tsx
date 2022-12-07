@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { AuthContext, FilesContext } from '../../contexts';
 import FileDescription from '../../models/state/FileDescription';
 import { parseUrl } from '../../utils';
+import { mergeFiles } from './helpers';
 
 const FilesContainer = ({ children }) => {
   const location = useLocation();
@@ -12,6 +13,7 @@ const FilesContainer = ({ children }) => {
 
   const [files, setFiles] = useState<FileDescription[]>(() => {
     if (collectionId && documentName) {
+      // the path is copied from the other users, so we are not going to show the file in the side menu
       const file = new FileDescription(documentName, collectionId, +new Date());
       file.active = true;
       return [file];
@@ -28,18 +30,7 @@ const FilesContainer = ({ children }) => {
         if (message === 'OK') {
           const userFiles = data as Array<any>;
 
-          const filesNotExist = userFiles.filter(userFile =>
-            !files.some(
-              f => f.creator === userFile.creator && f.name === userFile.fileName
-            )
-          );
-
-          setFiles([
-            ...files,
-            ...filesNotExist.map(
-              f => new FileDescription(f.fileName, f.creator, f.createTime)
-            ),
-          ]);
+          setFiles(mergeFiles(files, userFiles));
         }
       });
   }, [userId]);

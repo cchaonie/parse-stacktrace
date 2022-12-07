@@ -22,13 +22,12 @@ const MenuItem = ({ name, children }: MenuItemProps) => {
     const newFileName = generateNewFileName(
       files.filter(f => f.creator === userId).map(f => f.name)
     );
-    console.log(newFileName);
     const createTime = +new Date();
 
     fetch('/files', {
       method: 'PUT',
       body: JSON.stringify({
-        fileName: newFileName,
+        name: newFileName,
         createTime,
         userId,
       }),
