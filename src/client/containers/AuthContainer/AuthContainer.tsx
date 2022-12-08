@@ -1,10 +1,9 @@
 import { memo, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts';
 import { useRequest } from '../../hooks/useRequest/useRequest';
-import { UserStatus } from '../../models/core/type';
-import { getFingerprint } from '../../models/fingerprint/getFingerprint';
+import { getFingerprint, UserStatus } from '../../models';
 
-const AuthContainer = ({ children }) => {
+export const AuthContainer = ({ children }) => {
   const [userId, setUserId] = useState('');
   const [userStatus, setUserStatus] = useState(UserStatus.NotLoggedIn);
 
@@ -44,5 +43,3 @@ const AuthContainer = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
-export default memo(AuthContainer);

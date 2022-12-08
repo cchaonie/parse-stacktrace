@@ -9,17 +9,6 @@ import { ClientDocumentEvents } from './constants';
 
 // export type LoadingStatus = typeof LoadingStatus[keyof typeof LoadingStatus];
 
-export enum ShareDBDocStatus {
-  Loading = 'Loading',
-  Loaded = 'Loaded',
-  LoadFailed = 'LoadFailed',
-}
-
-export enum UserStatus {
-  NotLoggedIn = 'Not Logged in',
-  LoggedIn = 'Logged in',
-}
-
 export type ClientDocumentEventHandler = (doc: Doc) => void;
 
 export type ClientDocumentListeners = {

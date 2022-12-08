@@ -1,33 +1,28 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { memo, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { createEditor, Descendant } from 'slate';
 import { withReact } from 'slate-react';
 
 import { withSync } from '../../plugins/withSync';
 import { Message } from '../Message';
 import { SourceView } from './components/SourceView';
-import { ConnectionContext, FilesContext } from '../../contexts';
 
-import { ClientDocument, ClientDocumentEvents } from '../../models';
-import { ShareDBDocStatus } from '../../models/core/type';
+import { ClientDocument, ShareDBDocStatus } from '../../models';
 
-import styles from './sourceEditor.css';
 import { Editor } from './components/Editor';
 
-export const SourceEditor = () => {
-  const { files } = useContext(FilesContext);
-  const activeFile = files.filter(f => f.active)?.[0];
+import { SourceEditorProps } from './type';
 
-  const { connection } = useContext(ConnectionContext);
+import styles from './sourceEditor.css';
+
+export const SourceEditor = memo(({ files, connection }: SourceEditorProps) => {
+  const activeFile = useMemo(() => files.filter(f => f.active)?.[0], [files]);
 
   const [source, setSource] = useState(activeFile.content);
 
   const clientDocRef = useRef(new ClientDocument());
 
-  const operationListener = (currentData: Descendant[]) =>
-    setSource(currentData);
-
   const [editor] = useState(() =>
-    withSync(clientDocRef.current)(withReact(createEditor()), operationListener)
+    withSync(clientDocRef.current)(withReact(createEditor()))
   );
 
   const [status, setStatus] = useState<ShareDBDocStatus>(
@@ -41,57 +36,40 @@ export const SourceEditor = () => {
     const shareDBDoc = connection.get(creator, name);
     clientDocRef.current.shareDBDoc = shareDBDoc;
 
-    // clientDocRef.current.addListener(
-    //   ClientDocumentEvents.documentContentUpdate,
-    //   doc => {
-    //     setSource(_.cloneDeep(doc.data));
-    //   }
-    // );
+    const shareDBDocErrorHandler = (error, tag: string) => {
+      console.error(`[${tag}]: `, error);
+      setStatus(ShareDBDocStatus.Error);
+    };
 
-    shareDBDoc.addListener('load', () => {
-      if (!shareDBDoc.type) {
-        shareDBDoc.create(content, error => {
-          if (error) {
-            setStatus(ShareDBDocStatus.LoadFailed);
-          } else {
-            setStatus(ShareDBDocStatus.Loaded);
-            setSource(shareDBDoc.data);
-          }
-        });
-      } else {
-        setStatus(ShareDBDocStatus.Loaded);
-        setSource(shareDBDoc.data);
-      }
-    });
-
-    shareDBDoc.subscribe(error => {
-      if (error) {
-        setStatus(ShareDBDocStatus.LoadFailed);
-      }
-    });
+    if (!shareDBDoc.data) {
+      console.log('INFO:', 'create new doc now.');
+      shareDBDoc.create(content, e => shareDBDocErrorHandler(e, 'CREATE'));
+      setSource(content);
+    } else {
+      setStatus(ShareDBDocStatus.Loaded);
+      setSource(shareDBDoc.data);
+    }
 
     shareDBDoc.addListener('op', () => {
-      console.log('new operation received');
-      clientDocRef.current.dispatch(ClientDocumentEvents.documentContentUpdate);
+      setSource(shareDBDoc.data);
     });
+
+    shareDBDoc.addListener('error', e => shareDBDocErrorHandler(e, 'GENERAL'));
   }, [activeFile, connection]);
 
-  const renderContent =
-    status === ShareDBDocStatus.Loading ? (
-      <Message>Loading......</Message>
-    ) : status === ShareDBDocStatus.Loaded ? (
-      <div className={styles.sourceEditor}>
-        <Editor
-          instance={editor}
-          initialValue={clientDocRef.current.getDocumentData()}
-        />
-        <SourceView data={source} />
-      </div>
-    ) : (
-      <Message>
-        Load shareDB document failed -_-!, please refresh you page
-      </Message>
-    );
-
-  return renderContent;
-};
+  return status === ShareDBDocStatus.Loading ? (
+    <Message>Loading......</Message>
+  ) : status === ShareDBDocStatus.Loaded ? (
+    <div className={styles.sourceEditor}>
+      <Editor
+        instance={editor}
+        initialValue={clientDocRef.current.getDocumentData()}
+      />
+      <SourceView data={source} />
+    </div>
+  ) : (
+    <Message>
+      Sorry, something wrong with shareDB document -_-!, please refresh you page
+    </Message>
+  );
+});

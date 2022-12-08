@@ -5,7 +5,7 @@ import {
   ConnectionContainer,
   FilesContainer,
 } from './containers';
-import { SourceEditor, SideMenu } from './components';
+import { SourceEditor, SideMenu, SourceEditorConnect } from './components';
 
 import styles from './app.css';
 
@@ -27,7 +27,13 @@ export default () => {
               />
               <Route
                 path='/document/:collectionId/:documentName'
-                element={<SourceEditor />}
+                element={
+                  <SourceEditorConnect>
+                    {({ files, connection }) => (
+                      <SourceEditor files={files} connection={connection} />
+                    )}
+                  </SourceEditorConnect>
+                }
               />
             </Routes>
           </div>

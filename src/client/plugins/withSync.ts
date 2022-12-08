@@ -7,7 +7,7 @@ export const withSync =
   (clientDocument: ClientDocument) =>
   (
     editor: ReactEditor,
-    operationListener: (editor: Descendant[]) => void
+    operationListener?: (editor: Descendant[]) => void
   ): ReactEditor => {
     const { apply } = editor;
 
@@ -27,7 +27,10 @@ export const withSync =
       }
 
       apply(op);
-      operationListener(editor.children);
+
+      if (operationListener) {
+        operationListener(editor.children);
+      }
     };
 
     return editor;
