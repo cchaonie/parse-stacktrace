@@ -29,8 +29,12 @@ export default () => {
                 path='/document/:collectionId/:documentName'
                 element={
                   <SourceEditorConnect>
-                    {({ files, connection }) => (
-                      <SourceEditor files={files} connection={connection} />
+                    {({ userStatus, files, connection }) => (
+                      <SourceEditor
+                        files={files}
+                        connection={connection}
+                        userStatus={userStatus}
+                      />
                     )}
                   </SourceEditorConnect>
                 }

@@ -1,15 +1,13 @@
 import { ReactNode } from 'react';
 import { Connection } from 'sharedb/lib/client';
-import { FileDescription } from '../../models';
-
-export interface SourceEditorConnectProps {
-  children: (contextValues: {
-    files: FileDescription[];
-    connection: Connection;
-  }) => ReactNode;
-}
+import { FileDescription, UserStatus } from '../../models';
 
 export interface SourceEditorProps {
+  userStatus: UserStatus;
   files: FileDescription[];
   connection: Connection;
+}
+
+export interface SourceEditorConnectProps {
+  children: (contextValues: SourceEditorProps) => ReactNode;
 }

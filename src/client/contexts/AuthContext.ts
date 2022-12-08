@@ -1,5 +1,5 @@
 import React from 'react';
-import { UserStatus } from '../models/core/type';
+import { UserStatus } from '../models';
 
 export interface AuthValue {
   userId: string;

@@ -12,25 +12,28 @@ export const AuthContainer = ({ children }) => {
       .then(({ visitorId }) => {
         setUserId(visitorId);
         console.log(`Visitor: ${visitorId}`);
+        return visitorId;
       })
-      .catch(e => console.error(`Getting fingerprint failed`, e));
+      .then(visitorId => {
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            fingerprint: visitorId,
+          }),
+        })
+          .then(res => res.json())
+          .then(json => {
+            if (json.message === 'OK') {
+              setUserStatus(UserStatus.LoggedIn);
+              console.log(`User login successfully`);
+            }
+          });
+      })
+      .catch(e => console.error(`User login failed`, e));
   }, []);
-
-  useRequest(
-    {
-      url: '/login',
-      initOptions: {
-        method: 'POST',
-      },
-    },
-    res => {
-      if (res.ok) {
-        setUserStatus(UserStatus.LoggedIn);
-        console.log(`User login successfully`);
-      }
-    },
-    e => console.error(`User login failed`, e)
-  );
 
   return (
     <AuthContext.Provider

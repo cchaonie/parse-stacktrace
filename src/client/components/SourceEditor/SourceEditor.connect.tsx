@@ -1,8 +1,10 @@
 import { useContext } from 'react';
-import { ConnectionContext, FilesContext } from '../../contexts';
+import { AuthContext, ConnectionContext, FilesContext } from '../../contexts';
 
 export const SourceEditorConnect = ({ children }) => {
+  const { userStatus } = useContext(AuthContext);
   const { files } = useContext(FilesContext);
   const { connection } = useContext(ConnectionContext);
-  return children({ files, connection });
+
+  return children({ userStatus, files, connection });
 };
