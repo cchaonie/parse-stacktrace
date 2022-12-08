@@ -37,8 +37,6 @@ export const SourceEditor = memo(
       const shareDBDoc = connection.get(creator, name);
       clientDocRef.current.shareDBDoc = shareDBDoc;
 
-      shareDBDoc.subscribe(e => shareDBDocErrorHandler('SUBSCRIBE', e));
-
       const shareDBDocErrorHandler = (tag: string, error: any) => {
         if (error) {
           console.error(`[${tag}]: `, error);
@@ -46,22 +44,26 @@ export const SourceEditor = memo(
         }
       };
 
-      const shareDBDocUpdateHandler = () => {
+      const shareDBDocUpdateHandler = (tag: string) => {
+        console.log(`[${tag}]:`);
         setStatus(ShareDBDocStatus.Loaded);
         setSource(shareDBDoc.data);
       };
 
-      if (!shareDBDoc.type) {
-        console.log('INFO:', 'create new doc now.');
-        shareDBDoc.create(content, e => shareDBDocErrorHandler('CREATE', e));
-        setSource(content);
-      } else {
-        shareDBDocUpdateHandler();
-      }
+      shareDBDoc.subscribe(e => {
+        shareDBDocErrorHandler('SUBSCRIBE', e);
+        if (!shareDBDoc.type) {
+          console.log('INFO:', 'create new doc now.');
+          shareDBDoc.create(content, e => shareDBDocErrorHandler('CREATE', e));
+          setSource(content);
+        } else {
+          shareDBDocUpdateHandler('SUBSCRIBE');
+        }
+      });
 
-      shareDBDoc.addListener('load', shareDBDocUpdateHandler);
+      shareDBDoc.addListener('load', () => shareDBDocUpdateHandler('LOAD'));
 
-      shareDBDoc.addListener('op', shareDBDocUpdateHandler);
+      shareDBDoc.addListener('op', () => shareDBDocUpdateHandler('OP'));
 
       shareDBDoc.addListener('error', e => shareDBDocErrorHandler('GENERAL', e));
 
