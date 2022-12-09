@@ -85,8 +85,9 @@ export const SourceEditor = ({
   ) : status === ShareDBDocStatus.Loaded ? (
     <div className={styles.sourceEditor}>
       <Editor
+        key={JSON.stringify(source)}
         instance={editor}
-        initialValue={clientDocRef.current.getDocumentData()}
+        initialValue={source}
       />
       <SourceView data={source} />
     </div>
