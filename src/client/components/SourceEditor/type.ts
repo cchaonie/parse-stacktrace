@@ -4,7 +4,7 @@ import { FileDescription, UserStatus } from '../../models';
 
 export interface SourceEditorProps {
   userStatus: UserStatus;
-  files: FileDescription[];
+  activeFile: FileDescription;
   connection: Connection;
 }
 

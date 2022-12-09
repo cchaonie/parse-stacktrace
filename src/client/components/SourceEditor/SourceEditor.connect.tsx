@@ -6,5 +6,7 @@ export const SourceEditorConnect = ({ children }) => {
   const { files } = useContext(FilesContext);
   const { connection } = useContext(ConnectionContext);
 
-  return children({ userStatus, files, connection });
+  const activeFile = files.find(f => f.active);
+
+  return children({ userStatus, activeFile, connection });
 };

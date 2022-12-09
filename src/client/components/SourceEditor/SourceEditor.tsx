@@ -14,44 +14,45 @@ import { SourceEditorProps } from './type';
 
 import styles from './sourceEditor.css';
 
-export const SourceEditor = memo(
-  ({ files, connection, userStatus }: SourceEditorProps) => {
-    const activeFile = useMemo(() => files.filter(f => f.active)?.[0], [files]);
+export const SourceEditor = ({
+  activeFile,
+  connection,
+  userStatus,
+}: SourceEditorProps) => {
+  const [source, setSource] = useState(activeFile.content);
 
-    const [source, setSource] = useState(activeFile.content);
+  const clientDocRef = useRef(new ClientDocument());
 
-    const clientDocRef = useRef(new ClientDocument());
+  const [editor] = useState(() =>
+    withSync(clientDocRef.current)(withReact(createEditor()))
+  );
 
-    const [editor] = useState(() =>
-      withSync(clientDocRef.current)(withReact(createEditor()))
-    );
+  const [status, setStatus] = useState<ShareDBDocStatus>(
+    ShareDBDocStatus.Loading
+  );
 
-    const [status, setStatus] = useState<ShareDBDocStatus>(
-      ShareDBDocStatus.Loading
-    );
+  useEffect(() => {
+    if (!connection || userStatus !== UserStatus.LoggedIn) return;
+    const { name, content, creator } = activeFile;
 
-    useEffect(() => {
-      if (!connection || userStatus !== UserStatus.LoggedIn) return;
-      const { name, content, creator } = activeFile;
+    const shareDBDoc = connection.get(creator, name);
 
-      const shareDBDoc = connection.get(creator, name);
-      clientDocRef.current.shareDBDoc = shareDBDoc;
+    clientDocRef.current.shareDBDoc = shareDBDoc;
 
-      const shareDBDocErrorHandler = (tag: string, error: any) => {
-        if (error) {
-          console.error(`[${tag}]: `, error);
-          setStatus(ShareDBDocStatus.Error);
-        }
-      };
+    const shareDBDocErrorHandler = (tag: string, error: any) => {
+      console.error(`[${tag}]: `, error);
+      setStatus(ShareDBDocStatus.Error);
+    };
 
-      const shareDBDocUpdateHandler = (tag: string) => {
-        console.log(`[${tag}]:`);
-        setStatus(ShareDBDocStatus.Loaded);
-        setSource(shareDBDoc.data);
-      };
+    const shareDBDocUpdateHandler = (tag: string) => {
+      setStatus(ShareDBDocStatus.Loaded);
+      setSource(clientDocRef.current.getDocumentData());
+    };
 
-      shareDBDoc.subscribe(e => {
+    shareDBDoc.subscribe(e => {
+      if (e) {
         shareDBDocErrorHandler('SUBSCRIBE', e);
+      } else {
         if (!shareDBDoc.type) {
           console.log('INFO:', 'create new doc now.');
           shareDBDoc.create(content, e => shareDBDocErrorHandler('CREATE', e));
@@ -59,35 +60,39 @@ export const SourceEditor = memo(
         } else {
           shareDBDocUpdateHandler('SUBSCRIBE');
         }
-      });
+      }
+    });
 
-      shareDBDoc.addListener('load', () => shareDBDocUpdateHandler('LOAD'));
+    shareDBDoc.addListener('load', () => shareDBDocUpdateHandler('LOAD'));
 
-      shareDBDoc.addListener('op', () => shareDBDocUpdateHandler('OP'));
+    shareDBDoc.addListener('op', () => shareDBDocUpdateHandler('OP'));
 
-      shareDBDoc.addListener('error', e => shareDBDocErrorHandler('GENERAL', e));
-
-      () => {
-        console.log('SourceEditor is about to rerender');
-        shareDBDoc.removeAllListeners();
-      };
-    }, [activeFile, connection, userStatus]);
-
-    return status === ShareDBDocStatus.Loading ? (
-      <Message>Loading......</Message>
-    ) : status === ShareDBDocStatus.Loaded ? (
-      <div className={styles.sourceEditor}>
-        <Editor
-          instance={editor}
-          initialValue={clientDocRef.current.getDocumentData()}
-        />
-        <SourceView data={source} />
-      </div>
-    ) : (
-      <Message>
-        Sorry, something wrong with shareDB document -_-!, please refresh you
-        page
-      </Message>
+    shareDBDoc.addListener(
+      'error',
+      e => e && shareDBDocErrorHandler('GENERAL', e)
     );
-  }
-);
+
+    return () => {
+      shareDBDoc.removeAllListeners();
+      shareDBDoc.unsubscribe();
+    };
+  }, [activeFile, connection, userStatus]);
+
+  console.log(source);
+
+  return status === ShareDBDocStatus.Loading ? (
+    <Message>Loading......</Message>
+  ) : status === ShareDBDocStatus.Loaded ? (
+    <div className={styles.sourceEditor}>
+      <Editor
+        instance={editor}
+        initialValue={clientDocRef.current.getDocumentData()}
+      />
+      <SourceView data={source} />
+    </div>
+  ) : (
+    <Message>
+      Sorry, something wrong with shareDB document -_-!, please refresh you page
+    </Message>
+  );
+};
