@@ -45,6 +45,7 @@ export const SourceEditor = ({
     };
 
     const shareDBDocUpdateHandler = (tag: string) => {
+      console.log(`In [${tag}]`);
       setStatus(ShareDBDocStatus.Loaded);
       setSource(clientDocRef.current.getDocumentData());
     };
