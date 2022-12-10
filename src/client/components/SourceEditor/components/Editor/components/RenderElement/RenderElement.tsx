@@ -1,37 +1,37 @@
 export const RenderElement = ({ attributes, children, element }) => {
   const style = { textAlign: element.align };
   switch (element.type) {
-    case 'block-quote':
+    case "block-quote":
       return (
         <blockquote style={style} {...attributes}>
           {children}
         </blockquote>
       );
-    case 'bulleted-list':
+    case "bulleted-list":
       return (
         <ul style={style} {...attributes}>
           {children}
         </ul>
       );
-    case 'heading-one':
+    case "heading-one":
       return (
         <h1 style={style} {...attributes}>
           {children}
         </h1>
       );
-    case 'heading-two':
+    case "heading-two":
       return (
         <h2 style={style} {...attributes}>
           {children}
         </h2>
       );
-    case 'list-item':
+    case "list-item":
       return (
         <li style={style} {...attributes}>
           {children}
         </li>
       );
-    case 'numbered-list':
+    case "numbered-list":
       return (
         <ol style={style} {...attributes}>
           {children}

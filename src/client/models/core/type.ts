@@ -1,5 +1,5 @@
-import { Doc } from 'sharedb';
-import { ClientDocumentEvents } from './constants';
+import { Doc } from "sharedb";
+import { ClientDocumentEvents } from "./constants";
 
 // export const LoadingStatus = {
 //   Loading: 1,

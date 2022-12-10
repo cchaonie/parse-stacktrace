@@ -1,1 +1,1 @@
-export { baseFileMiddleware } from './baseFileMiddleware';
+export { baseFileMiddleware } from "./baseFileMiddleware";

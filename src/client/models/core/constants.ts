@@ -3,13 +3,13 @@ export enum ClientDocumentEvents {
 }
 
 export enum ShareDBDocStatus {
-  Loading = 'Loading',
-  Loaded = 'Loaded',
-  LoadFailed = 'LoadFailed',
-  Error = 'error',
+  Loading = "Loading",
+  Loaded = "Loaded",
+  LoadFailed = "LoadFailed",
+  Error = "error",
 }
 
 export enum UserStatus {
-  NotLoggedIn = 'Not Logged in',
-  LoggedIn = 'Logged in',
+  NotLoggedIn = "Not Logged in",
+  LoggedIn = "Logged in",
 }

@@ -1,4 +1,4 @@
-import { Node } from 'slate';
+import { Node } from "slate";
 
 export type JSON0Path = Array<string | number>;
 

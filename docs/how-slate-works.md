@@ -38,6 +38,6 @@ The first merge_node is to merge 2 paragraphs. The result is the text node of th
 
 The second merge_node is to merge the 2 text nodes of the previous paragraph because it has a empty text node, which is the text node from the last merge_node operation.
 
-
 ## How to change the style of the text?
+
 Text nodes are the leaves of the whole nodes tree. So by adding extra properties to the text node, we can render different component depending on the custom properties.

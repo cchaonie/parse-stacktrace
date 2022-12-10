@@ -1,7 +1,7 @@
-import { Descendant, Operation } from 'slate';
-import { ReactEditor } from 'slate-react';
-import { ClientDocument } from '../models/core/clientDocument';
-import { isDocumentUpdated } from '../utils/isDocumentUpdated';
+import { Descendant, Operation } from "slate";
+import { ReactEditor } from "slate-react";
+import { ClientDocument } from "../models/core/clientDocument";
+import { isDocumentUpdated } from "../utils/isDocumentUpdated";
 
 export const withSync =
   (clientDocument: ClientDocument) =>
@@ -17,7 +17,7 @@ export const withSync =
       if (isDocumentUpdated(op)) {
         // send to server
         if (!clientDocument.shareDBDoc) {
-          console.error('The related shareDBDoc has not been initialized yet.');
+          console.error("The related shareDBDoc has not been initialized yet.");
         }
         try {
           clientDocument.submitOperation(op);

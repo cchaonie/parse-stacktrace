@@ -1,4 +1,4 @@
-import { middleware } from 'sharedb';
+import { middleware } from "sharedb";
 
 export const applyMiddleware = (
   context: middleware.ApplyContext,

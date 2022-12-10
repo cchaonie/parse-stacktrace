@@ -1,1 +1,1 @@
-export { loginRoute } from './login';
+export { loginRoute } from "./login";

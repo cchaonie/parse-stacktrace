@@ -1,1 +1,1 @@
-export { BoldElement } from './Bold';
+export { BoldElement } from "./Bold";

@@ -1,12 +1,12 @@
-import { IconFontProps } from './type';
+import { IconFontProps } from "./type";
 
-import styles from './iconfont.css';
+import styles from "./iconfont.css";
 
 export const Iconfont = ({
   name,
   rotate,
   animated = false,
-  fontSize = '16px',
+  fontSize = "16px",
 }: IconFontProps) => {
   let defaultStyle: React.CSSProperties = {
     fontSize,
@@ -22,7 +22,7 @@ export const Iconfont = ({
   if (animated) {
     defaultStyle = {
       ...defaultStyle,
-      transition: 'ease-in transform 300ms',
+      transition: "ease-in transform 300ms",
     };
   }
 

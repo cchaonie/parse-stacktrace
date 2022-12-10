@@ -1,7 +1,7 @@
-import { Descendant } from 'slate';
-import _ from 'lodash';
+import { Descendant } from "slate";
+import _ from "lodash";
 
-import { initialContent } from '../core';
+import { initialContent } from "../core";
 
 export class FileDescription {
   name: string;

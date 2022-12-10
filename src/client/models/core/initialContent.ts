@@ -1,6 +1,6 @@
 export const initialContent = [
   {
-    type: 'paragraph',
-    children: [{ text: '' }],
+    type: "paragraph",
+    children: [{ text: "" }],
   },
 ];

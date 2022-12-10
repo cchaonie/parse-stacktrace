@@ -1,8 +1,8 @@
-import { InsertTextOperation } from 'slate';
-import _ from 'lodash';
+import { InsertTextOperation } from "slate";
+import _ from "lodash";
 
-import { JSON0Path } from './type';
-import BaseOperationConverter from './BaseOperationConverter';
+import { JSON0Path } from "./type";
+import BaseOperationConverter from "./BaseOperationConverter";
 
 export class InsertTextOperationConverter extends BaseOperationConverter {
   convert() {
@@ -11,10 +11,10 @@ export class InsertTextOperationConverter extends BaseOperationConverter {
     _.each(path, (value, index) => {
       json0Path.push(value);
       if (index < path.length - 1) {
-        json0Path.push('children');
+        json0Path.push("children");
       }
     });
-    json0Path.push('text');
+    json0Path.push("text");
 
     // offset
     json0Path.push(offset);

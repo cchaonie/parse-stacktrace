@@ -1,9 +1,9 @@
-import { SplitNodeOperation } from 'slate';
-import _ from 'lodash';
+import { SplitNodeOperation } from "slate";
+import _ from "lodash";
 
-import { JSON0Path } from './type';
-import BaseOperationConverter from './BaseOperationConverter';
-import { convertPath } from '../../utils';
+import { JSON0Path } from "./type";
+import BaseOperationConverter from "./BaseOperationConverter";
+import { convertPath } from "../../utils";
 
 export class SplitNodeOperationConverter extends BaseOperationConverter {
   convert() {
@@ -13,7 +13,7 @@ export class SplitNodeOperationConverter extends BaseOperationConverter {
 
     if (Object.keys(properties).length) {
       // We are splitting paragraph
-      const targetListPath = [...json0Path, 'children'];
+      const targetListPath = [...json0Path, "children"];
       const targetList = _.get(this.docData, targetListPath);
       const splitObj = targetList[position];
 
@@ -28,7 +28,7 @@ export class SplitNodeOperationConverter extends BaseOperationConverter {
       const upperLevelPath = convertPath(upperLevel);
       const insertOp = {
         p: upperLevelPath.length
-          ? [...upperLevelPath, 'children', insertTargetIndex + 1]
+          ? [...upperLevelPath, "children", insertTargetIndex + 1]
           : [insertTargetIndex + 1],
         li: {
           ...properties,
@@ -38,7 +38,7 @@ export class SplitNodeOperationConverter extends BaseOperationConverter {
       return [deleteOp, insertOp];
     } else {
       // We are splitting text node
-      const deletePosition = [...json0Path, 'text'];
+      const deletePosition = [...json0Path, "text"];
       const target = _.get(this.docData, deletePosition);
 
       const splitText = target.substring(position);
@@ -54,7 +54,7 @@ export class SplitNodeOperationConverter extends BaseOperationConverter {
       const upperLevelPath = convertPath(upperLevel);
 
       const insertOp = {
-        p: [...upperLevelPath, 'children', insertTargetIndex + 1],
+        p: [...upperLevelPath, "children", insertTargetIndex + 1],
         li: {
           text: splitText,
         },

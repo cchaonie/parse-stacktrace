@@ -1,2 +1,2 @@
-export const defaultFileName = 'New File';
-export const defaultFileExtension = 'txt';
+export const defaultFileName = "New File";
+export const defaultFileExtension = "txt";

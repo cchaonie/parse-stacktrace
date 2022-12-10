@@ -1,2 +1,2 @@
-export { default as initialState } from './initialState';
-export { FileDescription } from './FileDescription';
+export { default as initialState } from "./initialState";
+export { FileDescription } from "./FileDescription";

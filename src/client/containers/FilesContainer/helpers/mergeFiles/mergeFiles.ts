@@ -1,9 +1,9 @@
-import { FileDescription } from '../../../../models';
+import { FileDescription } from "../../../../models";
 
 export const mergeFiles = (
   existingFiles: FileDescription[],
   newFilesDescription: Array<
-    Pick<FileDescription, 'name' | 'creator' | 'createTime'>
+    Pick<FileDescription, "name" | "creator" | "createTime">
   >
 ) => {
   const newFiles = newFilesDescription.map(

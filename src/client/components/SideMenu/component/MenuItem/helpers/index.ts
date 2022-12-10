@@ -1,1 +1,1 @@
-export { generateNewFileName } from './generateNewFileName';
+export { generateNewFileName } from "./generateNewFileName";

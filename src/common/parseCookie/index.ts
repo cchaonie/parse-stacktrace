@@ -1,1 +1,1 @@
-export { parseCookie } from './parseCookie';
+export { parseCookie } from "./parseCookie";

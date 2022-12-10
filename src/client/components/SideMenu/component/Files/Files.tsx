@@ -1,9 +1,9 @@
-import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { AuthContext, FilesContext } from '../../../../contexts';
+import { AuthContext, FilesContext } from "../../../../contexts";
 
-import styles from './files.css';
+import styles from "./files.css";
 
 export default () => {
   const { files, setFiles } = useContext(FilesContext);
@@ -31,8 +31,8 @@ export default () => {
         ({ name, active, creator }, i) =>
           creator === userId && (
             <div
-              className={`${styles['files-item']} ${
-                active && styles['files-item_active']
+              className={`${styles["files-item"]} ${
+                active && styles["files-item_active"]
               }`}
               key={name}
               onClick={() => handleFileClick(i)}

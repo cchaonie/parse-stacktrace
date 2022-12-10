@@ -1,1 +1,1 @@
-export { Iconfont } from './Iconfont';
+export { Iconfont } from "./Iconfont";

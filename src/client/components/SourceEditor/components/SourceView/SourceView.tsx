@@ -1,4 +1,4 @@
-import styles from './index.css';
+import styles from "./index.css";
 
 export const SourceView = ({ data }) => (
   <div className={styles.sourceView}>

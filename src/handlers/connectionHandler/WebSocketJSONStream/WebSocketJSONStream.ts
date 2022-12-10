@@ -1,5 +1,5 @@
-import { Duplex } from 'stream';
-import { WebSocket } from 'ws';
+import { Duplex } from "stream";
+import { WebSocket } from "ws";
 
 const CONNECTING = 0;
 const OPEN = 1;
@@ -7,9 +7,9 @@ const CLOSING = 2;
 const CLOSED = 3;
 
 const NORMAL_CLOSURE_CODE = 1000;
-const NORMAL_CLOSURE_REASON = 'stream end';
+const NORMAL_CLOSURE_REASON = "stream end";
 const INTERNAL_ERROR_CODE = 1011;
-const INTERNAL_ERROR_REASON = 'stream error';
+const INTERNAL_ERROR_REASON = "stream error";
 
 export default class WebSocketJSONStream extends Duplex {
   ws: WebSocket;
@@ -24,7 +24,7 @@ export default class WebSocketJSONStream extends Duplex {
     this._emittedClose = false;
     this.ws = ws;
 
-    this.ws.addEventListener('message', ({ data }) => {
+    this.ws.addEventListener("message", ({ data }) => {
       let value;
 
       try {
@@ -40,7 +40,7 @@ export default class WebSocketJSONStream extends Duplex {
       this.push(value);
     });
 
-    this.ws.addEventListener('close', () => {
+    this.ws.addEventListener("close", () => {
       this.destroy();
     });
   }
@@ -56,7 +56,7 @@ export default class WebSocketJSONStream extends Duplex {
       return callback(error);
     }
 
-    if (typeof json !== 'string') {
+    if (typeof json !== "string") {
       return callback(new Error("Can't JSON.stringify the value"));
     }
 
@@ -66,17 +66,17 @@ export default class WebSocketJSONStream extends Duplex {
   _send(json, callback) {
     if (this.ws.readyState === CONNECTING) {
       const send = () => {
-        this.ws.removeEventListener('open', send);
-        this.ws.removeEventListener('close', send);
+        this.ws.removeEventListener("open", send);
+        this.ws.removeEventListener("close", send);
         this._send(json, callback);
       };
-      this.ws.addEventListener('open', send);
-      this.ws.addEventListener('close', send);
+      this.ws.addEventListener("open", send);
+      this.ws.addEventListener("close", send);
     } else if (this.ws.readyState === OPEN) {
       this.ws.send(json, callback);
     } else {
-      const error = new Error('WebSocket CLOSING or CLOSED.');
-      error.name = 'Error [ERR_CLOSED]';
+      const error = new Error("WebSocket CLOSING or CLOSED.");
+      error.name = "Error [ERR_CLOSED]";
 
       return callback(error);
     }
@@ -123,36 +123,36 @@ export default class WebSocketJSONStream extends Duplex {
     switch (this.ws.readyState) {
       case CONNECTING: {
         const close = () => {
-          this.ws.removeEventListener('open', close);
-          this.ws.removeEventListener('close', close);
+          this.ws.removeEventListener("open", close);
+          this.ws.removeEventListener("close", close);
           this._closeWebSocket(code, reason, callback);
         };
-        this.ws.addEventListener('open', close);
-        this.ws.addEventListener('close', close);
+        this.ws.addEventListener("open", close);
+        this.ws.addEventListener("close", close);
         break;
       }
       case OPEN: {
         const closed = () => {
-          this.ws.removeEventListener('close', closed);
+          this.ws.removeEventListener("close", closed);
           this._closeWebSocket(code, reason, callback);
         };
-        this.ws.addEventListener('close', closed);
+        this.ws.addEventListener("close", closed);
         this.ws.close(code, reason);
         break;
       }
       case CLOSING: {
         const closed = () => {
-          this.ws.removeEventListener('close', closed);
+          this.ws.removeEventListener("close", closed);
           this._closeWebSocket(code, reason, callback);
         };
-        this.ws.addEventListener('close', closed);
+        this.ws.addEventListener("close", closed);
         break;
       }
       case CLOSED: {
         process.nextTick(() => {
           if (!this._emittedClose) {
             this._emittedClose = true;
-            this.emit('close');
+            this.emit("close");
           }
 
           return callback();

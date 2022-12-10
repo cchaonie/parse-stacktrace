@@ -1,9 +1,9 @@
-import { MergeNodeOperation } from 'slate';
-import _ from 'lodash';
+import { MergeNodeOperation } from "slate";
+import _ from "lodash";
 
-import { JSON0Path } from './type';
-import BaseOperationConverter from './BaseOperationConverter';
-import { convertPath } from '../../utils';
+import { JSON0Path } from "./type";
+import BaseOperationConverter from "./BaseOperationConverter";
+import { convertPath } from "../../utils";
 
 export class MergeNodeOperationConverter extends BaseOperationConverter {
   convert() {
@@ -28,9 +28,9 @@ export class MergeNodeOperationConverter extends BaseOperationConverter {
 
       const siblingLevelPath = convertPath(siblingLevel);
       const insertOp = {
-        p: [...siblingLevelPath, 'children', position],
+        p: [...siblingLevelPath, "children", position],
         li: {
-          ..._.get(toBeMergedObj, ['children', 0]),
+          ..._.get(toBeMergedObj, ["children", 0]),
         },
       };
       return [deleteOp, insertOp];
@@ -44,7 +44,7 @@ export class MergeNodeOperationConverter extends BaseOperationConverter {
         ld: target,
       };
 
-      const splitText = target['text'];
+      const splitText = target["text"];
 
       const siblingLevel = [...path];
       const insertTargetIndex = siblingLevel.pop();
@@ -53,7 +53,7 @@ export class MergeNodeOperationConverter extends BaseOperationConverter {
       const siblingLevelPath = convertPath(siblingLevel);
 
       const insertOp = {
-        p: [...siblingLevelPath, 'text', position],
+        p: [...siblingLevelPath, "text", position],
         si: splitText,
       };
       return [deleteOp, insertOp];

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { FailedHandler, SuccessfulHandler } from './type';
+import { useEffect } from "react";
+import { FailedHandler, SuccessfulHandler } from "./type";
 
 const noop = () => {};
 
@@ -11,8 +11,8 @@ export const useRequest = (
   useEffect(() => {
     fetch(url, initOptions)
       .then(successfulHandler)
-      .catch(e => {
-        if (typeof failedHandler === 'function') {
+      .catch((e) => {
+        if (typeof failedHandler === "function") {
           failedHandler(e);
         } else {
           console.error(e);

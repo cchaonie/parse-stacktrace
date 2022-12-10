@@ -1,10 +1,10 @@
-import { useCallback } from 'react';
-import { Editor } from 'slate';
-import { useSlate } from 'slate-react';
+import { useCallback } from "react";
+import { Editor } from "slate";
+import { useSlate } from "slate-react";
 
-import { Iconfont } from '../../../../../Iconfont';
+import { Iconfont } from "../../../../../Iconfont";
 
-import styles from './toolbar.css';
+import styles from "./toolbar.css";
 
 export const Toolbar = () => {
   const editor = useSlate();
@@ -17,18 +17,18 @@ export const Toolbar = () => {
   );
 
   return (
-    <div className={styles['toolbar']}>
+    <div className={styles["toolbar"]}>
       <div
-        onClick={() => handleStyle('bold')}
-        className={`${styles['toolbarItem']} ${styles['bold']}`}
+        onClick={() => handleStyle("bold")}
+        className={`${styles["toolbarItem"]} ${styles["bold"]}`}
       >
-        <Iconfont name='bold' fontSize='20px' />
+        <Iconfont name="bold" fontSize="20px" />
       </div>
       <div
-        onClick={() => handleStyle('italic')}
-        className={`${styles['toolbarItem']} ${styles['italic']}`}
+        onClick={() => handleStyle("italic")}
+        className={`${styles["toolbarItem"]} ${styles["italic"]}`}
       >
-        <Iconfont name='italics' fontSize='20px' />
+        <Iconfont name="italics" fontSize="20px" />
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
-import { SetNodeOperation } from 'slate';
-import _ from 'lodash';
+import { SetNodeOperation } from "slate";
+import _ from "lodash";
 
-import { JSON0Path } from './type';
-import BaseOperationConverter from './BaseOperationConverter';
-import { convertPath } from '../../utils';
+import { JSON0Path } from "./type";
+import BaseOperationConverter from "./BaseOperationConverter";
+import { convertPath } from "../../utils";
 
 export class SetNodeOperationConverter extends BaseOperationConverter {
   convert() {

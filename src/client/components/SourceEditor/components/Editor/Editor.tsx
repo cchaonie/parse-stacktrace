@@ -1,14 +1,14 @@
-import { useCallback } from 'react';
+import { useCallback } from "react";
 import {
   Slate,
   Editable,
   RenderElementProps,
   RenderLeafProps,
-} from 'slate-react';
+} from "slate-react";
 
-import { Toolbar, RenderElement, RenderLeaf } from './components';
+import { Toolbar, RenderElement, RenderLeaf } from "./components";
 
-import styles from './editor.css';
+import styles from "./editor.css";
 
 export const Editor = ({ instance, initialValue }) => {
   const renderElement = useCallback(
@@ -27,7 +27,7 @@ export const Editor = ({ instance, initialValue }) => {
         <Editable
           renderElement={renderElement}
           renderLeaf={renderLeaf}
-          style={{ flexGrow: 1, paddingInline: '8px' }}
+          style={{ flexGrow: 1, paddingInline: "8px" }}
         />
       </Slate>
     </div>

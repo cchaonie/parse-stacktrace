@@ -1,10 +1,10 @@
-import _ from 'lodash';
-import { Path } from 'slate';
+import _ from "lodash";
+import { Path } from "slate";
 /**
  * Convert slate path to the keys array.
  * For example, [0, 0] => [0, 'children', 0]
  * @param path slate Path
- * @returns 
+ * @returns
  */
 export const convertPath = (path: Path) =>
   _.reduce(
@@ -12,7 +12,7 @@ export const convertPath = (path: Path) =>
     (prev, curr, index) => {
       prev.push(curr);
       if (index < path.length - 1) {
-        prev.push('children');
+        prev.push("children");
       }
       return prev;
     },

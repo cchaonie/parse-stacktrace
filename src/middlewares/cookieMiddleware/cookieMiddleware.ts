@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
-import { nanoid } from 'nanoid';
+import { NextFunction, Request, Response } from "express";
+import { nanoid } from "nanoid";
 
 export const cookieMiddleware = (
   req: Request,
@@ -8,7 +8,7 @@ export const cookieMiddleware = (
 ) => {
   const { uid } = req.cookies;
   if (!uid) {
-    res.cookie('uid', nanoid());
+    res.cookie("uid", nanoid());
   }
   return next();
 };

@@ -1,4 +1,4 @@
-import { BoldElementProps } from './type';
+import { BoldElementProps } from "./type";
 
 export const BoldElement = (props: BoldElementProps) => {
   return (

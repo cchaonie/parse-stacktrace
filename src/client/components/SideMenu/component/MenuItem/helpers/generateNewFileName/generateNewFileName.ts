@@ -1,4 +1,4 @@
-import { defaultFileExtension, defaultFileName } from '../../constant';
+import { defaultFileExtension, defaultFileName } from "../../constant";
 
 export const generateNewFileName = (fileNames: string[]) => {
   let index = 1;

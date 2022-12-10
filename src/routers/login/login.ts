@@ -1,12 +1,12 @@
-import { Router } from 'express';
-import { UserInfo } from './type';
+import { Router } from "express";
+import { UserInfo } from "./type";
 
 export const loginRoute = Router();
 
 const loginUsers: UserInfo[] = [];
 
-loginRoute.post('/login', (req, res) => {
-  const fingerprint = req.body['fingerprint'];
+loginRoute.post("/login", (req, res) => {
+  const fingerprint = req.body["fingerprint"];
   let user = getByFingerprint(fingerprint)?.[0];
 
   if (user) {
@@ -19,10 +19,10 @@ loginRoute.post('/login', (req, res) => {
   }
 
   res.status(200).json({
-    message: 'OK',
+    message: "OK",
   });
 });
 
 function getByFingerprint(fingerprint: string): UserInfo[] {
-  return loginUsers.filter(u => u.fingerprint === fingerprint);
+  return loginUsers.filter((u) => u.fingerprint === fingerprint);
 }

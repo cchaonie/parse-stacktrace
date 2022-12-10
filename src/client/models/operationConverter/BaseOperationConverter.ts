@@ -1,7 +1,7 @@
-import { BaseOperation, Descendant } from 'slate';
-import _ from 'lodash';
+import { BaseOperation, Descendant } from "slate";
+import _ from "lodash";
 
-import { JSON0Operation } from './type';
+import { JSON0Operation } from "./type";
 
 export default class BaseOperationConverter {
   slateOperation: BaseOperation;
@@ -13,6 +13,6 @@ export default class BaseOperationConverter {
   }
 
   convert(): JSON0Operation[] {
-    throw new Error('Sub-Class should override this behavior');
+    throw new Error("Sub-Class should override this behavior");
   }
 }

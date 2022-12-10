@@ -1,1 +1,1 @@
-export { default as WebSocketJSONStream } from './WebSocketJSONStream';
+export { default as WebSocketJSONStream } from "./WebSocketJSONStream";

@@ -1,30 +1,30 @@
 .sideMenu {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 300px;
-    padding-inline: 8px;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 300px;
+  padding-inline: 8px;
 }
 
 .sideMenu-background {
-    background-color: rgb(193, 197, 202);
+  background-color: rgb(193, 197, 202);
 }
 
 .sideMenu-operationSection {
-    flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 .sideMenu-operation {
-    font-size: 24px;
-    font-weight: 500;
-    display: flex;
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
 }
 
 .sideMenu-operationIcon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sideMenu-operationText {
-    margin-left: 16px;
+  margin-left: 16px;
 }

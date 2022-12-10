@@ -1,1 +1,1 @@
-export { getFingerprint } from './getFingerprint';
+export { getFingerprint } from "./getFingerprint";

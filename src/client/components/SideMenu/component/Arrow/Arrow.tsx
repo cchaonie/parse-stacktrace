@@ -1,10 +1,10 @@
-import { Iconfont } from '../../../Iconfont';
+import { Iconfont } from "../../../Iconfont";
 
-export default ({ direction = 'right' }) => (
+export default ({ direction = "right" }) => (
   <Iconfont
-    name='arrow-right'
+    name="arrow-right"
     animated
-    rotate={direction === 'right' ? 0 : 90}
-    fontSize='20px'
+    rotate={direction === "right" ? 0 : 90}
+    fontSize="20px"
   />
 );

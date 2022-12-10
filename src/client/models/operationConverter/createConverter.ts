@@ -1,6 +1,6 @@
-import { BaseOperation, Descendant } from 'slate';
+import { BaseOperation, Descendant } from "slate";
 
-import converterMap from './converterMap';
+import converterMap from "./converterMap";
 
 export default function createConverter(
   docData: Descendant[],

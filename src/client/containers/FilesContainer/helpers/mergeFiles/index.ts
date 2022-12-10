@@ -1,1 +1,1 @@
-export { mergeFiles } from './mergeFiles';
+export { mergeFiles } from "./mergeFiles";

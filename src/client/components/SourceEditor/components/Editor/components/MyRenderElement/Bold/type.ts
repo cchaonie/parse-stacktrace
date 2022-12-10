@@ -1,3 +1,3 @@
-import { RenderElementProps } from 'slate-react';
+import { RenderElementProps } from "slate-react";
 
 export interface BoldElementProps extends RenderElementProps {}
