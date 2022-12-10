@@ -38,6 +38,7 @@ specifiers:
   lodash: ^4.17.21
   nanoid: ^4.0.0
   postcss: ^8.4.16
+  prettier: 2.8.1
   react: ^18.2.0
   react-dom: ^18.2.0
   react-router-dom: ^6.4.3
@@ -104,6 +105,7 @@ devDependencies:
   jest: 28.1.3_gsb7asu77en4txj3es3i65pxci
   lint-staged: 13.1.0
   postcss: 8.4.16
+  prettier: 2.8.1
   rimraf: 3.0.2
   rollup: 2.78.1
   rollup-plugin-copy: 3.4.0
@@ -8559,6 +8561,15 @@ packages:
         integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==,
       }
     engines: { node: ">= 0.8.0" }
+    dev: true
+
+  /prettier/2.8.1:
+    resolution:
+      {
+        integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==,
+      }
+    engines: { node: ">=10.13.0" }
+    hasBin: true
     dev: true
 
   /pretty-format/28.1.3:
