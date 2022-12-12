@@ -57,8 +57,16 @@ export const SourceEditor = ({
       } else {
         if (!shareDBDoc.type) {
           console.log('INFO:', 'create new doc now.');
-          shareDBDoc.create(content, e => shareDBDocErrorHandler('CREATE', e));
-          setSource(content);
+
+          shareDBDoc.addListener('create', () =>
+            shareDBDocUpdateHandler('CREATE')
+          );
+
+          shareDBDoc.create(content, e => {
+            if (e) {
+              shareDBDocErrorHandler('CREATE', e);
+            }
+          });
         } else {
           shareDBDocUpdateHandler('SUBSCRIBE');
         }
@@ -79,8 +87,6 @@ export const SourceEditor = ({
       shareDBDoc.unsubscribe();
     };
   }, [activeFile, connection, userStatus]);
-
-  console.log(source);
 
   return status === ShareDBDocStatus.Loading ? (
     <Message>Loading......</Message>
