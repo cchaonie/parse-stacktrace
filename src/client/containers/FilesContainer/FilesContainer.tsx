@@ -1,11 +1,12 @@
-import { memo, useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { AuthContext, FilesContext } from "../../contexts";
-import { FileDescription } from "../../models";
-import { parseUrl } from "../../utils";
-import { mergeFiles } from "./helpers";
+import { memo, useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { AuthContext, FilesContext } from '../../contexts';
+import { FileDescription } from '../../models';
+import { parseUrl } from '../../utils';
+import { ContainerProps } from '../type';
+import { mergeFiles } from './helpers';
 
-const FilesContainer = ({ children }) => {
+const FilesContainer = ({ children }: ContainerProps) => {
   const location = useLocation();
   const { userId } = useContext(AuthContext);
 
@@ -23,11 +24,11 @@ const FilesContainer = ({ children }) => {
 
   useEffect(() => {
     fetch(`/files?userId=${userId}`, {
-      method: "GET",
+      method: 'GET',
     })
-      .then((res) => res.json())
+      .then(res => res.json())
       .then(({ message, data }: any) => {
-        if (message === "OK") {
+        if (message === 'OK') {
           const userFiles = data as Array<any>;
 
           setFiles(mergeFiles(files, userFiles));

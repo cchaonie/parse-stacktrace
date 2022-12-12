@@ -1,11 +1,11 @@
 {
     "env": {
-        "browser": true,
-        "es2021": true
+        "browser": true
     },
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
+        "plugin:react/jsx-runtime",
         "plugin:@typescript-eslint/recommended",
         "prettier"
     ],
@@ -15,11 +15,12 @@
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
+    "ignorePatterns": [
+        "**/*.css"
+    ],
     "plugins": [
         "react",
         "@typescript-eslint"
     ],
-    "rules": {
-        "react/react-in-jsx-scope": "off"
-    }
+    "rules": {}
 }

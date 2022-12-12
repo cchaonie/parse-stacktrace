@@ -1,9 +1,9 @@
-import { FileDescription } from "../../../../models";
+import { FileDescription } from '../../../../models';
 
 export const mergeFiles = (
   existingFiles: FileDescription[],
   newFilesDescription: Array<
-    Pick<FileDescription, "name" | "creator" | "createTime">
+    Pick<FileDescription, 'name' | 'creator' | 'createTime'>
   >
 ) => {
   const newFiles = newFilesDescription.map(
@@ -11,9 +11,9 @@ export const mergeFiles = (
       new FileDescription(name, creator, createTime)
   );
   const filesNotInNew = [];
-  for (let f of existingFiles) {
+  for (const f of existingFiles) {
     let exist = null;
-    for (let nf of newFiles) {
+    for (const nf of newFiles) {
       if (nf.name === f.name && nf.creator === f.creator) {
         exist = nf;
         break;

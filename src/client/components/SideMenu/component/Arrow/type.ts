@@ -1,4 +1,4 @@
-type ArrowDirection = "right" | "down";
+export type ArrowDirection = 'right' | 'down';
 
 export interface ArrowProps {
   direction: ArrowDirection;

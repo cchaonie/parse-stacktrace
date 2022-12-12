@@ -1,10 +1,10 @@
-import { memo, useEffect, useState } from "react";
-import { AuthContext } from "../../contexts";
-import { useRequest } from "../../hooks/useRequest/useRequest";
-import { getFingerprint, UserStatus } from "../../models";
+import { useEffect, useState } from 'react';
+import { AuthContext } from '../../contexts';
+import { getFingerprint, UserStatus } from '../../models';
+import { ContainerProps } from '../type';
 
-export const AuthContainer = ({ children }) => {
-  const [userId, setUserId] = useState("");
+export const AuthContainer = ({ children }: ContainerProps) => {
+  const [userId, setUserId] = useState('');
   const [userStatus, setUserStatus] = useState(UserStatus.NotLoggedIn);
 
   useEffect(() => {
@@ -14,25 +14,25 @@ export const AuthContainer = ({ children }) => {
         console.log(`Visitor: ${visitorId}`);
         return visitorId;
       })
-      .then((visitorId) => {
-        fetch("/login", {
-          method: "POST",
+      .then(visitorId => {
+        fetch('/login', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             fingerprint: visitorId,
           }),
         })
-          .then((res) => res.json())
-          .then((json) => {
-            if (json.message === "OK") {
+          .then(res => res.json())
+          .then(json => {
+            if (json.message === 'OK') {
               setUserStatus(UserStatus.LoggedIn);
               console.log(`User login successfully`);
             }
           });
       })
-      .catch((e) => console.error(`User login failed`, e));
+      .catch(e => console.error(`User login failed`, e));
   }, []);
 
   return (

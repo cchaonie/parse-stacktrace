@@ -1,10 +1,10 @@
-import { Doc } from "sharedb";
-import _ from "lodash";
-import { BaseOperation, Descendant } from "slate";
+import { Doc } from 'sharedb';
+import _ from 'lodash';
+import { BaseOperation, Descendant } from 'slate';
 
-import { createConverter } from "../operationConverter";
-import { ClientDocumentEventHandler, ClientDocumentListeners } from "./type";
-import { ClientDocumentEvents } from "./constants";
+import { createConverter } from '../operationConverter';
+import { ClientDocumentEventHandler, ClientDocumentListeners } from './type';
+import { ClientDocumentEvents } from './constants';
 
 export class ClientDocument {
   shareDBDoc: Doc;
@@ -12,7 +12,7 @@ export class ClientDocument {
 
   getDocumentData(): Descendant[] {
     if (!this.shareDBDoc) {
-      throw new Error("The related shareDBDoc has not been initialized yet.");
+      throw new Error('The related shareDBDoc has not been initialized yet.');
     }
     return _.cloneDeep(this.shareDBDoc.data);
   }
@@ -47,7 +47,7 @@ export class ClientDocument {
   dispatch(eventName: ClientDocumentEvents) {
     const eventListeners = this.listeners[eventName];
     if (eventListeners?.length > 0) {
-      for (let el of eventListeners) {
+      for (const el of eventListeners) {
         el(this.shareDBDoc);
       }
     }
@@ -57,7 +57,7 @@ export class ClientDocument {
     try {
       const converter = createConverter(this.getDocumentData(), op);
       const sharedbOps = converter.convert();
-      _.forEach(sharedbOps, (sharedbOp) => {
+      _.forEach(sharedbOps, sharedbOp => {
         this.shareDBDoc.submitOp(sharedbOp);
       });
     } catch (error) {
@@ -66,7 +66,7 @@ export class ClientDocument {
   }
 
   submitOperations(ops: BaseOperation[]) {
-    _.each(ops, (op) => {
+    _.each(ops, op => {
       this.submitOperation(op);
     });
   }

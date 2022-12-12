@@ -1,8 +1,9 @@
-import { memo, useEffect, useState } from "react";
-import { ConnectionContext } from "../../contexts";
-import { getShareDBConnection } from "../../models";
+import { memo, useEffect, useState } from 'react';
+import { ConnectionContext } from '../../contexts';
+import { getShareDBConnection } from '../../models';
+import { ContainerProps } from '../type';
 
-const ConnectionContainer = ({ children }) => {
+const ConnectionContainer = ({ children }: ContainerProps) => {
   const [connection, setConnection] = useState(null);
 
   useEffect(() => {

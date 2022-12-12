@@ -1,24 +1,24 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes } from 'react-router-dom';
 
 import {
   AuthContainer,
   ConnectionContainer,
   FilesContainer,
-} from "./containers";
-import { SourceEditor, SideMenu, SourceEditorConnect } from "./components";
+} from './containers';
+import { SourceEditor, SideMenu, SourceEditorConnect } from './components';
 
-import styles from "./app.css";
+import styles from './app.css';
 
-export default () => {
+export const App = () => {
   return (
     <AuthContainer>
       <ConnectionContainer>
         <FilesContainer>
-          <div id="board" className={styles.board}>
+          <div id='board' className={styles.board}>
             <SideMenu />
             <Routes>
               <Route
-                path="/"
+                path='/'
                 element={
                   <div className={styles.welcome}>
                     Create a new document from the side menu
@@ -26,7 +26,7 @@ export default () => {
                 }
               />
               <Route
-                path="/document/:collectionId/:documentName"
+                path='/document/:collectionId/:documentName'
                 element={
                   <SourceEditorConnect>
                     {({ userStatus, activeFile, connection }) => (
@@ -47,3 +47,5 @@ export default () => {
     </AuthContainer>
   );
 };
+
+export default App;
