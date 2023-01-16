@@ -1,16 +1,16 @@
-import express, { json } from "express";
-import http from "http";
-import path from "path";
-import cookieParser from "cookie-parser";
-import { parseRoute } from './routers/index';
+import express, { json } from 'express';
+import http from 'http';
+import path from 'path';
+
+import { parseRoute } from './routers';
 
 const app = express();
 
-app.use(cookieParser());
-
 app.use(json());
 
-app.use(express.static(path.resolve(process.cwd(), "./dist/client")));
+console.log(path.resolve(__dirname, '../dist/client'))
+
+app.use(express.static(path.resolve(__dirname, '../dist/client')));
 
 app.use(parseRoute);
 

@@ -7,7 +7,6 @@ import { babel } from '@rollup/plugin-babel';
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
 import copy from 'rollup-plugin-copy';
-import { eslint } from 'rollup-plugin-eslint';
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx'];
 const isPrd = process.env.NODE_ENV === 'production';
@@ -33,7 +32,6 @@ export default [
       sourcemap: !isPrd,
     },
     plugins: [
-      eslint(),
       builtins(),
       resolve({
         extensions,
@@ -59,7 +57,7 @@ export default [
         targets: [{ src: 'src/assets', dest: 'dist/client' }],
       }),
       html({
-        title: 'Collaborative Editor',
+        title: 'Parse stacktrace',
         template: options => {
           if (options) {
             const { attributes, meta, files, publicPath, title } = options;
