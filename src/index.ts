@@ -8,8 +8,6 @@ const app = express();
 
 app.use(json());
 
-console.log(path.resolve(__dirname, '../dist/client'))
-
 app.use(express.static(path.resolve(__dirname, '../dist/client')));
 
 app.use(parseRoute);
