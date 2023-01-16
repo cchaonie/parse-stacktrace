@@ -2,12 +2,12 @@
   "name": "error-trace-parser",
   "version": "0.0.1",
   "description": "Convert error trace with sourcemap",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "build": "rimraf ./dist && cross-env NODE_ENV=production rollup -c",
-    "build-dev": "rimraf ./dist && cross-env NODE_ENV=development rollup -c",
-    "start": "node dist/index.js",
-    "dev": "ts-node scripts/development",
+    "build:server": "rimraf ./lib && tsc",
+    "build:client": "rimraf ./dist && cross-env NODE_ENV=development rollup -c",
+    "start": "node lib/index.js",
+    "dev": "npm run build:server && npm run build:client && node lib/index",
     "test": "jest",
     "prepare": "husky install"
   },

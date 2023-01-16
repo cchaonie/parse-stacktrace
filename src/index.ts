@@ -10,7 +10,7 @@ app.use(cookieParser());
 
 app.use(json());
 
-app.use(express.static(path.resolve(process.cwd(), "../dist/client")));
+app.use(express.static(path.resolve(process.cwd(), "./dist/client")));
 
 app.use(parseRoute);
 

@@ -31,14 +31,26 @@ export const App = () => {
 
   return (
     <div className={styles.app}>
-      <input value={sourceMapUrl} onChange={onChangeUrl} />
+      <input
+        className={styles.sourceMapUrl}
+        value={sourceMapUrl}
+        onChange={onChangeUrl}
+      />
       <br />
-      <textarea value={errorTrace} onChange={onChangeTrace}></textarea>
+      <textarea
+        className={styles.stackTrace}
+        value={errorTrace}
+        onChange={onChangeTrace}
+      ></textarea>
       <br />
-      <button onClick={handleParse}>PARSE</button>
+      <button className={styles.parseButton} onClick={handleParse}>
+        PARSE
+      </button>
       {!!parseResult && (
         <div className={styles.parseResults} contentEditable>
-          {parseResult}
+          {Array.isArray(parseResult)
+            ? parseResult.map(l => <div key={l}>{l}</div>)
+            : parseResult}
         </div>
       )}
     </div>
