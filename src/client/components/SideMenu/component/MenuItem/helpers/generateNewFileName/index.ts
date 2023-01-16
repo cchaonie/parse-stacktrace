@@ -1,1 +1,0 @@
-export { generateNewFileName } from "./generateNewFileName";

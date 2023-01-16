@@ -1,50 +1,47 @@
-import { Route, Routes } from 'react-router-dom';
-
-import {
-  AuthContainer,
-  ConnectionContainer,
-  FilesContainer,
-} from './containers';
-import { SourceEditor, SideMenu, SourceEditorConnect } from './components';
-
+import { useState } from 'react';
 import styles from './app.css';
 
 export const App = () => {
+  const [sourceMapUrl, setSourceMapUrl] = useState('');
+  const [errorTrace, setErrorTrace] = useState('');
+  const [parseResult, setParseResult] = useState('');
+
+  const onChangeUrl = e => setSourceMapUrl(e.target.value);
+  const onChangeTrace = e => setErrorTrace(e.target.value);
+
+  const handleParse = () => {
+    fetch('/parse', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        sourceMapUrl,
+        errorTrace,
+      }),
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.message === 'OK') {
+          setParseResult(json.data);
+          console.log(`User login successfully`);
+        }
+      });
+  };
+
   return (
-    <AuthContainer>
-      <ConnectionContainer>
-        <FilesContainer>
-          <div id='board' className={styles.board}>
-            <SideMenu />
-            <Routes>
-              <Route
-                path='/'
-                element={
-                  <div className={styles.welcome}>
-                    Create a new document from the side menu
-                  </div>
-                }
-              />
-              <Route
-                path='/document/:collectionId/:documentName'
-                element={
-                  <SourceEditorConnect>
-                    {({ userStatus, activeFile, connection }) => (
-                      <SourceEditor
-                        key={activeFile.name + activeFile.creator}
-                        activeFile={activeFile}
-                        connection={connection}
-                        userStatus={userStatus}
-                      />
-                    )}
-                  </SourceEditorConnect>
-                }
-              />
-            </Routes>
-          </div>
-        </FilesContainer>
-      </ConnectionContainer>
-    </AuthContainer>
+    <div className={styles.app}>
+      <input value={sourceMapUrl} onChange={onChangeUrl} />
+      <br />
+      <textarea value={errorTrace} onChange={onChangeTrace}></textarea>
+      <br />
+      <button onClick={handleParse}>PARSE</button>
+      {!!parseResult && (
+        <div className={styles.parseResults} contentEditable>
+          {parseResult}
+        </div>
+      )}
+    </div>
   );
 };
 

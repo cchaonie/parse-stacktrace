@@ -1,1 +1,0 @@
-export { BoldElement } from "./Bold";

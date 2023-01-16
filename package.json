@@ -1,7 +1,7 @@
 {
-  "name": "collaborative-editor",
+  "name": "error-trace-parser",
   "version": "0.0.1",
-  "description": "Learn collaborative softwares by creating a collaborative editor",
+  "description": "Convert error trace with sourcemap",
   "main": "index.js",
   "scripts": {
     "build": "rimraf ./dist && cross-env NODE_ENV=production rollup -c",
@@ -12,26 +12,19 @@
     "prepare": "husky install"
   },
   "keywords": [
-    "collaborative",
-    "editor"
+    "error",
+    "sourcemap"
   ],
   "author": "nc_8093@163.com",
   "license": "MIT",
   "dependencies": {
-    "@fingerprintjs/fingerprintjs": "^3.3.6",
     "cookie-parser": "^1.4.6",
     "cross-env": "^7.0.3",
     "express": "^4.18.1",
-    "lodash": "^4.17.21",
-    "nanoid": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
-    "reconnecting-websocket": "^4.4.0",
-    "sharedb": "^3.1.0",
-    "slate": "^0.82.1",
-    "slate-react": "^0.82.1",
-    "ws": "^8.8.1"
+    "source-map": "^0.7.4"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.10",
@@ -53,8 +46,6 @@
     "@types/node": "^18.7.14",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
-    "@types/sharedb": "^3.0.0",
-    "@types/ws": "^8.5.3",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "@typescript-eslint/parser": "^5.46.0",
     "autoprefixer": "^10.4.8",

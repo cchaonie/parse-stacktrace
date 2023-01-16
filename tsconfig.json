@@ -3,10 +3,10 @@
   "compilerOptions": {
     "module": "NodeNext",
     "target": "es2017",
+    "outDir": "lib"
   },
   "include": [
     "src/**/*",
-    "scripts"
   ],
   "exclude": [
     "node_modules",

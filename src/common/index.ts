@@ -1,1 +1,0 @@
-export { parseCookie } from "./parseCookie";

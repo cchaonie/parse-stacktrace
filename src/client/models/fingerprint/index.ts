@@ -1,1 +1,0 @@
-export { getFingerprint } from "./getFingerprint";
