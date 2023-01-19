@@ -23,7 +23,6 @@ export default async (rawSourceMap: RawSourceMap, stackTrace: string) => {
             sourceReg,
             `at ${pos.name || ''} (${pos.source}:${pos.line}:${pos.column})`
           );
-          console.log(replacedLine);
           return replacedLine;
         }
       }

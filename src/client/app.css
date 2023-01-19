@@ -1,17 +1,29 @@
-.board {
-  min-height: 100vh;
+.app {
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.fieldItem {
+  width: 100%;
   display: flex;
+}
+
+.label {
+  flex: none;
+  width: 120px;
 }
 
 .sourceMapUrl {
   width: 100%;
   padding: 8px;
+  flex: 1;
 }
 
 .stackTrace {
   margin-top: 8px;
   width: 100%;
   height: 250px;
+  flex: 1;
 }
 
 .parseButton {
