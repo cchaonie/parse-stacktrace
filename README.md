@@ -1,6 +1,6 @@
 # parse-stacktrace
 
-This is a tool to convert the stacktrace to a readable format. **It is not fully tested, use it at your onw risk.**
+This is a tool to convert the stacktrace to a readable format. **It is not fully tested, use it at your own risk.**
 
 ## Usage
 
