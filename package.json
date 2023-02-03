@@ -12,7 +12,8 @@
   "files": [
     "bin",
     "dist",
-    "lib"
+    "lib",
+    "public"
   ],
   "keywords": [
     "error",
