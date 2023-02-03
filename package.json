@@ -1,6 +1,6 @@
 {
   "name": "parse-stacktrace",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "parse stacktrace with sourcemap",
   "main": "lib/index.js",
   "bin": "./bin/cli.js",
