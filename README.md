@@ -20,6 +20,6 @@ you will see a local server is running at port `8080`
 
 ![example](https://github.com/cchaonie/parse-stacktrace/blob/8acb39ba4df7a9c86bb56d6209f1cd4d1510e0db/public/images/parse-stacktrace.png)
 
-When you get a error stack trace from, like kibana, then you can put it to `Stack Trace:`. Then you need to input the sourcemap as well. In the example, the sourcemap url is just the js file and a suffix `.map`;
+When you get a error stack trace from, like kibana, then you can put it to `Stack Trace:`. Then you need to input the sourcemap as well. In the example, the sourcemap url is just the js file and a suffix `.map`.
 
 After these 2 fields are filled, you can click the `PARSE` button. A few seconds later, you will see the original source of the stack trace appended below.
