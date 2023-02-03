@@ -18,7 +18,7 @@ you will see a local server is running at port `8080`
 
 ## Example
 
-![example](./public/images/parse-stacktrace.png)
+![example](https://github.com/cchaonie/parse-stacktrace/blob/8acb39ba4df7a9c86bb56d6209f1cd4d1510e0db/public/images/parse-stacktrace.png)
 
 When you get a error stack trace from, like kibana, then you can put it to `Stack Trace:`. Then you need to input the sourcemap as well. In the example, the sourcemap url is just the js file and a suffix `.map`;
 
