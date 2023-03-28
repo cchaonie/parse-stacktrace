@@ -1,13 +1,14 @@
 {
   "name": "parse-stacktrace",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "parse stacktrace with sourcemap",
   "main": "lib/index.js",
   "bin": "./bin/cli.js",
   "scripts": {
+    "build": "pnpm build:server && pnpm build:client",
     "build:server": "rimraf ./lib && tsc",
     "build:client": "rimraf ./dist && cross-env NODE_ENV=production rollup -c",
-    "start": "npm run build:server && npm run build:client && node lib/index"
+    "start": "pnpm build && node lib/index"
   },
   "files": [
     "bin",
