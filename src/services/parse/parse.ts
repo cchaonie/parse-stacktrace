@@ -4,11 +4,10 @@ export default async (rawSourceMap: RawSourceMap, stackTrace: string) => {
   try {
     const smc = await new SourceMapConsumer(rawSourceMap);
     const stackLines = stackTrace.split('\\n');
-    console.log(stackLines)
 
     const sourceReg = /\(?.*:(\d+):(\d+)\)?/;
-
     return stackLines.map(eachStack => {
+      let parsedStack = eachStack;
       const result = sourceReg.exec(eachStack);
       if (result) {
         const [_, line, column] = result;
@@ -18,17 +17,14 @@ export default async (rawSourceMap: RawSourceMap, stackTrace: string) => {
           column: parseInt(column, 10),
         });
 
-        console.log(eachStack, pos)
-
         if (pos.source && pos.line && pos.column) {
-          const replacedLine = eachStack.replace(
+          parsedStack = eachStack.replace(
             sourceReg,
             `at ${pos.name || ''} (${pos.source}:${pos.line}:${pos.column})`
           );
-          return replacedLine;
         }
       }
-      return eachStack;
+      return parsedStack;
     });
   } catch (e) {
     console.error(e);

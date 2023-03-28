@@ -34,7 +34,7 @@ export const App = () => {
       .then(json => {
         if (json.message === 'OK') {
           setParseResult(json.data);
-          console.log(`User login successfully`);
+          console.log(`Parse successfully`);
         }
       })
       .catch(e => {
